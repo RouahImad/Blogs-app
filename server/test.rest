@@ -1,0 +1,31 @@
+GET http://localhost:3000/blogs
+
+###
+
+GET http://localhost:3000/blogs/1
+
+###
+
+POST http://localhost:3000/blogs
+
+{
+    "title": "New Blog",
+    "content": "This is a new blog"
+}
+
+###
+
+PUT http://localhost:3000/blogs/1
+
+{
+    "title": "Updated Blog",
+    "content": "This is an updated blog"
+}
+
+###
+
+DELETE http://localhost:3000/blogs/2323
+
+###
+
+DELETE http://localhost:3000/blogs/2
