@@ -28,4 +28,4 @@ DELETE http://localhost:3000/blogs/2323
 
 ###
 
-DELETE http://localhost:3000/blogs/2
+DELETE http://localhost:3000/blogs/1

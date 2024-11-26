@@ -1,12 +1,17 @@
 const pool = require("../configure/db");
 
 const getBlogs = async () => {
-    const blogs = await pool.query("SELECT * FROM blogs");
+    const blogs = await pool.query(
+        "SELECT id, title, content, DATE_FORMAT(post_date, '%Y-%m-%d') as post_date FROM blogs"
+    );
 
     return blogs[0];
 };
 const getBlog = async (id) => {
-    const blog = await pool.query("SELECT * FROM blogs WHERE id = ?", [id]);
+    const blog = await pool.query(
+        "SELECT id, title, content, DATE_FORMAT(post_date, '%Y-%m-%d') as post_date FROM blogs WHERE id = ?",
+        [id]
+    );
 
     return blog[0][0];
 };
@@ -16,7 +21,7 @@ const createBlog = async (title, content) => {
 
     const res = await pool.query(
         "INSERT INTO blogs (title, content, post_date) VALUES (?, ?, ?)",
-        [title, content, today]
+        [title, content, today.toString()]
     );
 
     return res[0].affectedRows ? true : false;

@@ -1,0 +1,34 @@
+button {
+    all: unset;
+    color: #333;
+    font-family: "arial";
+    font-size: 25px;
+    cursor: pointer;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    background-color: white;
+    padding-inline: 25px;
+    border-bottom: 1px solid #ccc;
+}
+.actions {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-block: 14px;
+}
+.actions button {
+    border-radius: 50%;
+    padding: 9px;
+    display: flex;
+    transition: 0.3s;
+}
+.actions button:hover {
+    background-color: #f1f1f1;
+}
+.theme {
+}
