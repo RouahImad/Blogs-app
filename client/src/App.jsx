@@ -4,10 +4,12 @@ import NavBar from "./components/NavBar";
 import axios from "axios";
 
 const App = () => {
-    const [blogs, setBlogs] = useState([]);
+    const [blogs, setBlogs] = useState({});
     const [theme, setTheme] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        let timer;
         axios
             .get("/blogs")
             .then((response) => {
@@ -15,19 +17,27 @@ const App = () => {
             })
             .catch((error) => {
                 console.log("Error fetching data");
-
                 console.error(error);
+            })
+            .finally(() => {
+                timer = setTimeout(() => {
+                    setLoading(false);
+                }, 1000);
             });
 
         if (localStorage.getItem("theme") == "true") {
             setTheme(true);
         }
+
+        return () => {
+            clearTimeout(timer);
+        };
     }, []);
 
     return (
         <div>
             <NavBar theme={theme} setTheme={setTheme} />
-            <Blogs blogs={blogs} />
+            <Blogs blogs={blogs} loading={loading} />
         </div>
     );
 };

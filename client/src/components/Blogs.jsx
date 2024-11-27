@@ -1,28 +1,38 @@
 import Blog from "./Blog";
 import PropTypes from "prop-types";
 import "../styles/Blogs.css";
+import SkeletonList from "./SkeletonList";
 
-const Blogs = ({ blogs }) => {
+const Blogs = ({ blogs, loading }) => {
     return (
-        <div className="blogs">
-            {blogs.length ? (
-                blogs.map((blog) => (
-                    <Blog
-                        key={blog.id}
-                        title={blog.title}
-                        content={blog.content}
-                        posted={blog.post_date}
-                    />
-                ))
+        <>
+            {loading ? (
+                <SkeletonList />
             ) : (
-                <span>More blogs are coming stay tunned!</span>
+                <div className="blogs">
+                    {blogs?.data?.length ? (
+                        blogs.data.map((blog) => (
+                            <Blog
+                                key={blog.id}
+                                title={blog.title}
+                                content={blog.content}
+                                posted={blog.post_date}
+                            />
+                        ))
+                    ) : blogs?.data?.length == 0 ? (
+                        <span>More blogs are coming stay tunned!</span>
+                    ) : (
+                        <span>Oops! something went wrong</span>
+                    )}
+                </div>
             )}
-        </div>
+        </>
     );
 };
 
 Blogs.propTypes = {
-    blogs: PropTypes.array.isRequired,
+    blogs: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
 };
 
 export default Blogs;

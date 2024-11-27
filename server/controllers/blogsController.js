@@ -5,9 +5,9 @@ const getBlogs = async (req, res) => {
         const blogs = await blogModel.getBlogs();
 
         if (blogs.length > 0) {
-            res.status(200).json(blogs);
+            res.status(200).json({ data: blogs });
         } else {
-            res.status(200).json([]);
+            res.status(200).json({ data: [] });
         }
     } catch (err) {
         console.log(err);
@@ -24,7 +24,7 @@ const getBlog = async (req, res) => {
     try {
         const blog = await blogModel.getBlog(id);
         if (blog) {
-            res.status(200).json(blog);
+            res.status(200).json({ data: blog });
         } else {
             res.status(404).json({ message: "Blog not found" });
         }

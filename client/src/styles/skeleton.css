@@ -1,0 +1,8 @@
+.skeletons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 1rem;
+}
