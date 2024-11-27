@@ -1,6 +1,6 @@
 import Blog from "./Blog";
 import PropTypes from "prop-types";
-import "../styles/Blogs.css";
+import "../styles/blogs.css";
 import SkeletonList from "./SkeletonList";
 
 const Blogs = ({ blogs, loading }) => {
