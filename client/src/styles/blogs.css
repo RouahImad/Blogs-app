@@ -21,12 +21,17 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: white;
-    padding-block: 15px;
-    padding-inline: 15px;
+    background-color: var(--blog-bg-light);
+    padding: 15px;
     border: 1px solid #ccc;
     border-radius: 6px;
     box-shadow: 0px 0px 3px #d3d4d7;
+    transition: 0.3s;
+}
+.dark .blogs .blog {
+    background-color: var(--blog-bg-dark);
+    color: white;
+    border: 1px solid var(--blog-bg-dark);
 }
 .blog .info {
     display: flex;
@@ -40,6 +45,9 @@
     font-size: 1.4rem;
     font-weight: bold;
     text-transform: capitalize;
+}
+.dark .blog .info span:first-of-type {
+    color: white;
 }
 .blog .info span:last-of-type {
     font-family: "Merriweather", serif;

@@ -22,11 +22,12 @@ const App = () => {
             .finally(() => {
                 timer = setTimeout(() => {
                     setLoading(false);
-                }, 1000);
+                }, 700);
             });
 
         if (localStorage.getItem("theme") == "true") {
             setTheme(true);
+            document.body.className = "dark";
         }
 
         return () => {

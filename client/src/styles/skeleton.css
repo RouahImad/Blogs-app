@@ -1,8 +1,57 @@
+:root {
+    --skeleton-color: #d0cece;
+    --skeleton-color: #e5e5e5;
+    --skeleton-height: 13px;
+}
 .skeletons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
     margin: 0 auto;
-    max-width: 1200px;
-    padding: 0 1rem;
+    margin-top: 20px;
+    max-width: 700px;
+}
+@media (max-width: 827px) {
+    .skeletons {
+        max-width: 500px;
+    }
+}
+@media (max-width: 527px) {
+    .skeletons {
+        max-width: 440px;
+    }
+}
+.skeletons .skeleton {
+    background-color: white;
+    box-shadow: 0px 0px 3px #d3d4d7;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    padding: 15px;
+    width: 100%;
+    height: 93px;
+}
+.dark .skeletons .skeleton {
+    background-color: var(--blog-bg-dark);
+    color: white;
+    border: 1px solid var(--blog-bg-dark);
+}
+.skeletons .skeleton .skeleton_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 6px;
+}
+.skeletons .skeleton .skeleton_info div {
+    width: 50%;
+    height: var(--skeleton-height);
+}
+.skeletons .skeleton .skeleton_info div:last-of-type {
+    width: 23%;
+}
+.skeletons .skeleton div:last-of-type,
+.skeletons .skeleton .skeleton_info div {
+    background-color: var(--skeleton-color);
+    border-radius: 5px;
+}
+.skeletons .skeleton > div:last-of-type {
+    width: 100%;
+    height: var(--skeleton-height);
+    margin-top: 16px;
 }

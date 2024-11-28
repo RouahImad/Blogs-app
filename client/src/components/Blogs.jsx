@@ -1,7 +1,8 @@
 import Blog from "./Blog";
 import PropTypes from "prop-types";
-import "../styles/blogs.css";
 import SkeletonList from "./SkeletonList";
+import "../styles/blogs.css";
+import ErrorLog from "./ErrorLog";
 
 const Blogs = ({ blogs, loading }) => {
     return (
@@ -22,7 +23,7 @@ const Blogs = ({ blogs, loading }) => {
                     ) : blogs?.data?.length == 0 ? (
                         <span>More blogs are coming stay tunned!</span>
                     ) : (
-                        <span>Oops! something went wrong</span>
+                        <ErrorLog />
                     )}
                 </div>
             )}

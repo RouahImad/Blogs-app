@@ -5,14 +5,21 @@ button {
     font-size: 25px;
     cursor: pointer;
 }
+.dark button {
+    color: white;
+}
 .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
-    background-color: white;
+    background-color: var(--nav-bg-light);
     padding-inline: 25px;
     border-bottom: 1px solid #ccc;
+}
+.dark .nav {
+    background-color: var(--nav-bg-dark);
+    color: white;
 }
 .actions {
     list-style: none;
@@ -30,5 +37,6 @@ button {
 .actions button:hover {
     background-color: #f1f1f1;
 }
-.theme {
+.dark .actions button:hover {
+    background-color: #f6f7f90d;
 }
