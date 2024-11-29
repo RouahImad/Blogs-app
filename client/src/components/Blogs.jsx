@@ -1,7 +1,6 @@
 import Blog from "./Blog";
 import PropTypes from "prop-types";
 import SkeletonList from "./SkeletonList";
-import "../styles/blogs.css";
 import ErrorLog from "./ErrorLog";
 
 const Blogs = ({ blogs, loading }) => {
@@ -15,6 +14,7 @@ const Blogs = ({ blogs, loading }) => {
                         blogs.data.map((blog) => (
                             <Blog
                                 key={blog.id}
+                                id={blog.id}
                                 title={blog.title}
                                 content={blog.content}
                                 posted={blog.post_date}

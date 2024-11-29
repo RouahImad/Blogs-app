@@ -3,6 +3,7 @@ import { FaRegMoon } from "react-icons/fa";
 import { LuSunMoon } from "react-icons/lu";
 import Proptypes from "prop-types";
 import "../styles/navbar.css";
+import { NavLink } from "react-router-dom";
 
 const NavBar = ({ theme, setTheme }) => {
     return (
@@ -10,9 +11,11 @@ const NavBar = ({ theme, setTheme }) => {
             <h2>Blogo</h2>
             <ul className="actions">
                 <li>
-                    <button>
+                    {/* <NavLink to="/"> */}
+                    <button onClick={() => {}}>
                         <IoHome />
                     </button>
+                    {/* </NavLink> */}
                 </li>
                 <li>
                     <button
