@@ -1,31 +1,43 @@
 import { IoHome } from "react-icons/io5";
 import { FaRegMoon } from "react-icons/fa";
 import { LuSunMoon } from "react-icons/lu";
+import { GoLog } from "react-icons/go";
+import { FaHeart } from "react-icons/fa";
 import Proptypes from "prop-types";
-import "../styles/navbar.css";
 import { NavLink } from "react-router-dom";
+import "../styles/navbar.css";
 
 const NavBar = ({ theme, setTheme }) => {
+    const toggleTheme = () => {
+        const newTheme = theme === "light" ? "dark" : "light";
+        document.body.className = newTheme;
+        localStorage.setItem("theme", newTheme);
+        setTheme(newTheme);
+    };
     return (
         <div className="nav">
             <h2>Blogo</h2>
             <ul className="actions">
                 <li>
-                    {/* <NavLink to="/"> */}
-                    <button onClick={() => {}}>
+                    <NavLink to="/">
                         <IoHome />
-                    </button>
-                    {/* </NavLink> */}
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/blog">
+                        <GoLog />
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/likes">
+                        <FaHeart />
+                    </NavLink>
                 </li>
                 <li>
                     <button
                         className="theme"
                         type="button"
-                        onClick={() => {
-                            document.body.className = !theme ? "dark" : "";
-                            localStorage.setItem("theme", !theme);
-                            setTheme((old) => !old);
-                        }}
+                        onClick={toggleTheme}
                     >
                         {theme ? <LuSunMoon /> : <FaRegMoon />}
                     </button>
@@ -36,7 +48,7 @@ const NavBar = ({ theme, setTheme }) => {
 };
 
 NavBar.propTypes = {
-    theme: Proptypes.bool.isRequired,
+    theme: Proptypes.string.isRequired,
     setTheme: Proptypes.func.isRequired,
 };
 

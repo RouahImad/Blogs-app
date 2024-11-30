@@ -5,9 +5,9 @@ const getBlogs = async (req, res) => {
         const blogs = await blogModel.getBlogs();
 
         if (blogs.length > 0) {
-            res.status(200).json({ data: blogs });
+            res.status(200).json(blogs);
         } else {
-            res.status(200).json({ data: [] });
+            res.status(200).json([]);
         }
     } catch (err) {
         console.log(err);
@@ -24,7 +24,7 @@ const getBlog = async (req, res) => {
     try {
         const blog = await blogModel.getBlog(id);
         if (blog) {
-            res.status(200).json({ data: blog });
+            res.status(200).json(blog);
         } else {
             res.status(404).json({ message: "Blog not found" });
         }
@@ -68,13 +68,15 @@ const updateBlog = async (req, res) => {
     try {
         const results = await blogModel.updateBlog(id, title, content);
         if (results) {
-            res.status(200).json({ message: "Blog updated successfully" });
+            res.status(201).json({ message: "Blog updated successfully" });
         } else {
             res.status(404).json({ message: "Blog not found" });
         }
     } catch (err) {
         console.log(err);
-        res.status(500).json({ error: "Sorry there is an error in server" });
+        res.status(500).json({
+            error: "An error occurred while updating the blog",
+        });
     }
 };
 
@@ -87,7 +89,7 @@ const deleteBlog = async (req, res) => {
     try {
         const results = await blogModel.deleteBlog(id);
         if (results) {
-            res.status(200).json({ message: "Blog deleted successfully" });
+            res.status(204).send();
         } else {
             res.status(404).json({ message: "Blog not found" });
         }

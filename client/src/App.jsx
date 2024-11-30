@@ -1,73 +1,74 @@
-import { useEffect, useState } from "react";
-// import Blogs from "./components/Blogs";
-import NavBar from "./components/NavBar";
-import axios from "axios";
-
+import { useState } from "react";
 import {
     createBrowserRouter,
     createRoutesFromElements,
     Route,
     RouterProvider,
 } from "react-router-dom";
-import Blogs from "./components/Blogs";
-import Blog, { BlogLoader } from "./pages/Blog";
-import NotFound from "./pages/NotFound";
+import BlogsList, { BlogsLoader } from "./pages/BlogsList";
+import BlogPage, { BlogLoader } from "./pages/BlogPage";
+import NotFound from "./components/NotFound";
+import Root, { RootLoader } from "./pages/Root";
+import Home from "./pages/Home";
+import ErrorLog from "./components/ErrorLog";
+import LikedPage from "./pages/LikedPage";
 
 const App = () => {
-    const [blogs, setBlogs] = useState({});
-    const [theme, setTheme] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [theme, setTheme] = useState("light");
 
-    useEffect(() => {
-        let timer;
-        axios
-            .get("/blogs")
-            .then((response) => {
-                setBlogs(response.data);
-            })
-            .catch((error) => {
-                console.log("Error fetching data");
-                console.error(error);
-            })
-            .finally(() => {
-                timer = setTimeout(() => {
-                    setLoading(false);
-                }, 700);
-            });
+    const handleLike = (id) => {
+        console.log("Liked", id);
+    };
 
-        if (localStorage.getItem("theme") == "true") {
-            setTheme(true);
-            document.body.className = "dark";
+    const handleShare = (id, title, content) => {
+        if (navigator.share) {
+            const shareData = {
+                title: title,
+                text: content,
+                url: window.location.origin + "/blog/" + id,
+            };
+
+            navigator.share(shareData);
         }
-
-        return () => {
-            clearTimeout(timer);
-        };
-    }, []);
+    };
 
     const routes = createBrowserRouter(
         createRoutesFromElements(
-            <>
+            <Route
+                path="/"
+                element={<Root theme={theme} setTheme={setTheme} />}
+                loader={RootLoader}
+            >
+                <Route index element={<Home />} />
                 <Route
-                    path="/"
-                    element={<Blogs blogs={blogs} loading={loading} />}
+                    path="blog"
+                    element={
+                        <BlogsList
+                            handleLike={handleLike}
+                            handleShare={handleShare}
+                        />
+                    }
+                    loader={BlogsLoader}
+                    errorElement={<ErrorLog />}
                 />
                 <Route
-                    path="/blog/:id"
-                    element={<Blog />}
+                    path="blog/:id"
+                    element={
+                        <BlogPage
+                            handleLike={handleLike}
+                            handleShare={handleShare}
+                        />
+                    }
                     loader={BlogLoader}
+                    errorElement={<ErrorLog />}
                 />
-                <Route path="/*" element={<NotFound />} />
-            </>
+                <Route path="likes" element={<LikedPage />} />
+                <Route path="*" element={<NotFound />} />
+            </Route>
         )
     );
 
-    return (
-        <div>
-            <NavBar theme={theme} setTheme={setTheme} />
-            <RouterProvider router={routes} />
-        </div>
-    );
+    return <RouterProvider router={routes} />;
 };
 
 export default App;
