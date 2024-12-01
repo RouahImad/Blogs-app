@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import Blog from "../components/Blog";
 import PropTypes from "prop-types";
 
-const BlogPage = ({ handleLike, handleShare }) => {
+const BlogPage = ({ likedBlogsId, handleLike, handleShare }) => {
     const data = useLoaderData();
 
     return (
@@ -14,7 +14,8 @@ const BlogPage = ({ handleLike, handleShare }) => {
                 title={data.title}
                 content={data.content}
                 posted={data.post_date}
-                handleLike={handleLike}
+                liked={likedBlogsId.includes(data.id)}
+                handleLike={() => handleLike(data.id)}
                 handleShare={handleShare}
             />
         </div>
@@ -22,6 +23,7 @@ const BlogPage = ({ handleLike, handleShare }) => {
 };
 
 BlogPage.propTypes = {
+    likedBlogsId: PropTypes.array.isRequired,
     handleLike: PropTypes.func.isRequired,
     handleShare: PropTypes.func.isRequired,
 };

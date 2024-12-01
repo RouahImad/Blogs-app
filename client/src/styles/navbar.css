@@ -20,7 +20,7 @@ li a {
     cursor: pointer;
 }
 a.active {
-    color: #f1356d !important;
+    color: #ee5467 !important;
 }
 .dark li a,
 .dark li button {

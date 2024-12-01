@@ -1,0 +1,37 @@
+.admin {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+}
+.adminSideBar {
+    position: fixed;
+    width: 193px;
+    height: calc(100vh - 70px);
+    bottom: 0;
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+}
+.adminSideBar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px solid #ccc;
+}
+.adminSideBar a:hover {
+    background-color: #ddd;
+}
+.adminSideBar svg {
+    font-size: 20px;
+}
+.adminContent {
+    width: calc(100% - 193px);
+    margin-left: 193px;
+    padding: 20px;
+}
+.adminContent h2 {
+    margin-bottom: 20px;
+}

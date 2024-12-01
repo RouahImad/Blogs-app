@@ -1,5 +1,6 @@
 import Blog from "../components/Blog";
 import SkeletonList from "../components/SkeletonList";
+import soon from "../assets/work-in-progress.png";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -19,10 +20,11 @@ export const BlogsLoader = async () => {
     }
 };
 
-const BlogsList = ({ handleLike, handleShare }) => {
+const BlogsList = ({ likedBlogsId, handleLike, handleShare }) => {
     const [loading, setLoading] = useState(true);
+
     const data = useLoaderData();
-    const [blogs, setBlogs] = useState(data.length ? data : []);
+    const [blogs, setBlogs] = useState(data?.length ? data : []);
     const navigate = useNavigate();
 
     const handleClick = (id) => {
@@ -46,17 +48,30 @@ const BlogsList = ({ handleLike, handleShare }) => {
                         blogs.map((blog) => (
                             <Blog
                                 key={blog.id}
-                                id={blog.id}
                                 title={blog.title}
                                 content={blog.content}
                                 posted={blog.post_date}
-                                handleLike={handleLike}
-                                handleShare={handleShare}
+                                liked={likedBlogsId.includes(blog.id)}
+                                handleLike={() => handleLike(blog.id)}
+                                handleShare={() =>
+                                    handleShare(
+                                        blog.id,
+                                        blog.title,
+                                        blog.content
+                                    )
+                                }
                                 handleClick={() => handleClick(blog.id)}
                             />
                         ))
                     ) : (
-                        <span>More blogs are coming stay tunned!</span>
+                        <div className="emptyBlogs">
+                            <img
+                                src={soon}
+                                alt="work in progress"
+                                loading="lazy"
+                            />
+                            <span>More blogs are coming stay tunned!</span>
+                        </div>
                     )}
                 </div>
             )}
@@ -65,6 +80,7 @@ const BlogsList = ({ handleLike, handleShare }) => {
 };
 
 BlogsList.propTypes = {
+    likedBlogsId: PropTypes.array.isRequired,
     handleLike: PropTypes.func.isRequired,
     handleShare: PropTypes.func.isRequired,
 };

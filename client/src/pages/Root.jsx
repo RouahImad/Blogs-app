@@ -1,9 +1,14 @@
 import { Outlet, useLoaderData } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 
 const Root = ({ theme, setTheme }) => {
-    theme = useLoaderData();
+    const data = useLoaderData();
+
+    useEffect(() => {
+        setTheme(data);
+    }, [data]);
 
     return (
         <div>
@@ -21,10 +26,11 @@ Root.propTypes = {
 export default Root;
 
 export const RootLoader = () => {
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.className = "dark";
-        return "dark";
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme === "dark") {
+        document.body.className = storedTheme;
+        return storedTheme;
     }
-    document.body.className = "light";
-    return "light";
+    document.body.className = storedTheme;
+    return storedTheme;
 };

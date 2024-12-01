@@ -4,15 +4,14 @@ import { FaHeart } from "react-icons/fa";
 import { FaShare } from "react-icons/fa";
 
 const Blog = ({
-    id,
     title,
     content,
     posted,
+    liked,
     handleLike,
     handleShare,
     handleClick,
 }) => {
-    const liked = false;
     return (
         <div className="blog">
             <div className="info" onClick={handleClick}>
@@ -24,13 +23,9 @@ const Blog = ({
                 <div className="links">link</div>
                 <div className="box">
                     <button onClick={handleLike}>
-                        {liked ? <FaHeart /> : <FaRegHeart />}
+                        {liked ? <FaHeart color="red" /> : <FaRegHeart />}
                     </button>
-                    <button
-                        onClick={() => {
-                            handleShare(id, title, content);
-                        }}
-                    >
+                    <button onClick={handleShare}>
                         <FaShare />
                     </button>
                 </div>
@@ -40,10 +35,10 @@ const Blog = ({
 };
 
 Blog.propTypes = {
-    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     posted: PropTypes.string.isRequired,
+    liked: PropTypes.bool.isRequired,
     handleLike: PropTypes.func.isRequired,
     handleShare: PropTypes.func.isRequired,
     handleClick: PropTypes.func,

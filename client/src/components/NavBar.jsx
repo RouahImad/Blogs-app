@@ -39,7 +39,7 @@ const NavBar = ({ theme, setTheme }) => {
                         type="button"
                         onClick={toggleTheme}
                     >
-                        {theme ? <LuSunMoon /> : <FaRegMoon />}
+                        {theme == "dark" ? <LuSunMoon /> : <FaRegMoon />}
                     </button>
                 </li>
             </ul>

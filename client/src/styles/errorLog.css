@@ -1,13 +1,14 @@
 .errorMessage {
-    font-family: "Roboto", sans-serif;
+    font-family: "Montserrat", sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0.5rem 0;
+    justify-content: center;
+    height: calc(83vh - 71px);
+    margin: 0.5rem 20px;
     text-align: center;
     font-weight: bold;
     letter-spacing: 0.1rem;
-    /* text-shadow: 0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2); */
     font-size: 0.8rem;
 }
 .errorMessage img {
@@ -16,4 +17,14 @@
 }
 .dark .errorMessage {
     color: white;
+}
+.errorMessage h2 {
+    font-size: 1.5rem;
+    text-transform: capitalize;
+}
+.errorMessage p {
+    text-wrap: pretty;
+    line-height: 1.5;
+    max-width: 480px;
+    text-transform: capitalize;
 }

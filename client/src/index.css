@@ -22,9 +22,13 @@ body {
 .dark {
     background-color: var(--bg-color-dark);
 }
+.blogs:has(.emptyBlogs) {
+    min-height: 80vh;
+}
 .blogs,
 .container {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
@@ -32,22 +36,62 @@ body {
     margin-inline: auto;
     margin-block: 20px;
 }
+.container > h2 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 0;
+}
+.dark .container > h2 {
+    color: white;
+}
 @media (max-width: 827px) {
     .blogs,
-    .container {
-        max-width: 500px;
+    .container,
+    .likePage {
+        max-width: 500px !important;
+    }
+    .emptyLiked {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .emptyLiked img {
+        width: 153px !important;
+        margin-right: 0 !important;
+        margin-bottom: 15px;
+    }
+    .emptyLiked span {
+        width: 100% !important;
+        text-align: center;
     }
 }
 @media (max-width: 527px) {
     .blogs,
-    .container {
-        max-width: 420px;
+    .container,
+    .likePage {
+        max-width: 420px !important;
+    }
+    .emptyBlogs {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .emptyBlogs img {
+        width: 153px !important;
+        margin-right: 0 !important;
+        margin-bottom: 15px;
+    }
+    .emptyBlogs span {
+        width: 100% !important;
+        text-align: center;
     }
 }
 @media (max-width: 427px) {
     .blogs,
-    .container {
-        max-width: 350px;
+    .container,
+    .likePage {
+        max-width: 350px !important;
     }
 }
 .blog {
@@ -116,4 +160,53 @@ body {
     all: unset;
     font-size: 20px;
     cursor: pointer;
+}
+.likePage {
+    margin-inline: auto;
+    margin-block: 20px;
+    max-width: 700px;
+}
+.likePage h2 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+.dark .likePage h2 {
+    color: white;
+}
+.likePage .row {
+    display: flex;
+    height: calc(73vh - 71px);
+}
+.likePage .row .blogs {
+    flex: 1;
+}
+.emptyLiked,
+.emptyBlogs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #333;
+}
+.dark .emptyLiked,
+.dark .emptyBlogs {
+    color: white;
+}
+.emptyBlogs img,
+.emptyLiked img {
+    width: 193px;
+    margin-right: 15px;
+}
+.emptyBlogs img {
+    filter: drop-shadow(3px 3px 0);
+}
+.emptyLiked span,
+.emptyBlogs span {
+    font-family: "Merriweather", serif;
+    text-wrap: pretty;
+    width: 273px;
+    font-size: 1.5rem;
 }
