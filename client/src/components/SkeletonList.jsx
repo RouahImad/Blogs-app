@@ -6,6 +6,7 @@ const SkeletonList = () => {
         <div className="skeletons">
             <SkeletonBlog />
             <SkeletonBlog />
+            <SkeletonBlog />
         </div>
     );
 };

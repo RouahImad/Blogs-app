@@ -35,14 +35,18 @@ const getBlog = async (req, res) => {
 };
 
 const createBlog = async (req, res) => {
-    const { title, content } = req.body;
+    const { title, content, links } = req.body;
 
     if (!title && !content) {
         res.status(400).json({ error: "Please provide title and content" });
         return;
     }
     try {
-        const results = await blogModel.createBlog(title, content);
+        const results = await blogModel.createBlog(
+            title,
+            content,
+            links ? links : null
+        );
         if (results) {
             res.status(200).json({ message: "Blog created successfully" });
         } else {
@@ -99,4 +103,25 @@ const deleteBlog = async (req, res) => {
     }
 };
 
-module.exports = { getBlogs, getBlog, createBlog, updateBlog, deleteBlog };
+const getStats = async (req, res) => {
+    try {
+        const stats = await blogModel.getStats();
+        if (stats) {
+            res.status(200).json(stats);
+        } else {
+            res.status(404).json({ message: "Stats not found" });
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "Sorry there is an error in server" });
+    }
+};
+
+module.exports = {
+    getBlogs,
+    getBlog,
+    createBlog,
+    updateBlog,
+    deleteBlog,
+    getStats,
+};

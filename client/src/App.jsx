@@ -12,11 +12,12 @@ import Root, { RootLoader } from "./pages/Root";
 import Home from "./pages/Home";
 import ErrorLog from "./components/ErrorLog";
 import LikedPage, { LikedPageLoader } from "./pages/LikedPage";
-import Admin from "./pages/admin";
+import Admin from "./pages/Admin";
 import BlogForm from "./components/BlogForm";
-import AdminBlogs from "./components/adminBlogs";
+import AdminBlogs, { AdminBLogsLoader } from "./components/AdminBlogs";
 import AdminStats from "./components/AdminStats";
-import AdminProfile from "./components/AdminProfile";
+import axios from "axios";
+import Login from "./components/Login";
 
 const App = () => {
     const [theme, setTheme] = useState("light");
@@ -65,13 +66,50 @@ const App = () => {
         }
     };
 
-    const handleCreate = (event) => {
+    const [links, setLinks] = useState([]);
+
+    const handleCreate = async (event) => {
         event.preventDefault();
 
-        const title = event.target.title.value;
-        const content = event.target.content.value;
+        const title = event.target.title.value.trim();
+        const content = event.target.content.value.trim();
 
-        console.log(title, content);
+        try {
+            const response = await axios.post("/blogs", {
+                title,
+                content,
+                links,
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.log("Error fetching data");
+            console.error(error);
+            throw error;
+        }
+    };
+
+    const [loggedIn, setLoggedIn] = useState(true); // change to false later
+
+    const handleLogin = async (event) => {
+        event.preventDefault();
+
+        const username = event.target.username.value.trim();
+        const password = event.target.password.value.trim();
+
+        try {
+            const response = await axios.post("/login", {
+                username,
+                password,
+            });
+
+            if (response.status === 200) {
+                setLoggedIn(true);
+            }
+        } catch (error) {
+            console.log("Error fetching data");
+            console.error(error.response.data);
+            throw error;
+        }
     };
 
     const routes = createBrowserRouter(
@@ -118,15 +156,36 @@ const App = () => {
                     loader={() => LikedPageLoader(likedBlogsId)}
                     errorElement={<ErrorLog />}
                 />
-                <Route path="admin" element={<Admin />}>
-                    <Route index element={<AdminStats />} />
+                {loggedIn ? (
                     <Route
-                        path="create"
-                        element={<BlogForm handleCreate={handleCreate} />}
+                        path="admin"
+                        element={<Admin />}
+                        errorElement={<ErrorLog />}
+                    >
+                        <Route index element={<AdminStats />} />
+                        <Route
+                            path="create"
+                            element={
+                                <BlogForm
+                                    links={links}
+                                    setLinks={setLinks}
+                                    handleCreate={handleCreate}
+                                />
+                            }
+                        />
+                        <Route
+                            path="blogs"
+                            element={<AdminBlogs />}
+                            loader={AdminBLogsLoader}
+                        />
+                    </Route>
+                ) : (
+                    <Route
+                        path="admin"
+                        element={<Login handleLogin={handleLogin} />}
+                        errorElement={<ErrorLog />}
                     />
-                    <Route path="blogs" element={<AdminBlogs />} />
-                    <Route path="profile" element={<AdminProfile />} />
-                </Route>
+                )}
                 <Route
                     path="*"
                     element={<NotFound />}

@@ -1,0 +1,46 @@
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    height: calc(93vh - 70px);
+}
+.loginContainer h2 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+.loginContainer form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 80vw;
+    max-width: 400px;
+}
+.loginContainer .inputBox {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+.loginContainer form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.loginContainer form button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}

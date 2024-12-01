@@ -5,10 +5,17 @@ import PropTypes from "prop-types";
 
 const BlogPage = ({ likedBlogsId, handleLike, handleShare }) => {
     const data = useLoaderData();
+    const links = JSON.parse(data.links);
 
     return (
-        <div className="container">
-            notice a single blog post
+        <div className="blogPage">
+            <div className="links">
+                {links?.map(({ name, url }, i) => (
+                    <a key={i} href={url} className="link" target="_blank">
+                        {name}
+                    </a>
+                ))}
+            </div>
             <Blog
                 id={data.id}
                 title={data.title}

@@ -11,6 +11,16 @@
     --nav-bg-light: #ffffff;
     --nav-bg-dark: #2c2c2c;
 }
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}
 body {
     margin: 0;
     font-family: "arial";
@@ -23,33 +33,31 @@ body {
     background-color: var(--bg-color-dark);
 }
 .blogs:has(.emptyBlogs) {
-    min-height: 80vh;
+    min-height: 67vh;
 }
 .blogs,
-.container {
+.blogPage {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
     max-width: 700px;
     margin-inline: auto;
     margin-block: 20px;
 }
-.container > h2 {
+.blogPage > h2 {
     font-family: "Montserrat", sans-serif;
     font-size: 2rem;
-    font-weight: bold;
     color: #333;
     text-align: center;
     margin-bottom: 0;
 }
-.dark .container > h2 {
+.dark .blogPage > h2 {
     color: white;
 }
 @media (max-width: 827px) {
     .blogs,
-    .container,
+    .blogPage,
     .likePage {
         max-width: 500px !important;
     }
@@ -69,7 +77,7 @@ body {
 }
 @media (max-width: 527px) {
     .blogs,
-    .container,
+    .blogPage,
     .likePage {
         max-width: 420px !important;
     }
@@ -89,7 +97,7 @@ body {
 }
 @media (max-width: 427px) {
     .blogs,
-    .container,
+    .blogPage,
     .likePage {
         max-width: 350px !important;
     }
@@ -120,6 +128,9 @@ body {
     gap: 3px;
     cursor: pointer;
 }
+.blogPage .info {
+    cursor: unset;
+}
 .blog .info span:first-of-type {
     font-family: "Montserrat", sans-serif;
     color: #333;
@@ -127,6 +138,16 @@ body {
     font-size: 1.4rem;
     font-weight: bold;
     text-transform: capitalize;
+    max-height: 30px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.blogPage .info span:first-of-type {
+    max-height: unset;
+    text-overflow: unset;
+    overflow: unset;
+    white-space: unset;
 }
 .dark .blog .info span:first-of-type {
     color: white;
@@ -139,9 +160,25 @@ body {
 }
 .blog p {
     font-family: "Merriweather", serif;
+    max-height: 93px;
     text-wrap: pretty;
     font-size: 1rem;
     margin-bottom: 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-clamp: 4;
+}
+.blogPage p {
+    text-overflow: unset;
+    overflow: unset;
+    max-height: unset;
+    display: unset;
+    -webkit-line-clamp: unset;
+    -webkit-box-orient: unset;
+    line-clamp: unset;
 }
 .blog .action {
     display: flex;
@@ -161,6 +198,34 @@ body {
     font-size: 20px;
     cursor: pointer;
 }
+.blogs .links,
+.blogPage .links {
+    display: flex;
+    gap: 10px;
+    width: 177px;
+    max-width: 177px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.blog .link,
+.blogPage .link {
+    font-family: "Merriweather", serif;
+    width: 59px;
+    background-color: #caf1eb87;
+    color: #8fe2d3;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}
+.blogs .links .link:nth-child(n + 4),
+.blogPage .links .link:nth-child(n + 4) {
+    display: none;
+}
 .likePage {
     margin-inline: auto;
     margin-block: 20px;
@@ -169,7 +234,6 @@ body {
 .likePage h2 {
     font-family: "Montserrat", sans-serif;
     font-size: 2rem;
-    font-weight: bold;
     color: #333;
     text-align: center;
 }
@@ -178,6 +242,8 @@ body {
 }
 .likePage .row {
     display: flex;
+}
+.likePage .row:has(.emptyLiked) {
     height: calc(73vh - 71px);
 }
 .likePage .row .blogs {
@@ -209,4 +275,15 @@ body {
     text-wrap: pretty;
     width: 273px;
     font-size: 1.5rem;
+}
+.blogPage > .links {
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100vw;
+    max-width: 100%;
+}
+.blogPage > .links .link {
+    display: inline-block !important;
+    width: fit-content !important;
+    border: 1px solid #8fe2d3;
 }

@@ -15,7 +15,12 @@
 }
 @media (max-width: 527px) {
     .skeletons {
-        max-width: 440px;
+        max-width: 420px;
+    }
+}
+@media (max-width: 427px) {
+    .skeletons {
+        max-width: 350px;
     }
 }
 .skeletons .skeleton {

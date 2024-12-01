@@ -11,16 +11,28 @@ const Blog = ({
     handleLike,
     handleShare,
     handleClick,
+    links,
 }) => {
     return (
         <div className="blog">
             <div className="info" onClick={handleClick}>
                 <span>{title}</span>
-                <span>{posted}</span>
+                <span>
+                    {new Date(posted).toLocaleDateString() ===
+                    new Date().toLocaleDateString()
+                        ? "Today"
+                        : posted}
+                </span>
             </div>
-            <p>{content}</p>
+            <p>{`${content}${content.at(-1) == "." ? "" : "."}`}</p>
             <div className="action">
-                <div className="links">link</div>
+                <div className="links">
+                    {links?.map(({ name, url }, i) => (
+                        <a key={i} href={url} className="link" target="_blank">
+                            {name}
+                        </a>
+                    ))}
+                </div>
                 <div className="box">
                     <button onClick={handleLike}>
                         {liked ? <FaHeart color="red" /> : <FaRegHeart />}
@@ -42,6 +54,7 @@ Blog.propTypes = {
     handleLike: PropTypes.func.isRequired,
     handleShare: PropTypes.func.isRequired,
     handleClick: PropTypes.func,
+    links: PropTypes.array,
 };
 
 export default Blog;

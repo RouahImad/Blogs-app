@@ -1,16 +1,36 @@
+body:has(.admin) {
+    overflow: hidden;
+}
 .admin {
     display: flex;
     align-items: center;
-    margin-top: 50px;
+    height: calc(100vh - 70px);
 }
 .adminSideBar {
-    position: fixed;
+    position: sticky;
     width: 193px;
-    height: calc(100vh - 70px);
-    bottom: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
     background-color: #f1f1f1;
     padding: 20px;
     border-right: 1px solid #ccc;
+    z-index: 999;
+    transition: 0.3s;
+}
+.dark .adminSideBar {
+    background-color: #333;
+    background-color: f6f7f90d;
+}
+.menu {
+    display: none;
+    cursor: pointer;
+}
+.dark .menu {
+    color: white;
+}
+.menu svg {
+    font-size: 30px !important;
 }
 .adminSideBar a {
     display: flex;
@@ -20,18 +40,296 @@
     color: #333;
     text-decoration: none;
     border-bottom: 1px solid #ccc;
+    transition: 0.3s;
+}
+.adminSideBar.open a {
+    display: flex;
+    opacity: 1;
 }
 .adminSideBar a:hover {
     background-color: #ddd;
 }
+.dark .adminSideBar a {
+    color: white;
+}
+.dark .adminSideBar a:hover {
+    background-color: #f6f7f90d;
+}
 .adminSideBar svg {
     font-size: 20px;
 }
+@media (max-width: 727px) {
+    .adminSideBar {
+        position: absolute;
+        height: 54px;
+        top: 70px;
+        width: 60px;
+        padding: 10px;
+    }
+    .adminSideBar a {
+        display: none;
+        justify-content: center;
+        gap: 0;
+        padding: 10px;
+        opacity: 0;
+    }
+    .adminSideBar a svg {
+        font-size: 30px !important;
+    }
+    .adminSideBar span {
+        display: none;
+    }
+    .menu {
+        display: block;
+        text-align: center;
+    }
+}
+.adminSideBar.open {
+    height: 100%;
+}
 .adminContent {
-    width: calc(100% - 193px);
-    margin-left: 193px;
-    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    flex: 1;
+    position: relative;
+    height: 500px;
+    min-height: calc(100vh - 70px);
+    margin-top: 18px;
+    padding-inline: 20px;
 }
 .adminContent h2 {
-    margin-bottom: 20px;
+    font-family: "Montserrat", sans-serif;
+    margin-top: 0;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+.dark .adminContent h2 {
+    color: white;
+}
+
+/* create blog */
+
+.adminForm {
+    width: 80%;
+    max-width: 800px;
+    padding-inline: 20px;
+    padding-block: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+@media (max-width: 512px) {
+    .adminForm {
+        width: 100%;
+    }
+}
+.adminForm form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.adminForm .inputBox {
+    display: flex;
+    gap: 20px;
+}
+.adminForm label {
+    font-size: 20px;
+}
+.dark .adminForm > form label {
+    color: white;
+}
+.adminForm input[type="text"],
+.adminForm input[type="url"],
+.adminForm textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.adminForm .inputBox:has(input),
+.adminForm .inputBox:has(button) {
+    align-items: center;
+}
+.adminForm button {
+    background-color: #ee5467;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+textarea {
+    resize: none;
+}
+.linkForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 493px;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    padding-top: 50px;
+}
+.dark .linkForm {
+    color: white;
+    background-color: #333;
+}
+
+@media (max-width: 512px) {
+    .linkForm {
+        width: 95%;
+    }
+}
+.linkForm form {
+    width: 100%;
+}
+.linkForm .close {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    font-size: 27px;
+    cursor: pointer;
+}
+/*  blog manager  */
+
+.adminBlogs {
+    height: 100%;
+    width: 90vw;
+    max-width: 600px;
+}
+.adminBlogs > h2 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+}
+.dark .adminBlogs h1 {
+    color: white;
+}
+.adminBlogs .blogs {
+    height: calc(90vh - 70px);
+}
+.adminBlogs .blogRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.dark .adminBlogs .blogRow {
+    background-color: #333;
+}
+.adminBlogs .blogRow > div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.adminBlogs .blogRow > div:first-of-type {
+    cursor: pointer;
+}
+.adminBlogs .blogRow h2 {
+    font-size: 1.3rem;
+    margin: 0;
+    color: #333;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 200px;
+}
+@media (max-width: 512px) {
+    .adminBlogs .blogRow h2 {
+        max-width: 173px;
+        font-size: 1.1rem;
+    }
+}
+.dark .adminBlogs .blogRow h2 {
+    color: white;
+}
+.adminBlogs .blogRow span {
+    color: #333;
+    background-color: #ee546657;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.dark .adminBlogs .blogRow span {
+    color: white;
+    background-color: #ee5466;
+}
+.adminBlogs .blogRow button {
+    background-color: #ee5467;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.adminBlogs .edit {
+    position: absolute;
+    width: 83%;
+    max-width: 600px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    padding-top: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 999;
+}
+.adminBlogs .edit .close {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    font-size: 27px;
+    cursor: pointer;
+}
+.adminBlogs .edit form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.adminBlogs .edit .inputBox {
+    display: flex;
+    gap: 20px;
+}
+.adminBlogs .edit label {
+    font-size: 20px;
+}
+.dark .adminBlogs .edit label {
+    color: white;
+}
+.adminBlogs .edit input,
+.adminBlogs .edit textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.adminBlogs .edit button {
+    background-color: #ee5467;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
 }
