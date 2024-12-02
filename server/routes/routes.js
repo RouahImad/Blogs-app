@@ -9,6 +9,8 @@ const {
     getStats,
 } = require("../controllers/blogsController");
 
+require("dotenv").config();
+
 router.get("/blogs", getBlogs);
 router.get("/blogs/:id", getBlog);
 
@@ -24,7 +26,10 @@ router.post("/login", (req, res) => {
     const { username, password } = req.body;
     console.log(username, password);
 
-    if (username === "admin" && password === "pass") {
+    if (
+        username === process.env.MASTER_NAME &&
+        password === process.env.MASTER_PASSWORD
+    ) {
         res.status(200).send("Success");
     } else {
         res.status(401).send("Unauthorized");

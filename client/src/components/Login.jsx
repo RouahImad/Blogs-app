@@ -1,11 +1,21 @@
 import "../styles/login.css";
 import PropTypes from "prop-types";
+import Message from "./Message";
+import { useState } from "react";
 
 const Login = ({ handleLogin }) => {
+    const [message, setMessage] = useState({});
+
     return (
         <div className="loginContainer">
             <h2>Login</h2>
-            <form onSubmit={handleLogin}>
+            <form
+                onSubmit={async (e) => {
+                    const res = await handleLogin(e);
+                    console.log(res);
+                    setMessage(res);
+                }}
+            >
                 <div className="inputBox">
                     <label htmlFor="username">Username: </label>
                     <input
@@ -30,6 +40,9 @@ const Login = ({ handleLogin }) => {
                     Login
                 </button>
             </form>
+            {message?.status && (
+                <Message status={message.status} message={message.message} />
+            )}
         </div>
     );
 };

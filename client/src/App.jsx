@@ -80,15 +80,19 @@ const App = () => {
                 content,
                 links,
             });
-            console.log(response.data);
+            event.target.reset();
+            return { status: 200, message: response.data.message };
         } catch (error) {
             console.log("Error fetching data");
             console.error(error);
-            throw error;
+            return {
+                status: error.response.status,
+                message: error.response.data.error,
+            };
         }
     };
 
-    const [loggedIn, setLoggedIn] = useState(true); // change to false later
+    const [loggedIn, setLoggedIn] = useState(false); // change to false later
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -104,11 +108,12 @@ const App = () => {
 
             if (response.status === 200) {
                 setLoggedIn(true);
+                return { status: 200, message: response.data };
             }
         } catch (error) {
             console.log("Error fetching data");
             console.error(error.response.data);
-            throw error;
+            return { status: 401, message: error.response.data };
         }
     };
 

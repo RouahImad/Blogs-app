@@ -4,7 +4,9 @@
     align-items: center;
     flex-direction: column;
     gap: 30px;
+    width: 80vw;
     height: calc(93vh - 70px);
+    margin: 0 auto;
 }
 .loginContainer h2 {
     font-family: "Montserrat", sans-serif;
@@ -18,7 +20,7 @@
     align-items: center;
     flex-direction: column;
     gap: 20px;
-    width: 80vw;
+    width: 100%;
     max-width: 400px;
 }
 .loginContainer .inputBox {

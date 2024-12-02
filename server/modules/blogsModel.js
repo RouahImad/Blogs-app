@@ -22,10 +22,10 @@ const createBlog = async (title, content, links) => {
     let sql = "INSERT INTO blogs (title, content, post_date) VALUES (?, ?, ?)";
     let values = [title, content, today.toString()];
 
-    if (links) {
+    if (links?.length) {
         sql =
-            "INSERT INTO blogs (title, content, post_date, links) VALUES (?, ?, ?, ?)";
-        values = [title, content, today.toString(), links];
+            "INSERT INTO blogs (title, content, links, post_date) VALUES (?, ?, ?, ?)";
+        values = [title, content, links, today.toString()];
     }
 
     const res = await pool.query(sql, values);

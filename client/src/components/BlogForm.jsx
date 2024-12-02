@@ -1,14 +1,22 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import LinksForm from "./LinksForm";
+import Message from "./Message";
 
 const BlogForm = ({ links, setLinks, handleCreate }) => {
     const [addLink, setAddLink] = useState(false);
+    const [message, setMessage] = useState({});
 
     return (
         <div className="adminForm">
             <h2>Create Blog 📝</h2>
-            <form onSubmit={handleCreate}>
+            <form
+                onSubmit={async (e) => {
+                    const res = await handleCreate(e);
+
+                    setMessage(res);
+                }}
+            >
                 <div className="inputBox">
                     <label htmlFor="title">Title: </label>
                     <input
@@ -41,6 +49,9 @@ const BlogForm = ({ links, setLinks, handleCreate }) => {
             </form>
             {addLink && (
                 <LinksForm setLinks={setLinks} setAddLink={setAddLink} />
+            )}
+            {message?.status && (
+                <Message status={message.status} message={message.message} />
             )}
         </div>
     );

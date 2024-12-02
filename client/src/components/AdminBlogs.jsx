@@ -5,6 +5,7 @@ import soon from "../assets/work-in-progress.png";
 import SkeletonList from "./SkeletonList";
 import { useEffect, useState } from "react";
 import EditForm from "./EditForm";
+import Message from "./Message";
 
 export const AdminBLogsLoader = async () => {
     try {
@@ -26,6 +27,7 @@ const AdminBlogs = () => {
     const [loading, setLoading] = useState(true);
     const [clickedEdit, setClickedEdit] = useState(false);
     const [editData, setEditData] = useState({});
+    const [message, setMessage] = useState({});
 
     useEffect(() => {
         if (data) {
@@ -38,11 +40,18 @@ const AdminBlogs = () => {
             const response = await axios.delete(`/blogs/${id}`);
             if (response.status === 204) {
                 setBlogs(blogs.filter((blog) => blog.id !== id));
+                setMessage({
+                    status: 204,
+                    message: "Blog deleted successfully",
+                });
             }
         } catch (err) {
             console.log("Error deleting blog");
             console.error(err.response);
-            throw err;
+            setMessage({
+                status: err.response.status,
+                message: err.response.data.error,
+            });
         }
     };
 
@@ -105,6 +114,9 @@ const AdminBlogs = () => {
                     setClickedEdit={setClickedEdit}
                     handleUpdate={handleUpdate}
                 />
+            )}
+            {message?.status && (
+                <Message status={message.status} message={message.message} />
             )}
         </div>
     );

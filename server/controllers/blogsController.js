@@ -50,7 +50,7 @@ const createBlog = async (req, res) => {
         if (results) {
             res.status(200).json({ message: "Blog created successfully" });
         } else {
-            res.status(400).json({ message: "Blog not created" });
+            res.status(400).json({ error: "Blog not created" });
         }
     } catch (err) {
         console.log(err);
@@ -95,7 +95,7 @@ const deleteBlog = async (req, res) => {
         if (results) {
             res.status(204).send();
         } else {
-            res.status(404).json({ message: "Blog not found" });
+            res.status(404).json({ error: "Blog not found" });
         }
     } catch (err) {
         console.log(err);
