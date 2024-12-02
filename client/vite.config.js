@@ -11,12 +11,14 @@ export default defineConfig({
         },
         proxy: {
             "/blogs": {
-                target: "http://localhost:3000",
+                // target: "http://localhost:3000",
+                target: "https://server-pmmzuv36g-imadrouahs-projects.vercel.app",
                 changeOrigin: true,
                 secure: false,
             },
             "/login": {
-                target: "http://localhost:3000",
+                // target: "http://localhost:3000",
+                target: "https://server-pmmzuv36g-imadrouahs-projects.vercel.app",
                 changeOrigin: true,
                 secure: false,
             },
