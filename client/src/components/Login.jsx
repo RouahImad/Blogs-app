@@ -12,7 +12,6 @@ const Login = ({ handleLogin }) => {
             <form
                 onSubmit={async (e) => {
                     const res = await handleLogin(e);
-                    console.log(res);
                     setMessage(res);
                 }}
             >

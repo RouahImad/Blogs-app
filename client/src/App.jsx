@@ -78,7 +78,7 @@ const App = () => {
             const response = await axios.post("/blogs", {
                 title,
                 content,
-                links,
+                links: JSON.stringify(links),
             });
             event.target.reset();
             return { status: 200, message: response.data.message };
@@ -93,6 +93,24 @@ const App = () => {
     };
 
     const [loggedIn, setLoggedIn] = useState(false); // change to false later
+
+    useEffect(() => {
+        console.log("Checking login status");
+
+        checkLogin();
+    }, []);
+
+    const checkLogin = async () => {
+        try {
+            const response = await axios.get("/loggedIn");
+            if (response.status === 200) {
+                setLoggedIn(true);
+            }
+        } catch (error) {
+            console.log("Error fetching data");
+            console.error(error);
+        }
+    };
 
     const handleLogin = async (event) => {
         event.preventDefault();

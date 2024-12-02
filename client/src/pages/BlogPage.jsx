@@ -41,6 +41,7 @@ export const BlogLoader = async ({ params }) => {
     const { id } = params;
     try {
         const res = await axios.get("/blogs/" + id);
+
         return res.data;
     } catch (error) {
         console.log("Error fetching blog data");

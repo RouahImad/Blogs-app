@@ -11,16 +11,24 @@ const {
 
 require("dotenv").config();
 
+const isAuthenticated = (req, res, next) => {
+    if (req.session.user) {
+        next();
+    } else {
+        res.status(401).send("Unauthorized");
+    }
+};
+
 router.get("/blogs", getBlogs);
 router.get("/blogs/:id", getBlog);
 
-router.post("/blogs", createBlog);
+router.post("/blogs", isAuthenticated, createBlog);
 
-router.put("/blogs/:id", updateBlog);
+router.put("/blogs/:id", isAuthenticated, updateBlog);
 
-router.delete("/blogs/:id", deleteBlog);
+router.delete("/blogs/:id", isAuthenticated, deleteBlog);
 
-router.get("/stats", getStats);
+router.get("/stats", isAuthenticated, getStats);
 
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
@@ -29,7 +37,16 @@ router.post("/login", (req, res) => {
         username === process.env.MASTER_NAME &&
         password === process.env.MASTER_PASSWORD
     ) {
+        req.session.user = username;
         res.status(200).send("Success");
+    } else {
+        res.status(401).send("Unauthorized");
+    }
+});
+
+router.get("/loggedIn", (req, res) => {
+    if (req.session.user) {
+        res.status(200).send("Logged in");
     } else {
         res.status(401).send("Unauthorized");
     }

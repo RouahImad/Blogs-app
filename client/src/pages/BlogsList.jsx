@@ -25,7 +25,6 @@ const BlogsList = ({ likedBlogsId, handleLike, handleShare }) => {
     const [loading, setLoading] = useState(true);
 
     const data = useLoaderData();
-    const links = data.links ? JSON.parse(data.links) : [];
 
     const [blogs, setBlogs] = useState(data?.length ? data : []);
     const navigate = useNavigate();
@@ -104,7 +103,7 @@ const BlogsList = ({ likedBlogsId, handleLike, handleShare }) => {
                                     )
                                 }
                                 handleClick={() => handleClick(blog.id)}
-                                links={links}
+                                links={blog.links ? JSON.parse(blog.links) : []}
                             />
                         ))
                     ) : (
