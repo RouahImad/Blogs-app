@@ -9,7 +9,9 @@ import Message from "./Message";
 
 export const AdminBLogsLoader = async () => {
     try {
-        const response = await axios.get("/blogs");
+        const response = await axios.get(
+            "https://server-io2gmraao-imadrouahs-projects.vercel.app/blogs"
+        );
         if (response.status === 200) {
             return response.data;
         }
@@ -37,7 +39,9 @@ const AdminBlogs = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await axios.delete(`/blogs/${id}`);
+            const response = await axios.delete(
+                `https://server-io2gmraao-imadrouahs-projects.vercel.app/blogs/${id}`
+            );
             if (response.status === 204) {
                 setBlogs(blogs.filter((blog) => blog.id !== id));
                 setMessage({
@@ -65,7 +69,7 @@ const AdminBlogs = () => {
         ) {
             try {
                 const response = await axios.put(
-                    `/blogs/${editData.id}`,
+                    `https://server-io2gmraao-imadrouahs-projects.vercel.app/blogs/${editData.id}`,
                     editData
                 );
                 if (response.status === 201) {

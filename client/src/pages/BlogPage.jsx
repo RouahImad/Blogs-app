@@ -40,7 +40,10 @@ export default BlogPage;
 export const BlogLoader = async ({ params }) => {
     const { id } = params;
     try {
-        const res = await axios.get("/blogs/" + id);
+        const res = await axios.get(
+            "https://server-io2gmraao-imadrouahs-projects.vercel.app/blogs/" +
+                id
+        );
 
         return res.data;
     } catch (error) {

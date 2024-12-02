@@ -9,7 +9,9 @@ import CategoriesNav from "../components/CategoriesNav";
 
 export const BlogsLoader = async () => {
     try {
-        const response = await axios.get("/blogs");
+        const response = await axios.get(
+            "https://server-io2gmraao-imadrouahs-projects.vercel.app/blogs"
+        );
         if (response.status === 200) {
             return response.data;
         }

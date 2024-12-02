@@ -75,11 +75,14 @@ const App = () => {
         const content = event.target.content.value.trim();
 
         try {
-            const response = await axios.post("/blogs", {
-                title,
-                content,
-                links: JSON.stringify(links),
-            });
+            const response = await axios.post(
+                "https://server-io2gmraao-imadrouahs-projects.vercel.app/blogs",
+                {
+                    title,
+                    content,
+                    links: JSON.stringify(links),
+                }
+            );
             event.target.reset();
             return { status: 200, message: response.data.message };
         } catch (error) {
@@ -102,7 +105,9 @@ const App = () => {
 
     const checkLogin = async () => {
         try {
-            const response = await axios.get("/loggedIn");
+            const response = await axios.get(
+                "https://server-io2gmraao-imadrouahs-projects.vercel.app/loggedIn"
+            );
             if (response.status === 200) {
                 setLoggedIn(true);
             }
@@ -119,10 +124,13 @@ const App = () => {
         const password = event.target.password.value.trim();
 
         try {
-            const response = await axios.post("/login", {
-                username,
-                password,
-            });
+            const response = await axios.post(
+                "https://server-io2gmraao-imadrouahs-projects.vercel.app/login",
+                {
+                    username,
+                    password,
+                }
+            );
 
             if (response.status === 200) {
                 setLoggedIn(true);
