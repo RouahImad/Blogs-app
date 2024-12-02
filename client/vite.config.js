@@ -12,13 +12,13 @@ export default defineConfig({
         proxy: {
             "/blogs": {
                 // target: "http://localhost:3000",
-                target: "https://server-avd7eh5qf-imadrouahs-projects.vercel.app",
+                target: "https://server-io2gmraao-imadrouahs-projects.vercel.app/",
                 changeOrigin: true,
                 secure: false,
             },
             "/login": {
                 // target: "http://localhost:3000",
-                target: "https://server-avd7eh5qf-imadrouahs-projects.vercel.app",
+                target: "https://server-io2gmraao-imadrouahs-projects.vercel.app/",
                 changeOrigin: true,
                 secure: false,
             },

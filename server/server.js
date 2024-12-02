@@ -1,5 +1,5 @@
 const express = require("express");
-const session = require("express-session");
+const session = require("cookie-session");
 const cors = require("cors");
 require("dotenv").config();
 const app = express();
@@ -15,10 +15,10 @@ app.use(express.json());
 
 app.use(
     session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: true,
-        cookie: { secure: true }, // change to true later
+        name: "session",
+        keys: [process.env.SESSION_SECRET],
+        secure: true, // change to true later
+        httpOnly: true,
     })
 );
 

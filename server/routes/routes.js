@@ -19,17 +19,6 @@ const isAuthenticated = (req, res, next) => {
     }
 };
 
-router.get("/blogs", getBlogs);
-router.get("/blogs/:id", getBlog);
-
-router.post("/blogs", isAuthenticated, createBlog);
-
-router.put("/blogs/:id", isAuthenticated, updateBlog);
-
-router.delete("/blogs/:id", isAuthenticated, deleteBlog);
-
-router.get("/stats", isAuthenticated, getStats);
-
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
 
@@ -51,5 +40,16 @@ router.get("/loggedIn", (req, res) => {
         res.status(401).send("Unauthorized");
     }
 });
+
+router.get("/blogs", getBlogs);
+router.get("/blogs/:id", getBlog);
+
+router.post("/blogs", isAuthenticated, createBlog);
+
+router.put("/blogs/:id", isAuthenticated, updateBlog);
+
+router.delete("/blogs/:id", isAuthenticated, deleteBlog);
+
+router.get("/stats", isAuthenticated, getStats);
 
 module.exports = router;
