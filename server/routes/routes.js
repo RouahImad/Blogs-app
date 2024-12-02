@@ -24,7 +24,6 @@ router.get("/stats", getStats);
 
 router.post("/login", (req, res) => {
     const { username, password } = req.body;
-    console.log(username, password);
 
     if (
         username === process.env.MASTER_NAME &&

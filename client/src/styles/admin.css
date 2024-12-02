@@ -40,6 +40,7 @@ body:has(.admin) {
     color: #333;
     text-decoration: none;
     border-bottom: 1px solid #ccc;
+    white-space: nowrap;
     transition: 0.3s;
 }
 .adminSideBar.open a {

@@ -2,8 +2,6 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 
 const Message = ({ status, message }) => {
-    console.log(status, message);
-
     useEffect(() => {
         const msg = document.querySelector(".message");
         msg.classList.add("show");

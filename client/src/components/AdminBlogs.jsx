@@ -58,20 +58,41 @@ const AdminBlogs = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
 
-        try {
-            const response = await axios.put(`/blogs/${editData.id}`, editData);
-            if (response.status === 201) {
-                setBlogs(
-                    blogs.map((blog) =>
-                        blog.id === editData.id ? editData : blog
-                    )
+        const originalBlog = blogs.find((blog) => blog.id === editData.id);
+        if (
+            JSON.stringify(editData) !== JSON.stringify(originalBlog) &&
+            Object.keys(editData).length !== 0
+        ) {
+            try {
+                const response = await axios.put(
+                    `/blogs/${editData.id}`,
+                    editData
                 );
+                if (response.status === 201) {
+                    setBlogs(
+                        blogs.map((blog) =>
+                            blog.id === editData.id ? editData : blog
+                        )
+                    );
+                    setMessage({
+                        status: 201,
+                        message: response.data.message,
+                    });
+                }
+                setClickedEdit(false);
+            } catch (err) {
+                console.log("Error updating blog");
+                console.error(err.response);
+                setMessage({
+                    status: err.response.status,
+                    message: err.response.data.error,
+                });
             }
-            setClickedEdit(false);
-        } catch (err) {
-            console.log("Error updating blog");
-            console.error(err.response);
-            throw err;
+        } else {
+            setMessage({
+                status: 400,
+                message: "No changes made to update",
+            });
         }
     };
 

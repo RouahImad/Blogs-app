@@ -26,7 +26,7 @@ const getBlog = async (req, res) => {
         if (blog) {
             res.status(200).json(blog);
         } else {
-            res.status(404).json({ message: "Blog not found" });
+            res.status(404).json({ error: "Blog not found" });
         }
     } catch (err) {
         console.log(err);
@@ -74,7 +74,7 @@ const updateBlog = async (req, res) => {
         if (results) {
             res.status(201).json({ message: "Blog updated successfully" });
         } else {
-            res.status(404).json({ message: "Blog not found" });
+            res.status(404).json({ error: "Blog not found" });
         }
     } catch (err) {
         console.log(err);
@@ -109,7 +109,7 @@ const getStats = async (req, res) => {
         if (stats) {
             res.status(200).json(stats);
         } else {
-            res.status(404).json({ message: "Stats not found" });
+            res.status(404).json({ error: "Stats not found" });
         }
     } catch (err) {
         console.log(err);

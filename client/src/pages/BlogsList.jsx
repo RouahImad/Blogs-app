@@ -59,8 +59,6 @@ const BlogsList = ({ likedBlogsId, handleLike, handleShare }) => {
     }, [blogs, filterType]);
 
     useEffect(() => {
-        console.log("rendered");
-
         setLoading(true);
         let timer = setTimeout(() => {
             setLoading(false);
