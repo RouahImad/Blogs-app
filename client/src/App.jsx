@@ -77,7 +77,7 @@ const App = () => {
 
         try {
             const response = await axios.post(
-                "https://server-io2gmraao-imadrouahs-projects.vercel.app/blogs",
+                "https://server-three-lac.vercel.app/blogs",
                 {
                     title,
                     content,
@@ -107,7 +107,7 @@ const App = () => {
     const checkLogin = async () => {
         try {
             const response = await axios.get(
-                "https://server-io2gmraao-imadrouahs-projects.vercel.app/loggedIn"
+                "https://server-three-lac.vercel.app/loggedIn"
             );
             if (response.status === 200) {
                 setLoggedIn(true);
@@ -126,7 +126,7 @@ const App = () => {
 
         try {
             const response = await axios.post(
-                "https://server-io2gmraao-imadrouahs-projects.vercel.app/login",
+                "https://server-three-lac.vercel.app/login",
                 {
                     username,
                     password,

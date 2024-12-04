@@ -9,7 +9,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 export const LikedPageLoader = async (likedBlogsId) => {
     try {
         const response = await axios.get(
-            "https://server-io2gmraao-imadrouahs-projects.vercel.app/blogs"
+            "https://server-three-lac.vercel.app/blogs"
         );
         if (response.status === 200) {
             return response.data.filter((blog) =>

@@ -41,8 +41,7 @@ export const BlogLoader = async ({ params }) => {
     const { id } = params;
     try {
         const res = await axios.get(
-            "https://server-io2gmraao-imadrouahs-projects.vercel.app/blogs/" +
-                id
+            "https://server-three-lac.vercel.app/blogs/" + id
         );
 
         return res.data;

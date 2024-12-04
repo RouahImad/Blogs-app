@@ -7,7 +7,11 @@ const routers = require("./routes/routes");
 
 app.use(
     cors({
-        origin: ["https://blogs-app-bay.vercel.app", "http://127.0.0.1:5173"],
+        origin: [
+            "https://blogs-app-bay.vercel.app",
+            "http://127.0.0.1:5173",
+            "http://localhost:5173",
+        ],
         optionsSuccessStatus: 200,
         methods: ["GET", "POST", "DELETE", "PUT"],
     })
@@ -19,7 +23,7 @@ app.use(
     session({
         name: "session",
         keys: [process.env.SESSION_SECRET],
-        secure: true, // change to true later for PROD
+        secure: process.env.NODE_ENV === "production",
         httpOnly: true,
     })
 );
