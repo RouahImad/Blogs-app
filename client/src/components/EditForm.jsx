@@ -40,7 +40,7 @@ const EditForm = ({ editData, setEditData, setClickedEdit, handleUpdate }) => {
                     />
                 </div>
 
-                <button className="create" type="submit">
+                <button className="create" type="submit" name="update">
                     Update
                 </button>
             </form>

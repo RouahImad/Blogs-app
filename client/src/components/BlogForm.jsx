@@ -39,11 +39,15 @@ const BlogForm = ({ links, setLinks, handleCreate }) => {
                 </div>
                 <div className="inputBox">
                     <label htmlFor="links">Links: ({links.length})</label>
-                    <button type="button" onClick={() => setAddLink(!addLink)}>
+                    <button
+                        type="button"
+                        onClick={() => setAddLink(!addLink)}
+                        name="validate link"
+                    >
                         Add Links
                     </button>
                 </div>
-                <button className="create" type="submit">
+                <button className="create" type="submit" name="create blog">
                     Create
                 </button>
             </form>

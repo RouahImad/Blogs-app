@@ -34,10 +34,10 @@ const Blog = ({
                     ))}
                 </div>
                 <div className="box">
-                    <button onClick={handleLike}>
+                    <button onClick={handleLike} name="like">
                         {liked ? <FaHeart color="red" /> : <FaRegHeart />}
                     </button>
-                    <button onClick={handleShare}>
+                    <button onClick={handleShare} name="share">
                         <FaShare />
                     </button>
                 </div>

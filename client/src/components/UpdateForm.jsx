@@ -11,7 +11,9 @@ const UpdateForm = () => {
                     <label htmlFor="content">Content</label>
                     <textarea id="content" rows="10"></textarea>
                 </div>
-                <button type="submit">Update</button>
+                <button type="submit" name="update">
+                    Update
+                </button>
             </form>
         </div>
     );

@@ -18,6 +18,7 @@ import AdminBlogs, { AdminBLogsLoader } from "./components/AdminBlogs";
 import AdminStats from "./components/AdminStats";
 import axios from "axios";
 import Login from "./components/Login";
+import SearchPage from "./pages/SearchPage";
 
 const App = () => {
     const [theme, setTheme] = useState("light");
@@ -173,6 +174,11 @@ const App = () => {
                         />
                     }
                     loader={BlogLoader}
+                    errorElement={<ErrorLog />}
+                />
+                <Route
+                    path="search"
+                    element={<SearchPage />}
                     errorElement={<ErrorLog />}
                 />
                 <Route

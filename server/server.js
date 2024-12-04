@@ -5,19 +5,21 @@ require("dotenv").config();
 const app = express();
 const routers = require("./routes/routes");
 
-const corsOptions = {
-    origin: "https://blogs-app-bay.vercel.app",
-    optionsSuccessStatus: 200,
-};
+app.use(
+    cors({
+        origin: ["https://blogs-app-bay.vercel.app", "http://127.0.0.1:5173"],
+        optionsSuccessStatus: 200,
+        methods: ["GET", "POST", "DELETE", "PUT"],
+    })
+);
 
-app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use(
     session({
         name: "session",
         keys: [process.env.SESSION_SECRET],
-        secure: true, // change to true later
+        secure: true, // change to true later for PROD
         httpOnly: true,
     })
 );

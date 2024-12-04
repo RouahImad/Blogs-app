@@ -35,7 +35,7 @@ const LinksForm = ({ setLinks, setAddLink }) => {
                         required
                     />
                 </div>
-                <button className="create" type="submit">
+                <button className="create" type="submit" name="add">
                     Add
                 </button>
             </form>

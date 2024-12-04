@@ -15,10 +15,13 @@ const BlogRow = ({ id, title, setClickedEdit, setEditData, handleDelete }) => {
                         setClickedEdit(true);
                         setEditData();
                     }}
+                    name="edit"
                 >
                     Edit
                 </button>
-                <button onClick={() => handleDelete(id)}>Delete</button>
+                <button onClick={() => handleDelete(id)} name="delete">
+                    Delete
+                </button>
             </div>
         </div>
     );
