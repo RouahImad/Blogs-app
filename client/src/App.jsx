@@ -4,6 +4,7 @@ import {
     createRoutesFromElements,
     Route,
     RouterProvider,
+    useLocation,
 } from "react-router-dom";
 import BlogsList, { BlogsLoader } from "./pages/BlogsList";
 import BlogPage, { BlogLoader } from "./pages/BlogPage";
@@ -19,6 +20,8 @@ import AdminStats from "./components/AdminStats";
 import axios from "axios";
 import Login from "./components/Login";
 import SearchPage from "./pages/SearchPage";
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const App = () => {
     const [theme, setTheme] = useState("light");
@@ -88,7 +91,7 @@ const App = () => {
             return { status: 200, message: response.data.message };
         } catch (error) {
             console.log("Error fetching data");
-            console.error(error);
+            console.error(error.response.data);
             return {
                 status: error.response.status,
                 message: error.response.data.error,
@@ -97,26 +100,6 @@ const App = () => {
     };
 
     const [loggedIn, setLoggedIn] = useState(false); // change to false later
-
-    useEffect(() => {
-        console.log("Checking login status");
-
-        checkLogin();
-    }, []);
-
-    const checkLogin = async () => {
-        try {
-            const response = await axios.get(
-                "https://server-three-lac.vercel.app/loggedIn"
-            );
-            if (response.status === 200) {
-                setLoggedIn(true);
-            }
-        } catch (error) {
-            console.log("Error fetching data");
-            console.error(error);
-        }
-    };
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -142,6 +125,45 @@ const App = () => {
             console.error(error.response.data);
             return { status: 401, message: error.response.data };
         }
+    };
+
+    const ProtectedRoute = ({ element }) => {
+        const navigate = useNavigate();
+        const location = useLocation();
+
+        useEffect(() => {
+            console.log("Checking login for admin");
+
+            const checkLogin = async () => {
+                try {
+                    const response = await axios.get(
+                        "https://server-three-lac.vercel.app/loggedIn"
+                    );
+
+                    if (response.status === 200) {
+                        setLoggedIn(true);
+                    } else {
+                        setLoggedIn(false);
+                        navigate("/login", { state: { from: location } });
+                    }
+                } catch (error) {
+                    console.log("Error fetching data");
+                    console.error(error.response.data);
+                    setLoggedIn(false);
+                    navigate("/login", { state: { from: location } });
+                }
+            };
+
+            if (!loggedIn) {
+                checkLogin();
+            }
+        }, [location, navigate]);
+
+        return loggedIn ? element : null;
+    };
+
+    ProtectedRoute.propTypes = {
+        element: PropTypes.element.isRequired,
     };
 
     const routes = createBrowserRouter(
@@ -193,36 +215,33 @@ const App = () => {
                     loader={() => LikedPageLoader(likedBlogsId)}
                     errorElement={<ErrorLog />}
                 />
-                {loggedIn ? (
+                <Route
+                    path="admin"
+                    element={<ProtectedRoute element={<Admin />} />}
+                    errorElement={<ErrorLog />}
+                >
+                    <Route index element={<AdminStats />} />
                     <Route
-                        path="admin"
-                        element={<Admin />}
-                        errorElement={<ErrorLog />}
-                    >
-                        <Route index element={<AdminStats />} />
-                        <Route
-                            path="create"
-                            element={
-                                <BlogForm
-                                    links={links}
-                                    setLinks={setLinks}
-                                    handleCreate={handleCreate}
-                                />
-                            }
-                        />
-                        <Route
-                            path="blogs"
-                            element={<AdminBlogs />}
-                            loader={AdminBLogsLoader}
-                        />
-                    </Route>
-                ) : (
-                    <Route
-                        path="admin"
-                        element={<Login handleLogin={handleLogin} />}
-                        errorElement={<ErrorLog />}
+                        path="create"
+                        element={
+                            <BlogForm
+                                links={links}
+                                setLinks={setLinks}
+                                handleCreate={handleCreate}
+                            />
+                        }
                     />
-                )}
+                    <Route
+                        path="blogs"
+                        element={<AdminBlogs />}
+                        loader={AdminBLogsLoader}
+                    />
+                </Route>
+                <Route
+                    path="login"
+                    element={<Login handleLogin={handleLogin} />}
+                    errorElement={<ErrorLog />}
+                />
                 <Route
                     path="*"
                     element={<NotFound />}

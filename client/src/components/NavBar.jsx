@@ -34,7 +34,7 @@ const NavBar = ({ theme, setTheme }) => {
                         <FaHeart />
                     </NavLink>
                 </li>
-                <li>
+                <li className="searchIcon">
                     <NavLink to="/search">
                         <IoSearchSharp />
                     </NavLink>

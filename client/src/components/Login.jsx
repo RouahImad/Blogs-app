@@ -2,9 +2,14 @@ import "../styles/login.css";
 import PropTypes from "prop-types";
 import Message from "./Message";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = ({ handleLogin }) => {
     const [message, setMessage] = useState({});
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
 
     return (
         <div className="loginContainer">
@@ -13,6 +18,9 @@ const Login = ({ handleLogin }) => {
                 onSubmit={async (e) => {
                     const res = await handleLogin(e);
                     setMessage(res);
+                    if (res.status === 200) {
+                        navigate(from, { replace: true });
+                    }
                 }}
             >
                 <div className="inputBox">

@@ -33,6 +33,14 @@ a.active {
     gap: 25px;
     margin-block: 14px;
 }
+@media (max-width: 416px) {
+    .nav {
+        padding-inline: 15px;
+    }
+    .actions {
+        gap: 13px;
+    }
+}
 .actions a,
 .actions button {
     border-radius: 50%;
@@ -47,4 +55,7 @@ a.active {
 .dark .actions a:hover,
 .dark .actions button:hover {
     background-color: #f6f7f90d;
+}
+.searchIcon a {
+    font-size: 28px;
 }
