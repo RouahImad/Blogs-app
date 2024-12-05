@@ -1,10 +1,9 @@
 import axios from "axios";
-const mode = import.meta.env.VITE_MODE;
-const url = import.meta.env.VITE_API_URL;
-console.log(mode);
+const { VITE_STATE, VITE_URL } = import.meta.env;
+const local = "http://localhost:3000";
 
 export const api = axios.create({
-    baseURL: mode === "production" ? url : "http://localhost:3000",
+    baseURL: VITE_STATE === "production" ? VITE_URL : local,
 });
 
 export const getAll = () => {
