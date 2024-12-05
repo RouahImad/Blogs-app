@@ -1,27 +1,23 @@
 import { useEffect, useState } from "react";
-import {
-    createBrowserRouter,
-    createRoutesFromElements,
-    Route,
-    RouterProvider,
-    useLocation,
-} from "react-router-dom";
-import BlogsList, { BlogsLoader } from "./pages/BlogsList";
-import BlogPage, { BlogLoader } from "./pages/BlogPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import NotFound from "./components/NotFound";
-import Root, { RootLoader } from "./pages/Root";
-import Home from "./pages/Home";
-import ErrorLog from "./components/ErrorLog";
-import LikedPage, { LikedPageLoader } from "./pages/LikedPage";
-import Admin from "./pages/Admin";
 import BlogForm from "./components/BlogForm";
+import ErrorLog from "./components/ErrorLog";
+import RequireAuth from "./components/RequireAuth";
 import AdminBlogs, { AdminBLogsLoader } from "./components/AdminBlogs";
 import AdminStats from "./components/AdminStats";
-import axios from "axios";
 import Login from "./components/Login";
+
+import Root, { RootLoader } from "./pages/Root";
+import BlogsList, { BlogsLoader } from "./pages/BlogsList";
+import BlogPage, { BlogLoader } from "./pages/BlogPage";
+import Home from "./pages/Home";
+import LikedPage, { LikedPageLoader } from "./pages/LikedPage";
+import Admin from "./pages/Admin";
 import SearchPage from "./pages/SearchPage";
-import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
+import { AuthProvider } from "./utils/auth";
+import { create } from "./utils/api";
 
 const App = () => {
     const [theme, setTheme] = useState("light");
@@ -79,18 +75,14 @@ const App = () => {
         const content = event.target.content.value.trim();
 
         try {
-            const response = await axios.post(
-                "https://server-three-lac.vercel.app/blogs",
-                {
-                    title,
-                    content,
-                    links: JSON.stringify(links),
-                }
-            );
+            const response = await create({
+                title,
+                content,
+                links: JSON.stringify(links),
+            });
             event.target.reset();
             return { status: 200, message: response.data.message };
         } catch (error) {
-            console.log("Error fetching data");
             console.error(error.response.data);
             return {
                 status: error.response.status,
@@ -99,159 +91,100 @@ const App = () => {
         }
     };
 
-    const [loggedIn, setLoggedIn] = useState(false); // change to false later
-
-    const handleLogin = async (event) => {
-        event.preventDefault();
-
-        const username = event.target.username.value.trim();
-        const password = event.target.password.value.trim();
-
-        try {
-            const response = await axios.post(
-                "https://server-three-lac.vercel.app/login",
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            element: <Root theme={theme} setTheme={setTheme} />,
+            loader: RootLoader,
+            children: [
+                { index: true, element: <Home /> },
                 {
-                    username,
-                    password,
-                }
-            );
-
-            if (response.status === 200) {
-                setLoggedIn(true);
-                return { status: 200, message: response.data };
-            }
-        } catch (error) {
-            console.log("Error fetching data");
-            console.error(error.response.data);
-            return { status: 401, message: error.response.data };
-        }
-    };
-
-    const ProtectedRoute = ({ element }) => {
-        const navigate = useNavigate();
-        const location = useLocation();
-
-        useEffect(() => {
-            console.log("Checking login for admin");
-
-            const checkLogin = async () => {
-                try {
-                    const response = await axios.get(
-                        "https://server-three-lac.vercel.app/loggedIn"
-                    );
-
-                    if (response.status === 200) {
-                        setLoggedIn(true);
-                    } else {
-                        setLoggedIn(false);
-                        navigate("/login", { state: { from: location } });
-                    }
-                } catch (error) {
-                    console.log("Error fetching data");
-                    console.error(error.response.data);
-                    setLoggedIn(false);
-                    navigate("/login", { state: { from: location } });
-                }
-            };
-
-            if (!loggedIn) {
-                checkLogin();
-            }
-        }, [location, navigate]);
-
-        return loggedIn ? element : null;
-    };
-
-    ProtectedRoute.propTypes = {
-        element: PropTypes.element.isRequired,
-    };
-
-    const routes = createBrowserRouter(
-        createRoutesFromElements(
-            <Route
-                path="/"
-                element={<Root theme={theme} setTheme={setTheme} />}
-                loader={RootLoader}
-            >
-                <Route index element={<Home />} />
-                <Route
-                    path="blog"
-                    element={
+                    path: "blog",
+                    element: (
                         <BlogsList
                             likedBlogsId={likedBlogsId}
                             handleLike={handleLike}
                             handleShare={handleShare}
                         />
-                    }
-                    loader={BlogsLoader}
-                    errorElement={<ErrorLog />}
-                />
-                <Route
-                    path="blog/:id"
-                    element={
+                    ),
+                    loader: BlogsLoader,
+                    errorElement: <ErrorLog />,
+                },
+                {
+                    path: "blog/:id",
+                    element: (
                         <BlogPage
                             likedBlogsId={likedBlogsId}
                             handleLike={handleLike}
                             handleShare={handleShare}
                         />
-                    }
-                    loader={BlogLoader}
-                    errorElement={<ErrorLog />}
-                />
-                <Route
-                    path="search"
-                    element={<SearchPage />}
-                    errorElement={<ErrorLog />}
-                />
-                <Route
-                    path="likes"
-                    element={
+                    ),
+                    loader: BlogLoader,
+                    errorElement: <ErrorLog />,
+                },
+                {
+                    path: "search",
+                    element: <SearchPage />,
+                    errorElement: <ErrorLog />,
+                },
+                {
+                    path: "likes",
+                    element: (
                         <LikedPage
                             likedBlogsId={likedBlogsId}
                             handleLike={handleLike}
                             handleShare={handleShare}
                         />
-                    }
-                    loader={() => LikedPageLoader(likedBlogsId)}
-                    errorElement={<ErrorLog />}
-                />
-                <Route
-                    path="admin"
-                    element={<ProtectedRoute element={<Admin />} />}
-                    errorElement={<ErrorLog />}
-                >
-                    <Route index element={<AdminStats />} />
-                    <Route
-                        path="create"
-                        element={
-                            <BlogForm
-                                links={links}
-                                setLinks={setLinks}
-                                handleCreate={handleCreate}
-                            />
-                        }
-                    />
-                    <Route
-                        path="blogs"
-                        element={<AdminBlogs />}
-                        loader={AdminBLogsLoader}
-                    />
-                </Route>
-                <Route
-                    path="login"
-                    element={<Login handleLogin={handleLogin} />}
-                    errorElement={<ErrorLog />}
-                />
-                <Route
-                    path="*"
-                    element={<NotFound />}
-                    errorElement={<ErrorLog />}
-                />
-            </Route>
-        )
-    );
+                    ),
+                    loader: () => LikedPageLoader(likedBlogsId),
+                    errorElement: <ErrorLog />,
+                },
+                {
+                    path: "admin",
+                    element: (
+                        <RequireAuth>
+                            <Admin />
+                        </RequireAuth>
+                    ),
+                    errorElement: <ErrorLog />,
+                    children: [
+                        { index: true, element: <AdminStats /> },
+                        {
+                            path: "create",
+                            element: (
+                                <BlogForm
+                                    links={links}
+                                    setLinks={setLinks}
+                                    handleCreate={handleCreate}
+                                />
+                            ),
+                        },
+                        {
+                            path: "blogs",
+                            element: <AdminBlogs />,
+                            loader: AdminBLogsLoader,
+                        },
+                    ],
+                },
+                {
+                    path: "login",
+                    element: <Login />,
+                    errorElement: <ErrorLog />,
+                },
+                {
+                    path: "*",
+                    element: <NotFound />,
+                    errorElement: <ErrorLog />,
+                },
+            ],
+        },
+    ]);
 
-    return <RouterProvider router={routes} />;
+    return (
+        <AuthProvider>
+            <RouterProvider router={router} />
+        </AuthProvider>
+    );
 };
 
 export default App;

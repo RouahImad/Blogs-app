@@ -14,19 +14,21 @@ app.use(
         ],
         optionsSuccessStatus: 200,
         methods: ["GET", "POST", "DELETE", "PUT"],
+        credentials: true,
     })
 );
-
-app.use(express.json());
 
 app.use(
     session({
         name: "session",
         keys: [process.env.SESSION_SECRET],
-        secure: process.env.NODE_ENV === "production",
+        maxAge: 24 * 60 * 60 * 1000,
         httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
     })
 );
+
+app.use(express.json());
 
 app.use(routers);
 

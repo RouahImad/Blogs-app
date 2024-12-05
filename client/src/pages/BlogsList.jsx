@@ -1,24 +1,23 @@
-import Blog from "../components/Blog";
-import SkeletonList from "../components/SkeletonList";
-import soon from "../assets/work-in-progress.png";
+import { useEffect, useMemo, useState, lazy } from "react";
+
 import { useLoaderData, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
-import PropTypes from "prop-types";
+const Blog = lazy(() => import("../components/Blog"));
+import SkeletonList from "../components/SkeletonList";
 import CategoriesNav from "../components/CategoriesNav";
+
+import soon from "../assets/work-in-progress.png";
+import PropTypes from "prop-types";
+import { getAll } from "../utils/api";
 
 export const BlogsLoader = async () => {
     try {
-        const response = await axios.get(
-            "https://server-three-lac.vercel.app/blogs"
-        );
+        const response = await getAll();
         if (response.status === 200) {
             return response.data;
         }
         return [];
     } catch (error) {
-        console.log("Error fetching data");
-        console.error(error);
+        console.error(error.response);
         throw error;
     }
 };

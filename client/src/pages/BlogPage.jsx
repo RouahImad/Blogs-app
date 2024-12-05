@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useLoaderData } from "react-router-dom";
 import Blog from "../components/Blog";
 import PropTypes from "prop-types";
+import { getOne } from "../utils/api";
 
 const BlogPage = ({ likedBlogsId, handleLike, handleShare }) => {
     const data = useLoaderData();
@@ -40,14 +40,11 @@ export default BlogPage;
 export const BlogLoader = async ({ params }) => {
     const { id } = params;
     try {
-        const res = await axios.get(
-            "https://server-three-lac.vercel.app/blogs/" + id
-        );
+        const res = await getOne(id);
 
         return res.data;
     } catch (error) {
-        console.log("Error fetching blog data");
-        console.error(error);
+        console.error(error.response);
         throw error;
     }
 };

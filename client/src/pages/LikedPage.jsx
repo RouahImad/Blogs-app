@@ -1,16 +1,14 @@
-import axios from "axios";
 import PropTypes from "prop-types";
 import Blog from "../components/Blog";
 import SkeletonList from "../components/SkeletonList";
 import love from "../assets/love-letter.png";
 import { useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { getAll } from "../utils/api";
 
 export const LikedPageLoader = async (likedBlogsId) => {
     try {
-        const response = await axios.get(
-            "https://server-three-lac.vercel.app/blogs"
-        );
+        const response = await getAll();
         if (response.status === 200) {
             return response.data.filter((blog) =>
                 likedBlogsId.includes(blog.id)
@@ -18,8 +16,7 @@ export const LikedPageLoader = async (likedBlogsId) => {
         }
         return [];
     } catch (error) {
-        console.log("Error fetching data");
-        console.error(error);
+        console.error(error.response);
         throw error;
     }
 };

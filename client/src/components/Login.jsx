@@ -1,15 +1,14 @@
-import "../styles/login.css";
-import PropTypes from "prop-types";
-import Message from "./Message";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import Message from "./Message";
+import { useNavigate } from "react-router-dom";
+import "../styles/login.css";
+import { useAuth } from "../utils/auth";
 
-const Login = ({ handleLogin }) => {
+const Login = () => {
     const [message, setMessage] = useState({});
     const navigate = useNavigate();
-    const location = useLocation();
 
-    const from = location.state?.from?.pathname || "/";
+    const { handleLogin } = useAuth();
 
     return (
         <div className="loginContainer">
@@ -19,7 +18,7 @@ const Login = ({ handleLogin }) => {
                     const res = await handleLogin(e);
                     setMessage(res);
                     if (res.status === 200) {
-                        navigate(from, { replace: true });
+                        navigate("/admin", { replace: true });
                     }
                 }}
             >
@@ -52,10 +51,6 @@ const Login = ({ handleLogin }) => {
             )}
         </div>
     );
-};
-
-Login.propTypes = {
-    handleLogin: PropTypes.func.isRequired,
 };
 
 export default Login;

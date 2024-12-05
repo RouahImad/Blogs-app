@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const handleChange = (e, setEditData, editData) => {
     const { name, value } = e.target;
-    setEditData({ ...editData, [name]: value.trim() });
+    setEditData({ ...editData, [name]: value });
 };
 
 const EditForm = ({ editData, setEditData, setClickedEdit, handleUpdate }) => {

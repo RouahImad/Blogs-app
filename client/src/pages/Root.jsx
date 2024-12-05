@@ -8,7 +8,7 @@ const Root = ({ theme, setTheme }) => {
 
     useEffect(() => {
         setTheme(data);
-    }, [data]);
+    }, [data, setTheme]);
 
     return (
         <div>

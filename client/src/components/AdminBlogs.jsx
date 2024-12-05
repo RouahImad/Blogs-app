@@ -1,4 +1,3 @@
-import axios from "axios";
 import BlogRow from "./BlogRow";
 import { useLoaderData } from "react-router-dom";
 import soon from "../assets/work-in-progress.png";
@@ -6,18 +5,16 @@ import SkeletonList from "./SkeletonList";
 import { useEffect, useState } from "react";
 import EditForm from "./EditForm";
 import Message from "./Message";
+import { getAll, remove, update } from "../utils/api";
 
 export const AdminBLogsLoader = async () => {
     try {
-        const response = await axios.get(
-            "https://server-three-lac.vercel.app/blogs"
-        );
+        const response = await getAll();
         if (response.status === 200) {
             return response.data;
         }
         return [];
     } catch (err) {
-        console.log("Error fetching blog data");
         console.error(err.response);
         throw err;
     }
@@ -39,9 +36,7 @@ const AdminBlogs = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await axios.delete(
-                `https://server-three-lac.vercel.app/blogs/${id}`
-            );
+            const response = await remove(id);
             if (response.status === 204) {
                 setBlogs(blogs.filter((blog) => blog.id !== id));
                 setMessage({
@@ -50,7 +45,6 @@ const AdminBlogs = () => {
                 });
             }
         } catch (err) {
-            console.log("Error deleting blog");
             console.error(err.response);
             setMessage({
                 status: err.response.status,
@@ -63,33 +57,37 @@ const AdminBlogs = () => {
         e.preventDefault();
 
         const originalBlog = blogs.find((blog) => blog.id === editData.id);
+        const updatedData = {
+            ...editData,
+            title: editData.title.trim(),
+            content: editData.content.trim(),
+        };
+
         if (
-            JSON.stringify(editData) !== JSON.stringify(originalBlog) &&
-            Object.keys(editData).length !== 0
+            originalBlog &&
+            JSON.stringify(updatedData) !== JSON.stringify(originalBlog) &&
+            updatedData.title &&
+            updatedData.content
         ) {
             try {
-                const response = await axios.put(
-                    `https://server-three-lac.vercel.app/blogs/${editData.id}`,
-                    editData
-                );
+                const response = await update(updatedData.id, updatedData);
                 if (response.status === 201) {
                     setBlogs(
                         blogs.map((blog) =>
-                            blog.id === editData.id ? editData : blog
+                            blog.id === updatedData.id ? updatedData : blog
                         )
                     );
                     setMessage({
                         status: 201,
                         message: response.data.message,
                     });
+                    setClickedEdit(false);
                 }
-                setClickedEdit(false);
             } catch (err) {
-                console.log("Error updating blog");
                 console.error(err.response);
                 setMessage({
                     status: err.response.status,
-                    message: err.response.data.error,
+                    message: err.response.data?.error || err.response.data,
                 });
             }
         } else {
@@ -140,9 +138,7 @@ const AdminBlogs = () => {
                     handleUpdate={handleUpdate}
                 />
             )}
-            {message?.status && (
-                <Message status={message.status} message={message.message} />
-            )}
+            {message?.status && <Message {...message} />}
         </div>
     );
 };

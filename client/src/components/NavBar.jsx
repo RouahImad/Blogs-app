@@ -4,8 +4,8 @@ import { LuSunMoon } from "react-icons/lu";
 import { GoLog } from "react-icons/go";
 import { FaHeart } from "react-icons/fa";
 import { IoSearchSharp } from "react-icons/io5";
-import Proptypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 import "../styles/navbar.css";
 
 const NavBar = ({ theme, setTheme }) => {
@@ -55,8 +55,8 @@ const NavBar = ({ theme, setTheme }) => {
 };
 
 NavBar.propTypes = {
-    theme: Proptypes.string.isRequired,
-    setTheme: Proptypes.func.isRequired,
+    theme: PropTypes.string.isRequired,
+    setTheme: PropTypes.func.isRequired,
 };
 
 export default NavBar;

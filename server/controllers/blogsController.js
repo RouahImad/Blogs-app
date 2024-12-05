@@ -61,6 +61,7 @@ const createBlog = async (req, res) => {
 const updateBlog = async (req, res) => {
     const id = req.params.id;
     const { title, content } = req.body;
+
     if (!id) {
         res.status(400).json({ error: "Please provide blog id" });
         return;
