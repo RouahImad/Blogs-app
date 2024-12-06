@@ -5,7 +5,6 @@ require("dotenv").config();
 const app = express();
 const routers = require("./routes/routes");
 
-// CORS configuration
 app.use(
     cors({
         origin: [
@@ -15,11 +14,10 @@ app.use(
         ],
         optionsSuccessStatus: 200,
         methods: ["GET", "POST", "DELETE", "PUT"],
-        credentials: true, // Allow credentials (cookies) to be sent in CORS requests
+        credentials: true,
     })
 );
 
-// Session configuration
 app.use(
     session({
         secret: process.env.SESSION_SECRET || "testing",
@@ -27,7 +25,6 @@ app.use(
         resave: false,
         cookie: {
             maxAge: 60000 * 60,
-            sameSite: "lax", // Ensure proper handling of cookies
         },
     })
 );

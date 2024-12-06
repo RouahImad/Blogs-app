@@ -4,6 +4,7 @@ const local = "http://localhost:3000";
 
 export const api = axios.create({
     baseURL: VITE_STATE === "production" ? VITE_URL : local,
+    withCredentials: true,
 });
 
 export const getAll = () => {

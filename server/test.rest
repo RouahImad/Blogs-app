@@ -6,26 +6,15 @@ GET http://localhost:3000/blogs/1
 
 ###
 
-POST http://localhost:3000/blogs
+GET https://server-three-lac.vercel.app/login
+
+###
+
+POST https://server-three-lac.vercel.app/login
+
+Content-Type: application/json
 
 {
-    "title": "New Blog",
-    "content": "This is a new blog"
+    "username": "madmaster",
+    "password": "master"
 }
-
-###
-
-PUT http://localhost:3000/blogs/1
-
-{
-    "title": "Updated Blog",
-    "content": "This is an updated blog"
-}
-
-###
-
-DELETE http://localhost:3000/blogs/2323
-
-###
-
-DELETE http://localhost:3000/blogs/1
