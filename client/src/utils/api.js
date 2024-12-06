@@ -31,5 +31,5 @@ export const login = (data) => {
 };
 
 export const checkLogin = () => {
-    return api.get("/loggedin");
+    return api.get("/login");
 };

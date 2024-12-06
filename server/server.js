@@ -1,10 +1,11 @@
 const express = require("express");
-const session = require("cookie-session");
+const session = require("express-session");
 const cors = require("cors");
 require("dotenv").config();
 const app = express();
 const routers = require("./routes/routes");
 
+// CORS configuration
 app.use(
     cors({
         origin: [
@@ -14,22 +15,24 @@ app.use(
         ],
         optionsSuccessStatus: 200,
         methods: ["GET", "POST", "DELETE", "PUT"],
-        credentials: true,
+        credentials: true, // Allow credentials (cookies) to be sent in CORS requests
     })
 );
 
+// Session configuration
 app.use(
     session({
-        name: "session",
-        keys: [process.env.SESSION_SECRET],
-        maxAge: 24 * 60 * 60 * 1000,
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secret: process.env.SESSION_SECRET || "testing",
+        saveUninitialized: false,
+        resave: false,
+        cookie: {
+            maxAge: 60000 * 60,
+            sameSite: "lax", // Ensure proper handling of cookies
+        },
     })
 );
 
 app.use(express.json());
-
 app.use(routers);
 
 app.listen(process.env.SERVER_PORT, (err) => {

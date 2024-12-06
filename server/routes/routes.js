@@ -30,14 +30,15 @@ router.post("/login", (req, res) => {
         password === process.env.MASTER_PASSWORD
     ) {
         req.session.user = { username };
+        console.log("Session created:", req.session);
         res.status(200).send("Success");
     } else {
         res.status(401).send("Wrong credentials");
     }
 });
 
-router.get("/loggedin", (req, res) => {
-    console.log(req.session);
+router.get("/login", (req, res) => {
+    console.log("Session:", req.session);
 
     if (req.session.user) {
         res.status(200).send("Logged in");
