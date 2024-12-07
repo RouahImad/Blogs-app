@@ -9,8 +9,14 @@
     "routes": [
         {
             "src": "/(.*)",
+            "headers": {
+                "Access-Control-Allow-Origin": "https://blogs-app-bay.vercel.app",
+                "Access-Control-Allow-Methods": "GET, POST, DELETE, PUT, OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type, Authorization",
+                "Access-Control-Allow-Credentials": "true"
+            },
             "dest": "/server.js",
-            "methods": ["GET", "POST", "DELETE", "PUT"]
+            "methods": ["GET", "POST", "DELETE", "PUT", "OPTIONS"]
         }
     ]
 }
