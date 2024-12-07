@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" role="application">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="title" content="Blogo" />
@@ -14,10 +14,21 @@
         <meta name="author" content="Imad Rouah" />
         <link rel="icon" type="image/png" href="/src/assets/blogging.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#ee5467" />
+
+        <meta property="og:title" content="Blogo" />
+        <meta
+            property="og:description"
+            content="Blogo is a platform where users can discover, like, share, and search for blogs written by the admin. Engage with a wide range of articles on various topics."
+        />
+        <meta property="og:image" content="/src/assets/blogging.png" />
+        <meta property="og:url" content="https://blogs-app-bay.vercel.app" />
+        <meta property="og:type" content="website" />
+
         <title>Blogo</title>
     </head>
     <body>
-        <div id="root"></div>
+        <div id="root" role="main"></div>
         <script type="module" src="/src/main.jsx"></script>
     </body>
 </html>
