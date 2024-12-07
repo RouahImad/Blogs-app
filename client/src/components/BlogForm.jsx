@@ -43,11 +43,17 @@ const BlogForm = ({ links, setLinks, handleCreate }) => {
                         type="button"
                         onClick={() => setAddLink(!addLink)}
                         name="validate link"
+                        aria-label="Add links"
                     >
                         Add Links
                     </button>
                 </div>
-                <button className="create" type="submit" name="create blog">
+                <button
+                    className="create"
+                    type="submit"
+                    name="create blog"
+                    aria-label="Create blog"
+                >
                     Create
                 </button>
             </form>

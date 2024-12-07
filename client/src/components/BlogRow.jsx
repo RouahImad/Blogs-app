@@ -16,10 +16,15 @@ const BlogRow = ({ id, title, setClickedEdit, setEditData, handleDelete }) => {
                         setEditData();
                     }}
                     name="edit"
+                    aria-label="Edit blog"
                 >
                     Edit
                 </button>
-                <button onClick={() => handleDelete(id)} name="delete">
+                <button
+                    onClick={() => handleDelete(id)}
+                    name="delete"
+                    aria-label="Delete blog"
+                >
                     Delete
                 </button>
             </div>

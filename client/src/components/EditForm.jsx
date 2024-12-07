@@ -40,7 +40,12 @@ const EditForm = ({ editData, setEditData, setClickedEdit, handleUpdate }) => {
                     />
                 </div>
 
-                <button className="create" type="submit" name="update">
+                <button
+                    className="create"
+                    type="submit"
+                    name="update"
+                    aria-label="Update blog"
+                >
                     Update
                 </button>
             </form>

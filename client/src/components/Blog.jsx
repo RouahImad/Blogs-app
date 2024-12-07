@@ -34,10 +34,18 @@ const Blog = ({
                     ))}
                 </div>
                 <div className="box">
-                    <button onClick={handleLike} name="like">
+                    <button
+                        onClick={handleLike}
+                        name="like"
+                        aria-label="Like this blog"
+                    >
                         {liked ? <FaHeart color="red" /> : <FaRegHeart />}
                     </button>
-                    <button onClick={handleShare} name="share">
+                    <button
+                        onClick={handleShare}
+                        name="share"
+                        aria-label="Share this blog"
+                    >
                         <FaShare />
                     </button>
                 </div>

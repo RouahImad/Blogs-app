@@ -45,6 +45,7 @@ const NavBar = ({ theme, setTheme }) => {
                         type="button"
                         onClick={toggleTheme}
                         name="theme"
+                        aria-label="Toggle theme"
                     >
                         {theme == "dark" ? <LuSunMoon /> : <FaRegMoon />}
                     </button>

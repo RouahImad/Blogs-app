@@ -42,7 +42,12 @@ const Login = () => {
                         required
                     />
                 </div>
-                <button className="login" type="submit" name="login">
+                <button
+                    className="login"
+                    type="submit"
+                    name="login"
+                    aria-label="Login"
+                >
                     Login
                 </button>
             </form>

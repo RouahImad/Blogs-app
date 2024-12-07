@@ -1,9 +1,11 @@
 const express = require("express");
-const session = require("express-session");
+const cookieSession = require("cookie-session");
 const cors = require("cors");
 require("dotenv").config();
 const app = express();
 const routers = require("./routes/routes");
+
+const isProduction = process.env.NODE_ENV === "production";
 
 app.use(
     cors({
@@ -19,13 +21,13 @@ app.use(
 );
 
 app.use(
-    session({
-        secret: process.env.SESSION_SECRET || "testing",
-        saveUninitialized: false,
-        resave: false,
-        cookie: {
-            maxAge: 60000 * 60,
-        },
+    cookieSession({
+        name: "session",
+        keys: [process.env.SESSION_SECRET],
+        maxAge: 60000 * 60, // 1 hour
+        // sameSite: isProduction ? "None" : "Lax", // Set sameSite to None only in production
+        secure: isProduction, // Set secure to true only in production
+        httpOnly: true,
     })
 );
 

@@ -35,7 +35,12 @@ const LinksForm = ({ setLinks, setAddLink }) => {
                         required
                     />
                 </div>
-                <button className="create" type="submit" name="add">
+                <button
+                    className="create"
+                    type="submit"
+                    name="add"
+                    aria-label="Add link"
+                >
                     Add
                 </button>
             </form>

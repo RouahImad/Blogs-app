@@ -11,7 +11,7 @@ const UpdateForm = () => {
                     <label htmlFor="content">Content</label>
                     <textarea id="content" rows="10"></textarea>
                 </div>
-                <button type="submit" name="update">
+                <button type="submit" name="update" aria-label="Update blog">
                     Update
                 </button>
             </form>
