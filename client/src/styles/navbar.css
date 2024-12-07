@@ -41,12 +41,16 @@ a.active {
     gap: 25px;
     margin-block: 14px;
 }
-@media (max-width: 416px) {
+@media (max-width: 498px) {
     .nav {
         padding-inline: 15px;
     }
+    .nav h2 {
+        font-size: 20px;
+    }
     .actions {
-        gap: 13px;
+        gap: 10px;
+        padding-left: 20px;
     }
 }
 .actions a,
