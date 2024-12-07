@@ -1,8 +1,13 @@
 const blogModel = require("../modules/blogsModel");
 
 const getBlogs = async (req, res) => {
+    // const { page, limit } = req.query;
+    // const offset = page ? (page - 1) * limit : 0;
+    // const limit = limit ? limit : 10;
+    const { search } = req.query;
+
     try {
-        const blogs = await blogModel.getBlogs();
+        const blogs = await blogModel.getBlogs(search ?? null);
 
         if (blogs.length > 0) {
             res.status(200).json(blogs);

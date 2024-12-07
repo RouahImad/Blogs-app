@@ -7,8 +7,8 @@ export const api = axios.create({
     withCredentials: true,
 });
 
-export const getAll = () => {
-    return api.get("/blogs");
+export const getAll = (query) => {
+    return api.get(`/blogs${query ? `?search=${query}` : ""}`);
 };
 
 export const getOne = (id) => {

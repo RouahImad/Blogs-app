@@ -1,56 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { RouterProvider } from "react-router-dom";
 
 import { AuthProvider } from "./utils/auth";
 import routes from "./utils/routes";
 import { create } from "./utils/api";
+import { ToolsProvider } from "./utils/toolsStore";
 
 const App = () => {
     const [theme, setTheme] = useState("light");
-    const [likedBlogsId, setLikedBlogsId] = useState([]);
-
-    useEffect(() => {
-        if (localStorage.getItem("likedBlogs")) {
-            setLikedBlogsId(JSON.parse(localStorage.getItem("likedBlogs")));
-        }
-    }, []);
-
-    const handleLike = (id) => {
-        if (localStorage.getItem("likedBlogs")) {
-            const temp = JSON.parse(localStorage.getItem("likedBlogs"));
-            if (temp.includes(id)) {
-                const newLikedBlogsId = temp.filter((blogId) => blogId !== id);
-                setLikedBlogsId(newLikedBlogsId);
-                localStorage.setItem(
-                    "likedBlogs",
-                    JSON.stringify(newLikedBlogsId)
-                );
-            } else {
-                const newLikedBlogsId = [...temp, id];
-                setLikedBlogsId(newLikedBlogsId);
-                localStorage.setItem(
-                    "likedBlogs",
-                    JSON.stringify(newLikedBlogsId)
-                );
-            }
-        } else {
-            const newLikedBlogsId = [id];
-            setLikedBlogsId(newLikedBlogsId);
-            localStorage.setItem("likedBlogs", JSON.stringify(newLikedBlogsId));
-        }
-    };
-
-    const handleShare = (id, title, content) => {
-        if (navigator.share) {
-            const shareData = {
-                title: title,
-                text: content,
-                url: window.location.origin + "/blog/" + id,
-            };
-
-            navigator.share(shareData);
-        }
-    };
 
     const [links, setLinks] = useState([]);
 
@@ -77,21 +34,14 @@ const App = () => {
         }
     };
 
-    const router = routes(
-        likedBlogsId,
-        handleLike,
-        handleShare,
-        links,
-        setLinks,
-        handleCreate,
-        theme,
-        setTheme
-    );
+    const router = routes(links, setLinks, handleCreate, theme, setTheme);
 
     return (
-        <AuthProvider>
-            <RouterProvider router={router} />
-        </AuthProvider>
+        <ToolsProvider>
+            <AuthProvider>
+                <RouterProvider router={router} />
+            </AuthProvider>
+        </ToolsProvider>
     );
 };
 

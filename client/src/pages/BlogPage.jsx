@@ -1,9 +1,11 @@
 import { useLoaderData } from "react-router-dom";
 import Blog from "../components/Blog";
-import PropTypes from "prop-types";
 import { getOne } from "../utils/api";
+import { useTools } from "../utils/toolsStore";
 
-const BlogPage = ({ likedBlogsId, handleLike, handleShare }) => {
+const BlogPage = () => {
+    const { likedBlogsId, handleLike, handleShare } = useTools();
+
     const data = useLoaderData();
     const links = JSON.parse(data.links);
 
@@ -27,12 +29,6 @@ const BlogPage = ({ likedBlogsId, handleLike, handleShare }) => {
             />
         </div>
     );
-};
-
-BlogPage.propTypes = {
-    likedBlogsId: PropTypes.array.isRequired,
-    handleLike: PropTypes.func.isRequired,
-    handleShare: PropTypes.func.isRequired,
 };
 
 export default BlogPage;

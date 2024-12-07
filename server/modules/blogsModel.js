@@ -1,8 +1,11 @@
 const pool = require("../configure/db");
 
-const getBlogs = async () => {
+const getBlogs = async (query) => {
     const blogs = await pool.query(
-        "SELECT id, title, content, links, DATE_FORMAT(post_date, '%Y-%m-%d') as post_date FROM blogs"
+        `SELECT id, title, content, links, DATE_FORMAT(post_date, '%Y-%m-%d') as post_date FROM blogs ${
+            query ? "WHERE title LIKE ? OR content LIKE ?" : ""
+        } `,
+        query ? [`%${query}%`, `%${query}%`] : []
     );
 
     return blogs[0];

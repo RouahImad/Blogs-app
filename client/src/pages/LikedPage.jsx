@@ -1,13 +1,15 @@
-import PropTypes from "prop-types";
 import Blog from "../components/Blog";
 import SkeletonList from "../components/SkeletonList";
 import love from "../assets/love-letter.png";
 import { useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { getAll } from "../utils/api";
+import { useTools } from "../utils/toolsStore";
 
-export const LikedPageLoader = async (likedBlogsId) => {
+export const LikedPageLoader = async () => {
     try {
+        const likedBlogsId =
+            JSON.parse(localStorage.getItem("likedBlogs")) || [];
         const response = await getAll();
         if (response.status === 200) {
             return response.data.filter((blog) =>
@@ -21,7 +23,9 @@ export const LikedPageLoader = async (likedBlogsId) => {
     }
 };
 
-const LikedPage = ({ likedBlogsId, handleLike, handleShare }) => {
+const LikedPage = () => {
+    const { likedBlogsId, handleLike, handleShare } = useTools();
+
     const [loading, setLoading] = useState(true);
 
     const data = useLoaderData();
@@ -79,12 +83,6 @@ const LikedPage = ({ likedBlogsId, handleLike, handleShare }) => {
             </div>
         </div>
     );
-};
-
-LikedPage.propTypes = {
-    likedBlogsId: PropTypes.array.isRequired,
-    handleLike: PropTypes.func.isRequired,
-    handleShare: PropTypes.func.isRequired,
 };
 
 export default LikedPage;

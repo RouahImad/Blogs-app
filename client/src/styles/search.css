@@ -1,0 +1,27 @@
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.search .searchBar {
+    position: relative;
+    width: 80%;
+}
+.search .searchBar input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 9px 8px 9px 35px;
+    font-size: 16px;
+}
+.search .searchBar button {
+    all: unset;
+    position: absolute;
+    left: 0;
+    height: 30px;
+    margin-left: 3px;
+    padding: 5px;
+    font-size: 22px;
+    cursor: pointer;
+}

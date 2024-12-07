@@ -21,16 +21,7 @@ const BlogsList = lazy(() => import("../pages/BlogsList"));
 const LikedPage = lazy(() => import("../pages/LikedPage"));
 const SearchPage = lazy(() => import("../pages/SearchPage"));
 
-const routes = (
-    likedBlogsId,
-    handleLike,
-    handleShare,
-    links,
-    setLinks,
-    handleCreate,
-    theme,
-    setTheme
-) =>
+const routes = (links, setLinks, handleCreate, theme, setTheme) =>
     createBrowserRouter([
         {
             path: "/",
@@ -42,11 +33,7 @@ const routes = (
                     path: "blog",
                     element: (
                         <Suspense fallback={<div className="spinner"></div>}>
-                            <BlogsList
-                                likedBlogsId={likedBlogsId}
-                                handleLike={handleLike}
-                                handleShare={handleShare}
-                            />
+                            <BlogsList />
                         </Suspense>
                     ),
                     loader: BlogsLoader,
@@ -54,13 +41,7 @@ const routes = (
                 },
                 {
                     path: "blog/:id",
-                    element: (
-                        <BlogPage
-                            likedBlogsId={likedBlogsId}
-                            handleLike={handleLike}
-                            handleShare={handleShare}
-                        />
-                    ),
+                    element: <BlogPage />,
                     loader: BlogLoader,
                     errorElement: <ErrorLog />,
                 },
@@ -77,14 +58,10 @@ const routes = (
                     path: "likes",
                     element: (
                         <Suspense fallback={<div className="spinner"></div>}>
-                            <LikedPage
-                                likedBlogsId={likedBlogsId}
-                                handleLike={handleLike}
-                                handleShare={handleShare}
-                            />
+                            <LikedPage />
                         </Suspense>
                     ),
-                    loader: () => LikedPageLoader(likedBlogsId),
+                    loader: () => LikedPageLoader(),
                     errorElement: <ErrorLog />,
                 },
                 {

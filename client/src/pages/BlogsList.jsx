@@ -6,8 +6,8 @@ import SkeletonList from "../components/SkeletonList";
 import CategoriesNav from "../components/CategoriesNav";
 
 import soon from "../assets/work-in-progress.png";
-import PropTypes from "prop-types";
 import { getAll } from "../utils/api";
+import { useTools } from "../utils/toolsStore";
 
 export const BlogsLoader = async () => {
     try {
@@ -22,7 +22,9 @@ export const BlogsLoader = async () => {
     }
 };
 
-const BlogsList = ({ likedBlogsId, handleLike, handleShare }) => {
+const BlogsList = () => {
+    const { likedBlogsId, handleLike, handleShare } = useTools();
+
     const [loading, setLoading] = useState(true);
 
     const data = useLoaderData();
@@ -121,12 +123,6 @@ const BlogsList = ({ likedBlogsId, handleLike, handleShare }) => {
             )}
         </>
     );
-};
-
-BlogsList.propTypes = {
-    likedBlogsId: PropTypes.array.isRequired,
-    handleLike: PropTypes.func.isRequired,
-    handleShare: PropTypes.func.isRequired,
 };
 
 export default BlogsList;
