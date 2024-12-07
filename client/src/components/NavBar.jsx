@@ -20,22 +20,22 @@ const NavBar = ({ theme, setTheme }) => {
             <h2>Blogo</h2>
             <ul className="actions">
                 <li>
-                    <NavLink to="/">
+                    <NavLink to="/" aria-label="Home page">
                         <IoHome />
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/blog">
+                    <NavLink to="/blog" aria-label="blogs page">
                         <GoLog />
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/likes">
+                    <NavLink to="/likes" aria-label="Liked blogs page">
                         <FaHeart />
                     </NavLink>
                 </li>
                 <li className="searchIcon">
-                    <NavLink to="/search">
+                    <NavLink to="/search" aria-label="Search blogs">
                         <IoSearchSharp />
                     </NavLink>
                 </li>
