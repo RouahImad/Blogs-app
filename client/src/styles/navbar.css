@@ -11,6 +11,14 @@
     background-color: var(--nav-bg-dark);
     color: white;
 }
+.nav h2 {
+    font-family: "montserrat", sans-serif;
+    font-size: 27px;
+    color: #333;
+}
+.dark .nav h2 {
+    color: white;
+}
 li button,
 li a {
     all: unset;

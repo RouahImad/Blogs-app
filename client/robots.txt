@@ -1,0 +1,19 @@
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /login
+
+User-agent: Googlebot-Mobile
+Allow: /
+Disallow: /admin/
+Disallow: /login
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /login
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /login

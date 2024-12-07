@@ -17,7 +17,7 @@ const NavBar = ({ theme, setTheme }) => {
     };
     return (
         <div className="nav">
-            <h2>Blogo</h2>
+            <h2>iMadLog</h2>
             <ul className="actions">
                 <li>
                     <NavLink to="/" aria-label="Home page">
