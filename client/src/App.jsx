@@ -1,22 +1,8 @@
 import { useEffect, useState } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 
-import NotFound from "./components/NotFound";
-import BlogForm from "./components/BlogForm";
-import ErrorLog from "./components/ErrorLog";
-import RequireAuth from "./components/RequireAuth";
-import AdminBlogs, { AdminBLogsLoader } from "./components/AdminBlogs";
-import AdminStats from "./components/AdminStats";
-import Login from "./components/Login";
-
-import Root, { RootLoader } from "./pages/Root";
-import BlogsList, { BlogsLoader } from "./pages/BlogsList";
-import BlogPage, { BlogLoader } from "./pages/BlogPage";
-import Home from "./pages/Home";
-import LikedPage, { LikedPageLoader } from "./pages/LikedPage";
-import Admin from "./pages/Admin";
-import SearchPage from "./pages/SearchPage";
 import { AuthProvider } from "./utils/auth";
+import routes from "./utils/routes";
 import { create } from "./utils/api";
 
 const App = () => {
@@ -91,94 +77,16 @@ const App = () => {
         }
     };
 
-    const router = createBrowserRouter([
-        {
-            path: "/",
-            element: <Root theme={theme} setTheme={setTheme} />,
-            loader: RootLoader,
-            children: [
-                { index: true, element: <Home /> },
-                {
-                    path: "blog",
-                    element: (
-                        <BlogsList
-                            likedBlogsId={likedBlogsId}
-                            handleLike={handleLike}
-                            handleShare={handleShare}
-                        />
-                    ),
-                    loader: BlogsLoader,
-                    errorElement: <ErrorLog />,
-                },
-                {
-                    path: "blog/:id",
-                    element: (
-                        <BlogPage
-                            likedBlogsId={likedBlogsId}
-                            handleLike={handleLike}
-                            handleShare={handleShare}
-                        />
-                    ),
-                    loader: BlogLoader,
-                    errorElement: <ErrorLog />,
-                },
-                {
-                    path: "search",
-                    element: <SearchPage />,
-                    errorElement: <ErrorLog />,
-                },
-                {
-                    path: "likes",
-                    element: (
-                        <LikedPage
-                            likedBlogsId={likedBlogsId}
-                            handleLike={handleLike}
-                            handleShare={handleShare}
-                        />
-                    ),
-                    loader: () => LikedPageLoader(likedBlogsId),
-                    errorElement: <ErrorLog />,
-                },
-                {
-                    path: "admin",
-                    element: (
-                        <RequireAuth>
-                            <Admin />
-                        </RequireAuth>
-                    ),
-                    errorElement: <ErrorLog />,
-                    children: [
-                        { index: true, element: <AdminStats /> },
-                        {
-                            path: "create",
-                            element: (
-                                <BlogForm
-                                    links={links}
-                                    setLinks={setLinks}
-                                    handleCreate={handleCreate}
-                                />
-                            ),
-                        },
-                        {
-                            path: "blogs",
-                            element: <AdminBlogs />,
-                            loader: AdminBLogsLoader,
-                        },
-                    ],
-                },
-                {
-                    path: "login",
-                    element: <Login />,
-                    errorElement: <ErrorLog />,
-                },
-                {
-                    path: "*",
-                    element: <NotFound />,
-                    errorElement: <ErrorLog />,
-                },
-            ],
-        },
-    ]);
+    const router = routes(
+        likedBlogsId,
+        handleLike,
+        handleShare,
+        links,
+        setLinks,
+        handleCreate,
+        theme,
+        setTheme
+    );
 
     return (
         <AuthProvider>

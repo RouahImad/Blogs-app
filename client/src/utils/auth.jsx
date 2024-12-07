@@ -8,8 +8,6 @@ export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const checkLoginStatus = async () => {
-        console.log("Checking login status");
-
         try {
             const response = await checkLogin("/loggedin");
             if (response.status === 200) {

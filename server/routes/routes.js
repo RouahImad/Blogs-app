@@ -13,12 +13,9 @@ require("dotenv").config();
 
 const isAuthenticated = (req, res, next) => {
     if (req.session.user) {
-        console.log("Authorized");
-
         next();
     } else {
         res.status(401).send("Unauthorized");
-        console.log("Unauthorized");
     }
 };
 
@@ -30,7 +27,6 @@ router.post("/login", (req, res) => {
         password === process.env.MASTER_PASSWORD
     ) {
         req.session.user = { username };
-        console.log("Session created:", req.session);
         res.status(200).send("Success");
     } else {
         res.status(401).send("Wrong credentials");
@@ -38,8 +34,6 @@ router.post("/login", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-    console.log("Session:", req.session);
-
     if (req.session.user) {
         res.status(200).send("Logged in");
     } else {
