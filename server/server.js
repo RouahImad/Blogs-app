@@ -8,7 +8,7 @@ const routers = require("./routes/routes");
 const isProduction = process.env.NODE_ENV === "production";
 
 const allowedOrigins = isProduction
-    ? ["https://blogs-app-bay.vercel.app"]
+    ? ["https://imadlog-bay.vercel.app/"]
     : ["http://127.0.0.1:5173", "http://localhost:5173"];
 
 if (isProduction) {
