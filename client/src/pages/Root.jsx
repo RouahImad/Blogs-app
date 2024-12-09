@@ -20,6 +20,8 @@ const Root = ({ theme, setTheme }) => {
                 progress={progress}
                 shadow={true}
                 height={3}
+                // transitionTime={50}
+                waitingTime={400}
             />
             <NavBar theme={theme} setTheme={setTheme} />
             <Suspense fallback={null}>
