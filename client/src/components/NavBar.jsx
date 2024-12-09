@@ -17,11 +17,11 @@ const NavBar = ({ theme, setTheme }) => {
         setTheme(newTheme);
     };
 
-    const { setProgress } = useTools();
+    const { isLoading, setProgress } = useTools();
     const location = useLocation();
 
     const handleNavClick = (path) => {
-        if (location.pathname === path) return;
+        if (isLoading || location.pathname === path) return;
         setProgress(0);
         setTimeout(() => {
             setProgress(40);
