@@ -23,18 +23,21 @@ export const BlogsLoader = async () => {
 };
 
 const BlogsList = () => {
-    const { likedBlogsId, handleLike, handleShare } = useTools();
+    const {
+        isLoading,
+        setIsLoading,
+        handleNavClick,
+        setProgress,
+        likedBlogsId,
+        handleLike,
+        handleShare,
+    } = useTools();
 
     const [loading, setLoading] = useState(true);
 
     const data = useLoaderData();
 
     const [blogs, setBlogs] = useState(data?.length ? data : []);
-    const navigate = useNavigate();
-
-    const handleClick = (id) => {
-        navigate(`/blog/${id}`);
-    };
 
     useEffect(() => {
         if (data) {
@@ -79,6 +82,21 @@ const BlogsList = () => {
         event.target.classList.add("active");
     };
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setProgress(100);
+            setIsLoading(false);
+        }, 100);
+
+        return () => {
+            clearTimeout(timer);
+            setProgress(0);
+            setIsLoading(false);
+        };
+    }, [setProgress, setIsLoading]);
+
+    const navigate = useNavigate();
+
     return (
         <>
             <CategoriesNav
@@ -105,7 +123,11 @@ const BlogsList = () => {
                                         blog.content
                                     )
                                 }
-                                handleClick={() => handleClick(blog.id)}
+                                handleClick={() => {
+                                    if (isLoading) return;
+                                    navigate(`/blog/${blog.id}`);
+                                    handleNavClick();
+                                }}
                                 links={blog.links ? JSON.parse(blog.links) : []}
                             />
                         ))

@@ -24,17 +24,32 @@ export const LikedPageLoader = async () => {
 };
 
 const LikedPage = () => {
-    const { likedBlogsId, handleLike, handleShare } = useTools();
+    const {
+        isLoading,
+        setIsLoading,
+        handleNavClick,
+        setProgress,
+        likedBlogsId,
+        handleLike,
+        handleShare,
+    } = useTools();
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setProgress(100);
+            setIsLoading(false);
+        }, 100);
+
+        return () => {
+            clearTimeout(timer);
+            setProgress(0);
+            setIsLoading(false);
+        };
+    }, [setProgress, setIsLoading]);
 
     const [loading, setLoading] = useState(true);
 
     const data = useLoaderData();
     const [blogs, setBlogs] = useState(data?.length ? data : []);
-    const navigate = useNavigate();
-
-    const handleClick = (id) => {
-        navigate(`/blog/${id}`);
-    };
 
     useEffect(() => {
         if (data) {
@@ -42,6 +57,8 @@ const LikedPage = () => {
             setLoading(false);
         }
     }, [data]);
+
+    const navigate = useNavigate();
 
     return (
         <div className="likePage">
@@ -67,7 +84,11 @@ const LikedPage = () => {
                                             blog.content
                                         )
                                     }
-                                    handleClick={() => handleClick(blog.id)}
+                                    handleClick={() => {
+                                        if (isLoading) return;
+                                        navigate(`/blog/${blog.id}`);
+                                        handleNavClick();
+                                    }}
                                 />
                             ))
                         ) : (

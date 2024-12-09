@@ -5,6 +5,15 @@ const ToolsStore = createContext();
 
 export const ToolsProvider = ({ children }) => {
     const [likedBlogsId, setLikedBlogsId] = useState([]);
+    const [progress, setProgress] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleNavClick = () => {
+        if (isLoading) return;
+        setIsLoading(true);
+        setProgress(0);
+        setProgress(40);
+    };
 
     useEffect(() => {
         const likedBlogs = localStorage.getItem("likedBlogs");
@@ -54,7 +63,17 @@ export const ToolsProvider = ({ children }) => {
 
     return (
         <ToolsStore.Provider
-            value={{ likedBlogsId, setLikedBlogsId, handleLike, handleShare }}
+            value={{
+                handleNavClick,
+                progress,
+                setProgress,
+                isLoading,
+                setIsLoading,
+                likedBlogsId,
+                setLikedBlogsId,
+                handleLike,
+                handleShare,
+            }}
         >
             {children}
         </ToolsStore.Provider>

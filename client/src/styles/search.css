@@ -2,11 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     margin-top: 20px;
 }
 .search .searchBar {
     position: relative;
-    width: 80%;
+    max-width: 480px;
+    margin: auto;
 }
 .search .searchBar input {
     width: 100%;

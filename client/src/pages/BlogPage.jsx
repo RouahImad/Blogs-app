@@ -2,9 +2,24 @@ import { useLoaderData } from "react-router-dom";
 import Blog from "../components/Blog";
 import { getOne } from "../utils/api";
 import { useTools } from "../utils/toolsStore";
+import { useEffect } from "react";
 
 const BlogPage = () => {
-    const { likedBlogsId, handleLike, handleShare } = useTools();
+    const { setIsLoading, setProgress, likedBlogsId, handleLike, handleShare } =
+        useTools();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setProgress(100);
+            setIsLoading(false);
+        }, 100);
+
+        return () => {
+            clearTimeout(timer);
+            setProgress(0);
+            setIsLoading(false);
+        };
+    }, [setProgress, setIsLoading]);
 
     const data = useLoaderData();
     const links = JSON.parse(data.links);

@@ -21,8 +21,8 @@ const BlogsList = lazy(() => import("../pages/BlogsList"));
 const LikedPage = lazy(() => import("../pages/LikedPage"));
 const SearchPage = lazy(() => import("../pages/SearchPage"));
 
-const routes = (links, setLinks, handleCreate, theme, setTheme) =>
-    createBrowserRouter([
+const routes = (links, setLinks, handleCreate, theme, setTheme) => {
+    return createBrowserRouter([
         {
             path: "/",
             element: <Root theme={theme ?? "light"} setTheme={setTheme} />,
@@ -127,5 +127,6 @@ const routes = (links, setLinks, handleCreate, theme, setTheme) =>
             ],
         },
     ]);
+};
 
 export default routes;

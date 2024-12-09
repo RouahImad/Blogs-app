@@ -7,6 +7,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import "../styles/navbar.css";
+import { useTools } from "../utils/toolsStore";
 
 const NavBar = ({ theme, setTheme }) => {
     const toggleTheme = () => {
@@ -15,26 +16,34 @@ const NavBar = ({ theme, setTheme }) => {
         localStorage.setItem("theme", newTheme);
         setTheme(newTheme);
     };
+
+    const { setProgress } = useTools();
+
+    const handleNavClick = () => {
+        setProgress(0);
+        setProgress(40);
+    };
+
     return (
         <div className="nav">
             <h2>iMadLog</h2>
             <ul className="actions">
-                <li>
+                <li onClick={handleNavClick}>
                     <NavLink to="/" aria-label="Home page">
                         <IoHome />
                     </NavLink>
                 </li>
-                <li>
+                <li onClick={handleNavClick}>
                     <NavLink to="/blog" aria-label="blogs page">
                         <GoLog />
                     </NavLink>
                 </li>
-                <li>
+                <li onClick={handleNavClick}>
                     <NavLink to="/likes" aria-label="Liked blogs page">
                         <FaHeart />
                     </NavLink>
                 </li>
-                <li className="searchIcon">
+                <li className="searchIcon" onClick={handleNavClick}>
                     <NavLink to="/search" aria-label="Search blogs">
                         <IoSearchSharp />
                     </NavLink>

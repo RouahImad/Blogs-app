@@ -1,10 +1,13 @@
 import { Outlet, useLoaderData } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import PropTypes from "prop-types";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
+import { useTools } from "../utils/toolsStore";
+import LoadingBar from "react-top-loading-bar";
 
 const Root = ({ theme, setTheme }) => {
     const data = useLoaderData();
+    const { progress } = useTools();
 
     useEffect(() => {
         setTheme(data);
@@ -12,8 +15,16 @@ const Root = ({ theme, setTheme }) => {
 
     return (
         <div>
+            <LoadingBar
+                color="#8fe2d3"
+                progress={progress}
+                shadow={true}
+                height={3}
+            />
             <NavBar theme={theme} setTheme={setTheme} />
-            <Outlet />
+            <Suspense fallback={null}>
+                <Outlet />
+            </Suspense>
         </div>
     );
 };
