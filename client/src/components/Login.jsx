@@ -12,7 +12,7 @@ const Login = () => {
 
     return (
         <div className="loginContainer">
-            <h2>Login</h2>
+            <h2>Authentification</h2>
             <form
                 onSubmit={async (e) => {
                     const res = await handleLogin(e);
