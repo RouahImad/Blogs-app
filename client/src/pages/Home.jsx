@@ -39,7 +39,6 @@ const Home = () => {
                     </span>
                 </p>
                 <div className="social">
-                    <span>Check my socials:</span>
                     <a
                         href="https://www.facebook.com/imade.rouah"
                         target="_blank"

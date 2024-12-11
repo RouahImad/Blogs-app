@@ -122,18 +122,11 @@
     align-items: center;
     gap: 20px;
 }
-.social span {
-    font-size: 1.2rem;
-    color: #666;
-}
-.dark .social span {
-    color: #aaa;
-}
 .social a {
     all: unset;
     color: #333;
     display: flex;
-    font-size: 2rem;
+    font-size: 35px;
     cursor: pointer;
     transition: 0.3s;
 }
