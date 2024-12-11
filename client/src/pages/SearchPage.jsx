@@ -9,15 +9,12 @@ import { useTools } from "../utils/toolsStore";
 const SearchPage = () => {
     const handleSearch = () => {
         if (search) {
-            console.log(search);
-
             getAll(search)
                 .then((res) => {
-                    console.log(res.data);
                     setResults(res.data);
                 })
                 .catch((err) => {
-                    console.log(err);
+                    throw err;
                 });
         }
     };
@@ -45,7 +42,7 @@ const SearchPage = () => {
         <div className="search ">
             <div className="searchBar">
                 <input
-                    type="text"
+                    type="search"
                     placeholder="Search for a blog"
                     value={search}
                     onKeyUp={(e) =>
@@ -80,7 +77,9 @@ const SearchPage = () => {
                 ) : (
                     <div className="emptyBlogs">
                         <img src={soon} alt="work in progress" loading="lazy" />
-                        <span>More blogs are coming stay tunned!</span>
+                        <span>
+                            No blog found. Please try another search term.
+                        </span>
                     </div>
                 )}
             </div>

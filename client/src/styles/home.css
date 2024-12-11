@@ -19,10 +19,11 @@
     .home h1 {
         margin-bottom: 30px !important;
         font-size: 1.8rem !important;
+        text-align: left;
     }
     .home p {
         width: 100% !important;
-        text-align: center;
+        max-width: 484px;
     }
 }
 .home h1 {
@@ -31,7 +32,6 @@
     font-size: 2.3rem;
     font-weight: 700;
     color: #333;
-    text-align: center;
     margin: 0;
     margin-bottom: 40px;
 }
@@ -61,5 +61,101 @@
     }
     50% {
         transform: translateY(-23px) scale(1.08);
+    }
+}
+.start-btn {
+    box-sizing: content-box;
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+    color: #333;
+    text-decoration: underline;
+    text-decoration-color: #ee5467;
+    font-size: 1.2rem;
+    width: 0ch;
+    padding-right: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: 0.3s ease;
+    animation: write 1.5s steps(9) 1s infinite alternate;
+}
+@keyframes write {
+    from {
+        width: 0ch;
+        padding-right: 0;
+    }
+    to {
+        width: 10ch;
+    }
+}
+.dark .start-btn {
+    color: white;
+}
+.start-btn:hover {
+    animation: none;
+    width: 9ch;
+    margin-left: 5px;
+    color: #ee5467;
+    transform: scale(1.1);
+}
+.start-btn::before {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 100%;
+    background-color: #ee5467;
+    bottom: 0;
+    right: -2px;
+    animation: blink 1s infinite;
+}
+@keyframes blink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+.social {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.social span {
+    font-size: 1.2rem;
+    color: #666;
+}
+.dark .social span {
+    color: #aaa;
+}
+.social a {
+    all: unset;
+    color: #333;
+    display: flex;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.dark .social a {
+    color: #aaa;
+}
+.social a:hover {
+    transform: scale(1.3);
+}
+@media (hover: hover) {
+    .social .facebook:hover {
+        color: #0866ff;
+    }
+    .social .instagram:hover {
+        color: #e1306c;
+    }
+}
+@media (hover: none) {
+    .social .facebook {
+        color: #0866ff !important;
+    }
+    .social .instagram {
+        color: #e1306c !important;
     }
 }

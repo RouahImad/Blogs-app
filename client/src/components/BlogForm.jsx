@@ -1,11 +1,18 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LinksForm from "./LinksForm";
 import Message from "./Message";
 
 const BlogForm = ({ links, setLinks, handleCreate }) => {
     const [addLink, setAddLink] = useState(false);
     const [message, setMessage] = useState({});
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setMessage({});
+        }, 1800);
+        return () => clearTimeout(timer);
+    }, [message]);
 
     return (
         <div className="adminForm">

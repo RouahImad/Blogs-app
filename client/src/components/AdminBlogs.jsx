@@ -98,6 +98,13 @@ const AdminBlogs = () => {
         }
     };
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setMessage({});
+        }, 1800);
+        return () => clearTimeout(timer);
+    }, [message]);
+
     return (
         <div className="adminBlogs">
             <h2>Admin Blogs</h2>

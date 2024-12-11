@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Message from "./Message";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
@@ -9,6 +9,13 @@ const Login = () => {
     const navigate = useNavigate();
 
     const { handleLogin } = useAuth();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setMessage({});
+        }, 1800);
+        return () => clearTimeout(timer);
+    }, [message]);
 
     return (
         <div className="loginContainer">
