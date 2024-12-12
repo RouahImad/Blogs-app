@@ -25,6 +25,8 @@ export const LikedPageLoader = async () => {
 
 const LikedPage = () => {
     const {
+        blogs,
+        setBlogs,
         isLoading,
         setIsLoading,
         handleNavClick,
@@ -49,14 +51,12 @@ const LikedPage = () => {
     const [loading, setLoading] = useState(true);
 
     const data = useLoaderData();
-    const [blogs, setBlogs] = useState(data?.length ? data : []);
 
     useEffect(() => {
-        if (data) {
-            setBlogs(data);
-            setLoading(false);
-        }
-    }, [data]);
+        setBlogs(data?.length ? data : []);
+        setBlogs(data);
+        setLoading(false);
+    }, [data, setBlogs]);
 
     const navigate = useNavigate();
 

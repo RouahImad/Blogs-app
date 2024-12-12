@@ -7,6 +7,7 @@ export const ToolsProvider = ({ children }) => {
     const [likedBlogsId, setLikedBlogsId] = useState([]);
     const [progress, setProgress] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const [blogs, setBlogs] = useState([]);
 
     const handleNavClick = () => {
         if (isLoading) return;
@@ -66,6 +67,8 @@ export const ToolsProvider = ({ children }) => {
             value={{
                 handleNavClick,
                 progress,
+                blogs,
+                setBlogs,
                 setProgress,
                 isLoading,
                 setIsLoading,

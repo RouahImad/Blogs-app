@@ -46,6 +46,11 @@
     color: #666;
     margin-bottom: 20px;
 }
+@media (max-width: 457px) {
+    .home p {
+        max-width: 320px;
+    }
+}
 .dark .home p {
     color: #aaa;
 }

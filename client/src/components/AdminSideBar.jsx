@@ -18,21 +18,23 @@ const AdminSideBar = () => {
 
     return (
         <div className="adminSideBar">
+            <div className="contentMenu">
+                <NavLink to="/admin" onClick={() => setMenu(!menu)} end>
+                    <ImStatsBars />
+                    <span>Stats</span>
+                </NavLink>
+                <NavLink to="/admin/create" onClick={() => setMenu(!menu)} end>
+                    <IoIosCreate />
+                    <span>Create Blog</span>
+                </NavLink>
+                <NavLink to="/admin/blogs" onClick={() => setMenu(!menu)} end>
+                    <SiMake />
+                    <span>Manage Blogs</span>
+                </NavLink>
+            </div>
             <div className="menu" onClick={() => setMenu(!menu)}>
                 {menu ? <IoCloseOutline /> : <IoMenu />}
             </div>
-            <NavLink to="/admin" onClick={() => setMenu(!menu)} end>
-                <ImStatsBars />
-                <span>Stats</span>
-            </NavLink>
-            <NavLink to="/admin/create" onClick={() => setMenu(!menu)} end>
-                <IoIosCreate />
-                <span>Create Blog</span>
-            </NavLink>
-            <NavLink to="/admin/blogs" onClick={() => setMenu(!menu)} end>
-                <SiMake />
-                <span>Manage Blogs</span>
-            </NavLink>
         </div>
     );
 };

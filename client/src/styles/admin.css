@@ -4,17 +4,12 @@ body:has(.admin) {
 .admin {
     display: flex;
     align-items: center;
-    height: calc(100vh - 70px);
+    /* height: calc(100vh - 70px); */
 }
 .adminSideBar {
-    position: sticky;
-    width: 193px;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: #f1f1f1;
-    padding: 20px;
-    border-right: 1px solid #ccc;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
     z-index: 999;
     transition: 0.3s;
 }
@@ -22,23 +17,43 @@ body:has(.admin) {
     background-color: #333;
     background-color: f6f7f90d;
 }
+.contentMenu {
+    position: relative;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.667);
+    left: -150%;
+    transition: 0.3s;
+}
+.open .contentMenu {
+    left: 0;
+}
 .menu {
-    display: none;
+    display: flex;
+    background-color: #8fe2d3;
+    padding: 15px;
+    border-radius: 50%;
+    width: fit-content;
     cursor: pointer;
+    transition: 0.3s;
 }
 .dark .menu {
     color: white;
 }
+.open .menu {
+    transform: rotate(1turn);
+}
 .menu svg {
-    font-size: 30px !important;
+    font-size: 25px !important;
 }
 .adminSideBar a {
-    display: flex;
+    display: none;
     align-items: center;
-    gap: 10px;
-    padding: 10px;
+    gap: 15px;
+    padding: 10px 15px;
     color: #333;
     text-decoration: none;
+    opacity: 0;
     border-bottom: 1px solid #ccc;
     white-space: nowrap;
     transition: 0.3s;
@@ -60,44 +75,18 @@ body:has(.admin) {
     font-size: 20px;
 }
 @media (max-width: 727px) {
-    .adminSideBar {
-        position: absolute;
-        height: 54px;
-        top: 70px;
-        width: 60px;
-        padding: 10px;
-    }
-    .adminSideBar a {
-        display: none;
-        justify-content: center;
-        gap: 0;
-        padding: 10px;
-        opacity: 0;
-    }
     .adminSideBar a svg {
         font-size: 30px !important;
     }
-    .adminSideBar span {
-        display: none;
-    }
-    .menu {
-        display: block;
-        text-align: center;
-    }
-}
-.adminSideBar.open {
-    height: 100%;
 }
 .adminContent {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow-y: auto;
     flex: 1;
-    position: relative;
-    height: 500px;
-    min-height: calc(100vh - 70px);
-    margin-top: 18px;
+    min-height: calc(93vh - 70px);
+    margin-block: 18px;
     padding-inline: 20px;
 }
 .adminContent h2 {

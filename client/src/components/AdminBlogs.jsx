@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import EditForm from "./EditForm";
 import Message from "./Message";
 import { getAll, remove, update } from "../utils/api";
+import { useTools } from "../utils/toolsStore";
 
 export const AdminBLogsLoader = async () => {
     try {
@@ -22,17 +23,16 @@ export const AdminBLogsLoader = async () => {
 
 const AdminBlogs = () => {
     const data = useLoaderData();
-    const [blogs, setBlogs] = useState(data);
+    const { blogs, setBlogs } = useTools();
     const [loading, setLoading] = useState(true);
     const [clickedEdit, setClickedEdit] = useState(false);
     const [editData, setEditData] = useState({});
     const [message, setMessage] = useState({});
 
     useEffect(() => {
-        if (data) {
-            setLoading(false);
-        }
-    }, [data]);
+        setBlogs(data);
+        setLoading(false);
+    }, [data, setBlogs]);
 
     const handleDelete = async (id) => {
         try {

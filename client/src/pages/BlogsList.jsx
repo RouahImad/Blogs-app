@@ -24,6 +24,8 @@ export const BlogsLoader = async () => {
 
 const BlogsList = () => {
     const {
+        blogs,
+        setBlogs,
         isLoading,
         setIsLoading,
         handleNavClick,
@@ -37,13 +39,11 @@ const BlogsList = () => {
 
     const data = useLoaderData();
 
-    const [blogs, setBlogs] = useState(data?.length ? data : []);
+    useEffect(() => {}, []);
 
     useEffect(() => {
-        if (data) {
-            setBlogs(data);
-        }
-    }, [data]);
+        setBlogs(data?.length ? data : []);
+    }, [data, setBlogs]);
 
     const [filterType, setFilterType] = useState("all");
 
