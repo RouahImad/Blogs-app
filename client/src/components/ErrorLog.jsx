@@ -9,7 +9,14 @@ const ErrorLog = () => {
             <img src={ErrorImage} alt="Error" loading="lazy" />
             <h2>Oops! something went wrong</h2>
             <p>
-                Brace yourself till we get the error fixed, You may also refresh
+                Brace yourself till we get the error fixed, You may also{" "}
+                <span
+                    className="refresh"
+                    aria-label="refresh the page"
+                    onClick={() => window.location.reload()}
+                >
+                    refresh
+                </span>{" "}
                 the page or try again later
             </p>
             {error && <p className="errorDetails">{error.message}</p>}

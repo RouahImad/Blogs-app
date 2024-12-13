@@ -3,6 +3,10 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { FaShare } from "react-icons/fa";
 
+function styledText(text) {
+    return text.replace(/<\*\*(.*?)\*\*>/g, "<strong>$1</strong>");
+}
+
 const Blog = ({
     title,
     content,
@@ -24,7 +28,13 @@ const Blog = ({
                         : posted}
                 </span>
             </div>
-            <p>{`${content}${content.at(-1) == "." ? "" : "."}`}</p>
+            <p
+                dangerouslySetInnerHTML={{
+                    __html: `${styledText(content)}${
+                        content.at(-1) == "." ? "" : "."
+                    }`,
+                }}
+            ></p>
             <div className="action">
                 <div className="links">
                     {links?.map(({ name, url }, i) => (

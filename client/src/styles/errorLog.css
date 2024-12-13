@@ -1,10 +1,9 @@
 .errorMessage {
-    font-family: "Montserrat", sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: calc(83vh - 71px);
+    height: calc(91vh - 71px);
     margin: 0.5rem 20px;
     text-align: center;
     font-weight: bold;
@@ -13,18 +12,27 @@
 }
 .errorMessage img {
     width: 250px;
-    margin: 0.5rem 0;
 }
 .dark .errorMessage {
     color: white;
 }
 .errorMessage h2 {
+    font-family: "Montserrat", sans-serif;
     font-size: 1.5rem;
     text-transform: capitalize;
 }
 .errorMessage p {
+    font-family: "Merriweather", serif;
     text-wrap: pretty;
     line-height: 1.5;
     max-width: 480px;
-    text-transform: capitalize;
+}
+.errorMessage .errorDetails {
+    max-width: 580px;
+}
+.errorMessage .refresh {
+    font-weight: 900;
+    text-decoration: underline;
+    color: #ee5467;
+    cursor: pointer;
 }

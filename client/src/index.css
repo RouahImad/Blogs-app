@@ -24,8 +24,6 @@
 body {
     margin: 0;
     font-family: "arial";
-    /* background-color: #f0f2f5; */
-    /* background-color: #ede8ee; */
     background-color: var(--bg-color-light);
     transition: 0.3s;
     overflow-x: hidden;

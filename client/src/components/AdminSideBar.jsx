@@ -32,7 +32,7 @@ const AdminSideBar = () => {
                     <span>Manage Blogs</span>
                 </NavLink>
             </div>
-            <div className="menu" onClick={() => setMenu(!menu)}>
+            <div className="menuIcon" onClick={() => setMenu(!menu)}>
                 {menu ? <IoCloseOutline /> : <IoMenu />}
             </div>
         </div>

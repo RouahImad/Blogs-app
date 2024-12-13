@@ -10,7 +10,10 @@ const NotFound = () => {
                 <h2>Not Found</h2>
                 <p>
                     Sorry, the page you are looking for does not exist. Go{" "}
-                    <Link to="/">Home</Link>.
+                    <Link aria-label="Go to home page" to="/">
+                        Home
+                    </Link>
+                    .
                 </p>
             </div>
         </div>
