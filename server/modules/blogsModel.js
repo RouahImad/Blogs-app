@@ -50,16 +50,29 @@ const deleteBlog = async (id) => {
 };
 
 const getStats = async () => {
-    const [totalBlogsResult, todayBlogsResult] = await Promise.all([
+    const [
+        totalBlogsResult,
+        todayBlogsResult,
+        blogsWithLinks,
+        blogsWithoutLinks,
+    ] = await Promise.all([
         pool.query("SELECT COUNT(*) as totalBlogs FROM blogs"),
         pool.query(
             "SELECT COUNT(*) as todayBlogs FROM blogs WHERE post_date = CURDATE()"
+        ),
+        pool.query(
+            "select COUNT(*) as blogsWithLinks from blogs where links is not null and links != '[]'"
+        ),
+        pool.query(
+            "select COUNT(*) as blogsWithoutLinks from blogs where links is null or links = '[]'"
         ),
     ]);
 
     const stats = {
         totalBlogs: totalBlogsResult[0][0].totalBlogs,
         todayBlogs: todayBlogsResult[0][0].todayBlogs,
+        blogsWithLinks: blogsWithLinks[0][0].blogsWithLinks,
+        blogsWithoutLinks: blogsWithoutLinks[0][0].blogsWithoutLinks,
     };
 
     return stats;

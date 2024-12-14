@@ -93,7 +93,81 @@ body:has(.admin) {
 .dark .adminContent h2 {
     color: white;
 }
-
+/* stats */
+.adminStats {
+    width: 90vw;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.statsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+.dark .statsContainer {
+    background-color: #333;
+}
+.statsContainer h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+}
+.dark .statsContainer h2 {
+    color: white;
+}
+.statsContainer .statsRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.statsContainer .statsRow:nth-of-type(2) {
+    flex-direction: column;
+    align-items: baseline;
+}
+.statsContainer .graph {
+    display: flex;
+    width: 100%;
+    height: 30px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    /* next: animate width here */
+}
+.dark .statsContainer .graph {
+    border: 1px solid white;
+}
+.statsContainer .graph .withLinks {
+    background-color: #8fe2d3;
+    height: 100%;
+    border-right: 1px solid #333;
+}
+.statsContainer .graph .withoutLinks {
+    background-color: #ee5467;
+    height: 100%;
+}
+.statsContainer .statsRow:last-of-type > span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.statsContainer .statsRow:last-of-type > span::before {
+    content: "🎯";
+}
+.statsContainer .statsRow:last-of-type > span::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+.statsContainer .statsRow:last-of-type > span:first-of-type:after {
+    background-color: #8fe2d3;
+}
+.statsContainer .statsRow:last-of-type > span:last-of-type:after {
+    background-color: #ee5467;
+}
 /* create blog */
 
 .adminForm {
@@ -190,7 +264,8 @@ textarea {
 /*  blog manager  */
 
 .adminBlogs {
-    height: 100%;
+    display: flex;
+    flex-direction: column;
     width: 90vw;
     max-width: 600px;
 }
@@ -199,13 +274,19 @@ textarea {
     font-size: 2rem;
     color: #333;
     text-align: center;
-    margin-top: 20px;
+    margin-bottom: 30px;
 }
 .dark .adminBlogs h1 {
     color: white;
 }
-.adminBlogs .blogs {
-    height: calc(90vh - 70px);
+.adminBlogs .blogsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: calc(80vh - 70px);
+    overflow: hidden auto;
+    padding-right: 10px;
+    margin-right: -10px;
 }
 .adminBlogs .blogRow {
     display: flex;
@@ -214,6 +295,7 @@ textarea {
     background-color: white;
     padding: 10px;
     border-bottom: 1px solid #ccc;
+    min-height: fit-content;
 }
 .dark .adminBlogs .blogRow {
     background-color: #333;

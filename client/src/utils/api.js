@@ -34,3 +34,7 @@ export const login = (data) => {
 export const checkLogin = () => {
     return api.get("/login");
 };
+
+export const getStats = () => {
+    return api.get("/stats");
+};

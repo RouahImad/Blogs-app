@@ -8,7 +8,7 @@ const Message = ({ status, message }) => {
 
         const timer = setTimeout(() => {
             msg.classList.remove("show");
-        }, 1800);
+        }, 180000);
         return () => clearTimeout(timer);
     });
 

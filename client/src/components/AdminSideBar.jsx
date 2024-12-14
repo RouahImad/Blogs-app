@@ -4,20 +4,12 @@ import { ImStatsBars } from "react-icons/im";
 import { IoMenu } from "react-icons/io5";
 import { IoCloseOutline } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 const AdminSideBar = () => {
     const [menu, setMenu] = useState(false);
 
-    useEffect(() => {
-        if (menu) {
-            document.querySelector(".adminSideBar").classList.add("open");
-        } else {
-            document.querySelector(".adminSideBar").classList.remove("open");
-        }
-    }, [menu]);
-
     return (
-        <div className="adminSideBar">
+        <div className={`adminSideBar${menu ? " open" : ""}`}>
             <div className="contentMenu">
                 <NavLink to="/admin" onClick={() => setMenu(!menu)} end>
                     <ImStatsBars />

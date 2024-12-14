@@ -12,6 +12,7 @@ import { BlogsLoader } from "../pages/BlogsList";
 import BlogPage, { BlogLoader } from "../pages/BlogPage";
 import { LikedPageLoader } from "../pages/LikedPage";
 import Admin from "../pages/Admin";
+import { StatsLoader } from "../components/AdminStats";
 
 const BlogForm = lazy(() => import("../components/BlogForm"));
 const AdminBlogs = lazy(() => import("../components/AdminBlogs"));
@@ -82,6 +83,7 @@ const routes = (links, setLinks, handleCreate, theme, setTheme) => {
                                     <AdminStats />
                                 </Suspense>
                             ),
+                            loader: StatsLoader,
                         },
                         {
                             path: "create",

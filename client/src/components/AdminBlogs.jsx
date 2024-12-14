@@ -101,7 +101,7 @@ const AdminBlogs = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setMessage({});
-        }, 1800);
+        }, 180000);
         return () => clearTimeout(timer);
     }, [message]);
 
@@ -111,7 +111,7 @@ const AdminBlogs = () => {
             {loading ? (
                 <SkeletonList />
             ) : (
-                <div className="blogs">
+                <div className="blogsContainer">
                     {blogs?.length ? (
                         blogs.map((blog) => (
                             <BlogRow
