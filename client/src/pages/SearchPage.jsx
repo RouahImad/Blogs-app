@@ -20,7 +20,7 @@ const SearchPage = () => {
     };
 
     const [search, setSearch] = useState("");
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState(undefined);
 
     const { setIsLoading, setProgress, likedBlogsId, handleLike, handleShare } =
         useTools();
@@ -56,31 +56,39 @@ const SearchPage = () => {
                 </button>
             </div>
             <div className="searchResults blogs">
-                {results.length ? (
-                    results.map((result) => (
-                        <Blog
-                            key={result.id}
-                            title={result.title}
-                            content={result.content}
-                            posted={result.post_date}
-                            liked={likedBlogsId.includes(result.id)}
-                            handleLike={() => handleLike(result.id)}
-                            handleShare={() =>
-                                handleShare(
-                                    result.id,
-                                    result.title,
-                                    result.content
-                                )
-                            }
-                        />
-                    ))
+                {results ? (
+                    results.length ? (
+                        results.map((result) => (
+                            <Blog
+                                key={result.id}
+                                title={result.title}
+                                content={result.content}
+                                posted={result.post_date}
+                                liked={likedBlogsId.includes(result.id)}
+                                handleLike={() => handleLike(result.id)}
+                                handleShare={() =>
+                                    handleShare(
+                                        result.id,
+                                        result.title,
+                                        result.content
+                                    )
+                                }
+                            />
+                        ))
+                    ) : (
+                        <div className="emptyBlogs">
+                            <img
+                                src={soon}
+                                alt="work in progress"
+                                loading="lazy"
+                            />
+                            <span>
+                                No blog found. Please try another search term.
+                            </span>
+                        </div>
+                    )
                 ) : (
-                    <div className="emptyBlogs">
-                        <img src={soon} alt="work in progress" loading="lazy" />
-                        <span>
-                            No blog found. Please try another search term.
-                        </span>
-                    </div>
+                    <div>search something</div>
                 )}
             </div>
         </div>

@@ -6,7 +6,7 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { getAll } from "../utils/api";
 import { useTools } from "../utils/toolsStore";
 
-export const LikedPageLoader = async () => {
+export const FavPageLoader = async () => {
     try {
         const likedBlogsId =
             JSON.parse(localStorage.getItem("likedBlogs")) || [];
@@ -23,7 +23,7 @@ export const LikedPageLoader = async () => {
     }
 };
 
-const LikedPage = () => {
+const FavPage = () => {
     const {
         blogs,
         setBlogs,
@@ -106,4 +106,4 @@ const LikedPage = () => {
     );
 };
 
-export default LikedPage;
+export default FavPage;

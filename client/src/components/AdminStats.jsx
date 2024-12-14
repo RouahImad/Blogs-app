@@ -11,6 +11,7 @@ export const StatsLoader = async () => {
     } catch (error) {
         if (error.response.status !== 401) {
             console.error(error);
+            throw error;
         }
     }
 };
@@ -37,7 +38,7 @@ const AdminStats = () => {
                         <span
                             className="withLinks"
                             style={{
-                                width: `${
+                                "--bar-width": `${
                                     (blogsWithLinks / totalBlogs) * 100
                                 }%`,
                             }}
@@ -46,15 +47,15 @@ const AdminStats = () => {
                         <span
                             className="withoutLinks"
                             style={{
-                                width: `${
+                                "--bar-width": `${
                                     (blogsWithoutLinks / totalBlogs) * 100
                                 }%`,
                             }}
                             title="Blogs without links"
                         ></span>
                     </div>
-                    <span>Blogs with link: {blogsWithLinks}</span>
-                    <span>Blogs without link: {blogsWithoutLinks}</span>
+                    <span>Blogs with links: {blogsWithLinks}</span>
+                    <span>Blogs without links: {blogsWithoutLinks}</span>
                 </div>
             </div>
         </div>

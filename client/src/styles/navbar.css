@@ -52,6 +52,10 @@ a.active {
         gap: 10px;
         padding-left: 20px;
     }
+    .submenu {
+        top: 76px !important;
+        right: 7px !important;
+    }
 }
 .actions a,
 .actions button {
@@ -70,4 +74,40 @@ a.active {
 }
 .searchIcon a {
     font-size: 28px;
+}
+.menu {
+    font-size: 30px;
+    transition: 0.3s;
+}
+.nav:has(.submenu.open) .menu {
+    color: #ee5467;
+    transform: rotate(0.5turn);
+}
+.submenu {
+    position: absolute;
+    background-color: var(--nav-bg-light);
+    border: 1px solid #ccc;
+    border-radius: 0 0 5px 5px;
+    opacity: 0;
+    top: 77px;
+    right: 16px;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 200;
+}
+.dark .submenu {
+    background-color: var(--nav-bg-dark);
+    color: white;
+}
+.submenu.open {
+    height: 105px;
+    opacity: 1;
+}
+.submenu li {
+    display: flex;
+    justify-content: center;
+    padding-inline: 10px;
+    padding-block: 5px;
+    border-bottom: 1px solid #ccc;
 }

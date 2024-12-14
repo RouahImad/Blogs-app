@@ -10,7 +10,7 @@ import Root, { RootLoader } from "../pages/Root";
 import Home from "../pages/Home";
 import { BlogsLoader } from "../pages/BlogsList";
 import BlogPage, { BlogLoader } from "../pages/BlogPage";
-import { LikedPageLoader } from "../pages/LikedPage";
+import { FavPageLoader } from "../pages/FavPage";
 import Admin from "../pages/Admin";
 import { StatsLoader } from "../components/AdminStats";
 
@@ -19,7 +19,7 @@ const AdminBlogs = lazy(() => import("../components/AdminBlogs"));
 const AdminStats = lazy(() => import("../components/AdminStats"));
 const Login = lazy(() => import("../components/Login"));
 const BlogsList = lazy(() => import("../pages/BlogsList"));
-const LikedPage = lazy(() => import("../pages/LikedPage"));
+const FavPage = lazy(() => import("../pages/FavPage"));
 const SearchPage = lazy(() => import("../pages/SearchPage"));
 
 const routes = (links, setLinks, handleCreate, theme, setTheme) => {
@@ -56,13 +56,13 @@ const routes = (links, setLinks, handleCreate, theme, setTheme) => {
                     errorElement: <ErrorLog />,
                 },
                 {
-                    path: "likes",
+                    path: "favorites",
                     element: (
                         <Suspense fallback={<div className="spinner"></div>}>
-                            <LikedPage />
+                            <FavPage />
                         </Suspense>
                     ),
-                    loader: () => LikedPageLoader(),
+                    loader: FavPageLoader,
                     errorElement: <ErrorLog />,
                 },
                 {

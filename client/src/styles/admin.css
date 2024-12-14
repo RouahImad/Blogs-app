@@ -53,7 +53,6 @@ body:has(.admin) {
     gap: 15px;
     padding: 10px 15px;
     padding-left: 20px;
-    opacity: 1;
     color: #333;
     text-decoration: none;
     border-bottom: 1px solid #ccc;
@@ -106,10 +105,12 @@ body:has(.admin) {
     padding: 20px;
     border-radius: 5px;
     background-color: #fff;
+    color: #333;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 .dark .statsContainer {
     background-color: #333;
+    color: white;
 }
 .statsContainer h2 {
     font-size: 1.5rem;
@@ -134,19 +135,27 @@ body:has(.admin) {
     width: 100%;
     height: 30px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-    /* next: animate width here */
 }
 .dark .statsContainer .graph {
     border: 1px solid white;
 }
+.statsContainer .graph span {
+    height: 100%;
+    width: 0;
+    transition: 0.3s;
+    animation: grow 0.8s forwards;
+}
 .statsContainer .graph .withLinks {
     background-color: #8fe2d3;
-    height: 100%;
     border-right: 1px solid #333;
 }
 .statsContainer .graph .withoutLinks {
     background-color: #ee5467;
-    height: 100%;
+}
+@keyframes grow {
+    to {
+        width: var(--bar-width);
+    }
 }
 .statsContainer .statsRow:last-of-type > span {
     display: flex;
