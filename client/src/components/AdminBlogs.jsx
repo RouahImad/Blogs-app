@@ -101,7 +101,7 @@ const AdminBlogs = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setMessage({});
-        }, 180000);
+        }, 1800);
         return () => clearTimeout(timer);
     }, [message]);
 
