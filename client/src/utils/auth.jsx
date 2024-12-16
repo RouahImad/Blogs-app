@@ -18,7 +18,9 @@ export const AuthProvider = ({ children }) => {
                 return false;
             }
         } catch (err) {
-            console.error(err.response.data);
+            if (err.response.status != 401) {
+                console.error(err.response.data);
+            }
             setIsLoggedIn(false);
             return false;
         }
