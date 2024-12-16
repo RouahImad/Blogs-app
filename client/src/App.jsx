@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { RouterProvider } from "react-router-dom";
 
 import { AuthProvider } from "./utils/auth";
@@ -39,7 +39,17 @@ const App = () => {
     return (
         <ToolsProvider>
             <AuthProvider>
-                <RouterProvider router={router} />
+                <Suspense
+                    fallback={
+                        <div className="loaderContainer">
+                            <div className="loaderText">
+                                loading<span>...</span>
+                            </div>
+                        </div>
+                    }
+                >
+                    <RouterProvider router={router} />
+                </Suspense>
             </AuthProvider>
         </ToolsProvider>
     );

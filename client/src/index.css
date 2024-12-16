@@ -22,9 +22,62 @@
 ::-webkit-scrollbar-track {
     background-color: #f0f0f0;
 }
+@keyframes loader {
+    0% {
+        width: 0;
+    }
+    50% {
+        width: 100%;
+    }
+    100% {
+        width: 0;
+    }
+}
+.loaderContainer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color-light);
+    z-index: 1000;
+}
+.loaderText {
+    font-family: "Merriweather", serif;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #333;
+    width: fit-content;
+    margin-inline: auto;
+    position: relative;
+}
+.dark .loaderText {
+    color: white;
+}
+.loaderText span {
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: loader 2s infinite linear;
+}
+.loaderText::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    animation: loader 2.3s infinite linear;
+}
 body {
     margin: 0;
-    font-family: "arial";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Arial",
+        sans-serif;
     background-color: var(--bg-color-light);
     transition: 0.3s;
     overflow-x: hidden;
@@ -44,6 +97,72 @@ body {
     max-width: 700px;
     margin-inline: auto;
     margin-block: 20px;
+}
+.blog .readMore {
+    font-family: "Merriweather", serif;
+    display: flex;
+    align-items: center;
+    color: #ee5467;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.dark .blog .readMore {
+    color: #8fe2d3;
+}
+.blogPage .backBtn {
+    all: unset;
+    position: relative;
+    font-family: "Merriweather", serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 23px;
+    color: #333;
+    width: fit-content;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.dark .blogPage .backBtn {
+    color: white;
+}
+.blogPage .backBtn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0px;
+    background-color: #333;
+    transition: 0.3s;
+}
+.dark .blogPage .backBtn::before {
+    background-color: white;
+}
+.blogPage .backBtn:hover::before {
+    width: 100%;
+}
+.blogPage .backBtn:hover svg {
+    animation: swing 1s infinite;
+}
+@keyframes swing {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(7px);
+    }
+    60% {
+        transform: translateX(-5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+.blogPage .backBtn span {
+    transition: 0.3s;
+}
+.blogPage .backBtn:hover span {
+    color: #ee5467;
 }
 .blogPage > h2 {
     font-family: "Montserrat", sans-serif;

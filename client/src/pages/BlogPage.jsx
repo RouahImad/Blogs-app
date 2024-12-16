@@ -1,12 +1,30 @@
-import { useLoaderData } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Blog from "../components/Blog";
-import { getOne } from "../utils/api";
 import { useTools } from "../utils/toolsStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { IoArrowBack } from "react-icons/io5";
 
 const BlogPage = () => {
-    const { setIsLoading, setProgress, likedBlogsId, handleLike, handleShare } =
-        useTools();
+    const { id } = useParams();
+
+    const {
+        loadBlog,
+        setIsLoading,
+        setProgress,
+        likedBlogsId,
+        handleLike,
+        handleShare,
+    } = useTools();
+
+    const [blog, setBlog] = useState(null);
+
+    useEffect(() => {
+        const getBlog = async () => {
+            const data = await loadBlog(id);
+            setBlog(data);
+        };
+        getBlog();
+    }, [id, loadBlog]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -21,25 +39,44 @@ const BlogPage = () => {
         };
     }, [setProgress, setIsLoading]);
 
-    const data = useLoaderData();
-    const links = JSON.parse(data.links);
+    if (!blog)
+        return (
+            <div className="loaderContainer">
+                <div className="loaderText">
+                    loading<span>...</span>
+                </div>
+            </div>
+        );
+
+    const links = blog.links ? JSON.parse(blog.links) : [];
 
     return (
         <div className="blogPage">
+            <button
+                className="backBtn"
+                role="button"
+                aria-label="go back"
+                onClick={() => {
+                    window.history.back();
+                }}
+            >
+                <IoArrowBack />
+                <span>Back</span>{" "}
+            </button>
             <div className="links">
-                {links?.map(({ name, url }, i) => (
+                {links?.map(({ title, url }, i) => (
                     <a key={i} href={url} className="link" target="_blank">
-                        {name}
+                        {title}
                     </a>
                 ))}
             </div>
             <Blog
-                id={data.id}
-                title={data.title}
-                content={data.content}
-                posted={data.post_date}
-                liked={likedBlogsId.includes(data.id)}
-                handleLike={() => handleLike(data.id)}
+                id={blog.id}
+                title={blog.title}
+                content={blog.content}
+                posted={blog.post_date}
+                liked={likedBlogsId.includes(blog.id)}
+                handleLike={() => handleLike(blog.id)}
                 handleShare={handleShare}
             />
         </div>
@@ -47,15 +84,3 @@ const BlogPage = () => {
 };
 
 export default BlogPage;
-
-export const BlogLoader = async ({ params }) => {
-    const { id } = params;
-    try {
-        const res = await getOne(id);
-
-        return res.data;
-    } catch (error) {
-        console.error(error.response);
-        throw error;
-    }
-};

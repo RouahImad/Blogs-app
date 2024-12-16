@@ -24,7 +24,15 @@ const Root = ({ theme, setTheme }) => {
                 waitingTime={400}
             />
             <NavBar theme={theme} setTheme={setTheme} />
-            <Suspense fallback={null}>
+            <Suspense
+                fallback={
+                    <div className="loaderContainer">
+                        <div className="loaderText">
+                            loading<span>...</span>
+                        </div>
+                    </div>
+                }
+            >
                 <Outlet />
             </Suspense>
         </div>

@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { getAll, getOne } from "./api";
 
 const ToolsStore = createContext();
 
@@ -8,6 +9,44 @@ export const ToolsProvider = ({ children }) => {
     const [progress, setProgress] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [blogs, setBlogs] = useState([]);
+
+    const [blogsLoaded, setBlogsLoaded] = useState(false);
+
+    const loadBlogs = async () => {
+        if (blogsLoaded) return blogs;
+
+        setIsLoading(true);
+        try {
+            const response = await getAll();
+            if (response.status === 200) {
+                setBlogs(response.data);
+                setBlogsLoaded(true);
+                return response.data;
+            }
+            return [];
+        } catch (error) {
+            console.error(error.response);
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const loadBlog = async (id) => {
+        const blog = blogs.find((blog) => blog.id === id);
+        if (blogsLoaded && blog?.id) return blog;
+
+        setIsLoading(true);
+        try {
+            const res = await getOne(id);
+            return res.data;
+        } catch (error) {
+            console.error(error.response);
+            throw error;
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const handleNavClick = () => {
         if (isLoading) return;
@@ -65,6 +104,8 @@ export const ToolsProvider = ({ children }) => {
     return (
         <ToolsStore.Provider
             value={{
+                loadBlog,
+                loadBlogs,
                 handleNavClick,
                 progress,
                 blogs,

@@ -1,31 +1,17 @@
 import { useEffect, useMemo, useState, lazy } from "react";
 
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Blog = lazy(() => import("../components/Blog"));
 import SkeletonList from "../components/SkeletonList";
 import CategoriesNav from "../components/CategoriesNav";
 
 import soon from "../assets/work-in-progress.png";
-import { getAll } from "../utils/api";
 import { useTools } from "../utils/toolsStore";
-
-export const BlogsLoader = async () => {
-    try {
-        const response = await getAll();
-        if (response.status === 200) {
-            return response.data;
-        }
-        return [];
-    } catch (error) {
-        console.error(error.response);
-        throw error;
-    }
-};
 
 const BlogsList = () => {
     const {
+        loadBlogs,
         blogs,
-        setBlogs,
         isLoading,
         setIsLoading,
         handleNavClick,
@@ -35,15 +21,11 @@ const BlogsList = () => {
         handleShare,
     } = useTools();
 
-    const [loading, setLoading] = useState(true);
-
-    const data = useLoaderData();
-
-    useEffect(() => {}, []);
-
     useEffect(() => {
-        setBlogs(data?.length ? data : []);
-    }, [data, setBlogs]);
+        loadBlogs();
+    }, [loadBlogs]);
+
+    const [loading, setLoading] = useState(true);
 
     const [filterType, setFilterType] = useState("all");
 

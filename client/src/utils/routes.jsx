@@ -8,12 +8,11 @@ import RequireAuth from "../components/RequireAuth";
 import { AdminBLogsLoader } from "../components/AdminBlogs";
 import Root, { RootLoader } from "../pages/Root";
 import Home from "../pages/Home";
-import { BlogsLoader } from "../pages/BlogsList";
-import BlogPage, { BlogLoader } from "../pages/BlogPage";
 import { FavPageLoader } from "../pages/FavPage";
 import Admin from "../pages/Admin";
 import { StatsLoader } from "../components/AdminStats";
 
+const BlogPage = lazy(() => import("../pages/BlogPage"));
 const BlogForm = lazy(() => import("../components/BlogForm"));
 const AdminBlogs = lazy(() => import("../components/AdminBlogs"));
 const AdminStats = lazy(() => import("../components/AdminStats"));
@@ -33,23 +32,49 @@ const routes = (links, setLinks, handleCreate, theme, setTheme) => {
                 {
                     path: "blog",
                     element: (
-                        <Suspense fallback={<div className="spinner"></div>}>
+                        <Suspense
+                            fallback={
+                                <div className="loaderContainer">
+                                    <div className="loaderText">
+                                        loading<span>...</span>
+                                    </div>
+                                </div>
+                            }
+                        >
                             <BlogsList />
                         </Suspense>
                     ),
-                    loader: BlogsLoader,
                     errorElement: <ErrorLog />,
                 },
                 {
                     path: "blog/:id",
-                    element: <BlogPage />,
-                    loader: BlogLoader,
+                    element: (
+                        <Suspense
+                            fallback={
+                                <div className="loaderContainer">
+                                    <div className="loaderText">
+                                        loading<span>...</span>
+                                    </div>
+                                </div>
+                            }
+                        >
+                            <BlogPage />
+                        </Suspense>
+                    ),
                     errorElement: <ErrorLog />,
                 },
                 {
                     path: "search",
                     element: (
-                        <Suspense fallback={<div className="spinner"></div>}>
+                        <Suspense
+                            fallback={
+                                <div className="loaderContainer">
+                                    <div className="loaderText">
+                                        loading<span>...</span>
+                                    </div>
+                                </div>
+                            }
+                        >
                             <SearchPage />
                         </Suspense>
                     ),
@@ -58,7 +83,15 @@ const routes = (links, setLinks, handleCreate, theme, setTheme) => {
                 {
                     path: "favorites",
                     element: (
-                        <Suspense fallback={<div className="spinner"></div>}>
+                        <Suspense
+                            fallback={
+                                <div className="loaderContainer">
+                                    <div className="loaderText">
+                                        loading<span>...</span>
+                                    </div>
+                                </div>
+                            }
+                        >
                             <FavPage />
                         </Suspense>
                     ),
