@@ -43,7 +43,3 @@ RequireAuth.propTypes = {
 };
 
 export default RequireAuth;
-
-// The RequireAuth component is a higher-order component that checks if the user is logged in.
-//  If the user is not logged in, the component redirects the user to the login page.
-//  If the user is logged in, the component renders the child component that is passed to it as a prop.
