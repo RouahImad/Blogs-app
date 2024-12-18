@@ -10,6 +10,8 @@ import { useTools } from "../utils/toolsStore";
 
 const BlogsList = () => {
     const {
+        loadingBlogs,
+        // setLoadingBlogs,
         loadBlogs,
         blogs,
         isLoading,
@@ -21,13 +23,11 @@ const BlogsList = () => {
         handleShare,
     } = useTools();
 
+    const [filterType, setFilterType] = useState("all");
+
     useEffect(() => {
         loadBlogs();
     }, [loadBlogs]);
-
-    const [loading, setLoading] = useState(true);
-
-    const [filterType, setFilterType] = useState("all");
 
     const filteredBlogs = useMemo(() => {
         if (filterType === "all") {
@@ -44,17 +44,6 @@ const BlogsList = () => {
             return blogs.filter((blog) => JSON.parse(blog.links).length === 0);
         }
     }, [blogs, filterType]);
-
-    useEffect(() => {
-        setLoading(true);
-        let timer = setTimeout(() => {
-            setLoading(false);
-        }, 500);
-
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [filterType]);
 
     const categorieClick = (event) => {
         document
@@ -79,13 +68,24 @@ const BlogsList = () => {
 
     const navigate = useNavigate();
 
+    // useEffect(() => {
+    //     setLoadingBlogs(true);
+    //     let timer = setTimeout(() => {
+    //         setLoadingBlogs(false);
+    //     }, 500);
+
+    //     return () => {
+    //         clearTimeout(timer);
+    //     };
+    // }, [filterType, setLoadingBlogs]);
+
     return (
         <>
             <CategoriesNav
                 categorieClick={categorieClick}
                 setFilterType={setFilterType}
             />
-            {loading ? (
+            {loadingBlogs ? (
                 <SkeletonList />
             ) : (
                 <div className="blogs">

@@ -8,6 +8,7 @@ export const ToolsProvider = ({ children }) => {
     const [likedBlogsId, setLikedBlogsId] = useState([]);
     const [progress, setProgress] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const [loadingBlogs, setLoadingBlogs] = useState(false);
     const [blogs, setBlogs] = useState([]);
 
     const [blogsLoaded, setBlogsLoaded] = useState(false);
@@ -15,7 +16,7 @@ export const ToolsProvider = ({ children }) => {
     const loadBlogs = async () => {
         if (blogsLoaded) return blogs;
 
-        setIsLoading(true);
+        setLoadingBlogs(true);
         try {
             const response = await getAll();
             if (response.status === 200) {
@@ -28,7 +29,7 @@ export const ToolsProvider = ({ children }) => {
             console.error(error.response);
             throw error;
         } finally {
-            setIsLoading(false);
+            setLoadingBlogs(false);
         }
     };
 
@@ -36,15 +37,12 @@ export const ToolsProvider = ({ children }) => {
         const blog = blogs.find((blog) => blog.id === id);
         if (blogsLoaded && blog?.id) return blog;
 
-        setIsLoading(true);
         try {
             const res = await getOne(id);
             return res.data;
         } catch (error) {
             console.error(error.response);
             throw error;
-        } finally {
-            setIsLoading(false);
         }
     };
 
@@ -104,6 +102,8 @@ export const ToolsProvider = ({ children }) => {
     return (
         <ToolsStore.Provider
             value={{
+                loadingBlogs,
+                setLoadingBlogs,
                 loadBlog,
                 loadBlogs,
                 handleNavClick,
