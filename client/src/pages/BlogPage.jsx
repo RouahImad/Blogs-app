@@ -26,7 +26,6 @@ const BlogPage = () => {
             setIsLoadingBlog(true);
             try {
                 const data = await loadBlog(parseInt(id));
-                console.log(data);
 
                 if (!data) {
                     setNotFound(true);
