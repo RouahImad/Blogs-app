@@ -102,14 +102,12 @@ const NavBar = ({ theme, setTheme }) => {
                     </button>
                     <ul
                         className={`submenu ${submenu ? "open" : ""}`}
-                        role="menu"
-                        aria-label="submenu"
+                        aria-label="submenu navigation"
                     >
                         <li onClick={() => handleNavClick("/favorites")}>
                             <NavLink
                                 to="/favorites"
                                 aria-label="Liked blogs page"
-                                role="menuitem"
                             >
                                 <FaHeart />
                             </NavLink>
@@ -121,7 +119,6 @@ const NavBar = ({ theme, setTheme }) => {
                                 onClick={toggleTheme}
                                 name="theme"
                                 aria-label="Toggle theme"
-                                role="menuitem"
                             >
                                 {theme == "dark" ? (
                                     <LuSunMoon />
