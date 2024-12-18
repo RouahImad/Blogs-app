@@ -56,25 +56,34 @@ const NavBar = ({ theme, setTheme }) => {
     }, [submenu]);
 
     return (
-        <div className="nav">
+        <div className="nav" aria-label="Main navigation">
             <h2>iMadLog</h2>
             <ul className="actions">
-                <li onClick={() => handleNavClick("/")}>
-                    <NavLink to="/" aria-label="Home page">
+                <li>
+                    <NavLink
+                        to="/"
+                        aria-label="Home page"
+                        onClick={() => handleNavClick("/")}
+                    >
                         <IoHome />
                     </NavLink>
                 </li>
-                <li onClick={() => handleNavClick("/blog")}>
-                    <NavLink to="/blog" aria-label="blogs page">
+                <li>
+                    <NavLink
+                        to="/blogs"
+                        aria-label="blogs page"
+                        onClick={() => handleNavClick("/blogs")}
+                    >
                         <GoLog />
                     </NavLink>
                 </li>
 
-                <li
-                    className="searchIcon"
-                    onClick={() => handleNavClick("/search")}
-                >
-                    <NavLink to="/search" aria-label="Search blogs">
+                <li className="searchIcon">
+                    <NavLink
+                        to="/search"
+                        aria-label="Search blogs"
+                        onClick={() => handleNavClick("/search")}
+                    >
                         <IoSearchSharp />
                     </NavLink>
                 </li>
@@ -91,25 +100,38 @@ const NavBar = ({ theme, setTheme }) => {
                     >
                         {submenu ? <IoClose /> : <IoMenu />}
                     </button>
+                    <ul
+                        className={`submenu ${submenu ? "open" : ""}`}
+                        role="menu"
+                        aria-label="submenu"
+                    >
+                        <li onClick={() => handleNavClick("/favorites")}>
+                            <NavLink
+                                to="/favorites"
+                                aria-label="Liked blogs page"
+                                role="menuitem"
+                            >
+                                <FaHeart />
+                            </NavLink>
+                        </li>
+                        <li>
+                            <button
+                                className="theme"
+                                type="button"
+                                onClick={toggleTheme}
+                                name="theme"
+                                aria-label="Toggle theme"
+                                role="menuitem"
+                            >
+                                {theme == "dark" ? (
+                                    <LuSunMoon />
+                                ) : (
+                                    <FaRegMoon />
+                                )}
+                            </button>
+                        </li>
+                    </ul>
                 </li>
-                <div className={`submenu ${submenu ? "open" : ""}`} role="menu">
-                    <li onClick={() => handleNavClick("/favorites")}>
-                        <NavLink to="/favorites" aria-label="Liked blogs page">
-                            <FaHeart />
-                        </NavLink>
-                    </li>
-                    <li>
-                        <button
-                            className="theme"
-                            type="button"
-                            onClick={toggleTheme}
-                            name="theme"
-                            aria-label="Toggle theme"
-                        >
-                            {theme == "dark" ? <LuSunMoon /> : <FaRegMoon />}
-                        </button>
-                    </li>
-                </div>
             </ul>
         </div>
     );

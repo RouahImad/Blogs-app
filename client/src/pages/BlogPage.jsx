@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import Blog from "../components/Blog";
 import { useTools } from "../utils/toolsStore";
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { IoArrowBack } from "react-icons/io5";
+const NotFound = lazy(() => import("../components/NotFound"));
 
 const BlogPage = () => {
     const { id } = useParams();
@@ -17,14 +18,32 @@ const BlogPage = () => {
     } = useTools();
 
     const [blog, setBlog] = useState(null);
+    const [notFound, setNotFound] = useState(false);
+    const [isLoadingBlog, setIsLoadingBlog] = useState(true);
 
     useEffect(() => {
         const getBlog = async () => {
-            const data = await loadBlog(id);
-            setBlog(data);
+            setIsLoadingBlog(true);
+            try {
+                const data = await loadBlog(parseInt(id));
+                console.log(data);
+
+                if (!data) {
+                    setNotFound(true);
+                } else {
+                    setBlog(data);
+                }
+            } catch (err) {
+                if (err.response.status === 500)
+                    console.error("Sorry there is an error in server");
+
+                setNotFound(true);
+            } finally {
+                setIsLoadingBlog(false);
+            }
         };
         getBlog();
-    }, [id, loadBlog]);
+    }, [id, setIsLoadingBlog, loadBlog]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -39,7 +58,7 @@ const BlogPage = () => {
         };
     }, [setProgress, setIsLoading]);
 
-    if (!blog)
+    if (isLoadingBlog) {
         return (
             <div className="loaderContainer">
                 <div className="loaderText">
@@ -47,6 +66,11 @@ const BlogPage = () => {
                 </div>
             </div>
         );
+    }
+
+    if (notFound) {
+        return <NotFound />;
+    }
 
     const links = blog.links ? JSON.parse(blog.links) : [];
 

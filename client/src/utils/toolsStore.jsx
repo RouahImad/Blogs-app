@@ -41,7 +41,7 @@ export const ToolsProvider = ({ children }) => {
             const res = await getOne(id);
             return res.data;
         } catch (error) {
-            console.error(error.response);
+            console.error(error.response.data);
             throw error;
         }
     };
@@ -66,7 +66,7 @@ export const ToolsProvider = ({ children }) => {
             const shareData = {
                 title: title,
                 text: content,
-                url: window.location.origin + "/blog/" + id,
+                url: window.location.origin + "/blogs/" + id,
             };
 
             navigator.share(shareData);

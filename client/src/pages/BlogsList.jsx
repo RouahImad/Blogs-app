@@ -107,7 +107,7 @@ const BlogsList = () => {
                                 }
                                 handleClick={() => {
                                     if (isLoading) return;
-                                    navigate(`/blog/${blog.id}`);
+                                    navigate(`/blogs/${blog.id}`);
                                     handleNavClick();
                                 }}
                                 links={blog.links ? JSON.parse(blog.links) : []}

@@ -5,7 +5,7 @@ const BlogRow = ({ id, title, setClickedEdit, setEditData, handleDelete }) => {
     const navigate = useNavigate();
     return (
         <div className="blogRow">
-            <div onClick={() => navigate("/blog/" + id)}>
+            <div onClick={() => navigate("/blogs/" + id)}>
                 <span>#{id}</span>
                 <h2>{title}</h2>
             </div>

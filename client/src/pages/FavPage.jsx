@@ -86,7 +86,7 @@ const FavPage = () => {
                                     }
                                     handleClick={() => {
                                         if (isLoading) return;
-                                        navigate(`/blog/${blog.id}`);
+                                        navigate(`/blogs/${blog.id}`);
                                         handleNavClick();
                                     }}
                                 />

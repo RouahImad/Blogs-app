@@ -33,7 +33,7 @@ const Home = () => {
                     blogs. You can also share the blogs with your friends.{" "}
                     <span
                         className="start-btn"
-                        onClick={() => navigate("/blog")}
+                        onClick={() => navigate("/blogs")}
                     >
                         Get started
                     </span>

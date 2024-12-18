@@ -30,7 +30,7 @@ const routes = (links, setLinks, handleCreate, theme, setTheme) => {
             children: [
                 { index: true, element: <Home /> },
                 {
-                    path: "blog",
+                    path: "blogs",
                     element: (
                         <Suspense
                             fallback={
@@ -47,7 +47,7 @@ const routes = (links, setLinks, handleCreate, theme, setTheme) => {
                     errorElement: <ErrorLog />,
                 },
                 {
-                    path: "blog/:id",
+                    path: "blogs/:id",
                     element: (
                         <Suspense
                             fallback={
