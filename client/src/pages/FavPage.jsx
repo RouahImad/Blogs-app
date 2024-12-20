@@ -2,31 +2,13 @@ import Blog from "../components/Blog";
 import SkeletonList from "../components/SkeletonList";
 import love from "../assets/love-letter.png";
 import { useEffect, useState } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
-import { getAll } from "../utils/api";
+import { useNavigate } from "react-router-dom";
 import { useTools } from "../utils/toolsStore";
-
-export const FavPageLoader = async () => {
-    try {
-        const likedBlogsId =
-            JSON.parse(localStorage.getItem("likedBlogs")) || [];
-        const response = await getAll();
-        if (response.status === 200) {
-            return response.data.filter((blog) =>
-                likedBlogsId.includes(blog.id)
-            );
-        }
-        return [];
-    } catch (error) {
-        console.error(error.response);
-        throw error;
-    }
-};
 
 const FavPage = () => {
     const {
-        blogs,
-        setBlogs,
+        loadingBlogsm,
+        loadBlogs,
         isLoading,
         setIsLoading,
         handleNavClick,
@@ -35,6 +17,7 @@ const FavPage = () => {
         handleLike,
         handleShare,
     } = useTools();
+
     useEffect(() => {
         const timer = setTimeout(() => {
             setProgress(100);
@@ -48,15 +31,13 @@ const FavPage = () => {
         };
     }, [setProgress, setIsLoading]);
 
-    const [loading, setLoading] = useState(true);
-
-    const data = useLoaderData();
+    const [blogs, setBlogs] = useState([]);
 
     useEffect(() => {
-        setBlogs(data?.length ? data : []);
-        setBlogs(data);
-        setLoading(false);
-    }, [data, setBlogs]);
+        loadBlogs().then((blogs) => {
+            setBlogs(blogs.filter((blog) => likedBlogsId.includes(blog.id)));
+        });
+    }, [likedBlogsId, loadBlogs]);
 
     const navigate = useNavigate();
 
@@ -64,7 +45,7 @@ const FavPage = () => {
         <div className="likePage">
             <h2>Saved Blogs 💖</h2>
             <div className="row">
-                {loading ? (
+                {loadingBlogsm ? (
                     <SkeletonList />
                 ) : (
                     <div className="blogs">

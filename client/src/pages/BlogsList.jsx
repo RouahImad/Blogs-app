@@ -11,7 +11,6 @@ import { useTools } from "../utils/toolsStore";
 const BlogsList = () => {
     const {
         loadingBlogs,
-        // setLoadingBlogs,
         loadBlogs,
         blogs,
         isLoading,
@@ -67,17 +66,6 @@ const BlogsList = () => {
     }, [setProgress, setIsLoading]);
 
     const navigate = useNavigate();
-
-    // useEffect(() => {
-    //     setLoadingBlogs(true);
-    //     let timer = setTimeout(() => {
-    //         setLoadingBlogs(false);
-    //     }, 500);
-
-    //     return () => {
-    //         clearTimeout(timer);
-    //     };
-    // }, [filterType, setLoadingBlogs]);
 
     return (
         <>

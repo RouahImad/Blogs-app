@@ -8,7 +8,6 @@ import RequireAuth from "../components/RequireAuth";
 import { AdminBLogsLoader } from "../components/AdminBlogs";
 import Root, { RootLoader } from "../pages/Root";
 import Home from "../pages/Home";
-import { FavPageLoader } from "../pages/FavPage";
 import Admin from "../pages/Admin";
 import { StatsLoader } from "../components/AdminStats";
 
@@ -95,7 +94,6 @@ const routes = (links, setLinks, handleCreate, theme, setTheme) => {
                             <FavPage />
                         </Suspense>
                     ),
-                    loader: FavPageLoader,
                     errorElement: <ErrorLog />,
                 },
                 {

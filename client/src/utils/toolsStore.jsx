@@ -14,9 +14,12 @@ export const ToolsProvider = ({ children }) => {
     const [blogsLoaded, setBlogsLoaded] = useState(false);
 
     const loadBlogs = async () => {
-        if (blogsLoaded) return blogs;
-
         setLoadingBlogs(true);
+        if (blogsLoaded) {
+            setLoadingBlogs(false);
+            return blogs;
+        }
+
         try {
             const response = await getAll();
             if (response.status === 200) {
