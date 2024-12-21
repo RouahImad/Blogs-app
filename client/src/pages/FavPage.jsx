@@ -7,7 +7,7 @@ import { useTools } from "../utils/toolsStore";
 
 const FavPage = () => {
     const {
-        loadingBlogsm,
+        loadingBlogs,
         loadBlogs,
         isLoading,
         setIsLoading,
@@ -41,47 +41,62 @@ const FavPage = () => {
 
     const navigate = useNavigate();
 
+    if (loadingBlogs) {
+        return (
+            <div className="likePage">
+                <h2>Saved Blogs 💖</h2>
+                <div className="row">
+                    <SkeletonList count={3} />
+                </div>
+            </div>
+        );
+    }
+    if (!loadingBlogs && blogs.length === 0) {
+        return (
+            <div className="likePage empty">
+                <h2>No Saved Blogs Yet 💔</h2>
+                <div className="emptyLiked">
+                    <img src={love} alt="love" loading="lazy" />
+                    <span>
+                        Start liking blogs to see them here!{" "}
+                        <span
+                            className="browseLink"
+                            role="button"
+                            aria-label="Browse Blogs"
+                            onClick={() => navigate("/blogs")}
+                        >
+                            Browse Blogs
+                        </span>
+                    </span>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="likePage">
             <h2>Saved Blogs 💖</h2>
             <div className="row">
-                {loadingBlogsm ? (
-                    <SkeletonList />
-                ) : (
-                    <div className="blogs">
-                        {blogs?.length ? (
-                            blogs.map((blog) => (
-                                <Blog
-                                    key={blog.id}
-                                    title={blog.title}
-                                    content={blog.content}
-                                    posted={blog.post_date}
-                                    liked={likedBlogsId.includes(blog.id)}
-                                    handleLike={() => handleLike(blog.id)}
-                                    handleShare={() =>
-                                        handleShare(
-                                            blog.id,
-                                            blog.title,
-                                            blog.content
-                                        )
-                                    }
-                                    handleClick={() => {
-                                        if (isLoading) return;
-                                        navigate(`/blogs/${blog.id}`);
-                                        handleNavClick();
-                                    }}
-                                />
-                            ))
-                        ) : (
-                            <div className="emptyLiked">
-                                <img src={love} alt="love" loading="lazy" />
-                                <span>
-                                    Please like some blogs to see them here.
-                                </span>
-                            </div>
-                        )}
-                    </div>
-                )}
+                <div className="blogs">
+                    {blogs.map((blog) => (
+                        <Blog
+                            key={blog.id}
+                            title={blog.title}
+                            content={blog.content}
+                            posted={blog.post_date}
+                            liked={likedBlogsId.includes(blog.id)}
+                            handleLike={() => handleLike(blog.id)}
+                            handleShare={() =>
+                                handleShare(blog.id, blog.title, blog.content)
+                            }
+                            handleClick={() => {
+                                if (isLoading) return;
+                                navigate(`/blogs/${blog.id}`);
+                                handleNavClick();
+                            }}
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     );

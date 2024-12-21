@@ -351,10 +351,17 @@ body {
     margin-block: 20px;
     max-width: 700px;
 }
+.empty {
+    height: calc(89vh - 78px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .likePage h2 {
     font-family: "Montserrat", sans-serif;
     font-size: 2rem;
     color: #333;
+    text-wrap: pretty;
     text-align: center;
 }
 .dark .likePage h2 {
@@ -368,6 +375,20 @@ body {
 }
 .likePage .row .blogs {
     flex: 1;
+}
+.empty .emptyLiked {
+    flex: 1;
+    gap: 20px;
+}
+.empty .emptyLiked span {
+    width: 300px;
+}
+.likePage .browseLink {
+    font-family: "Merriweather", serif;
+    color: #ee5467;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.3s;
 }
 .emptyLiked,
 .emptyBlogs {
