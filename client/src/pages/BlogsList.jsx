@@ -74,7 +74,7 @@ const BlogsList = () => {
                 setFilterType={setFilterType}
             />
             {loadingBlogs ? (
-                <SkeletonList />
+                <SkeletonList count={3} />
             ) : (
                 <div className="blogs">
                     {filteredBlogs?.length ? (

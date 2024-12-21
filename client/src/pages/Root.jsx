@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { useEffect, Suspense } from "react";
 import { useTools } from "../utils/toolsStore";
 import LoadingBar from "react-top-loading-bar";
+import LoadingFallback from "../components/LoadingFallback";
 
 const Root = ({ theme, setTheme }) => {
     const data = useLoaderData();
@@ -23,15 +24,7 @@ const Root = ({ theme, setTheme }) => {
                 waitingTime={400}
             />
             <NavBar theme={theme} setTheme={setTheme} />
-            <Suspense
-                fallback={
-                    <div className="loaderContainer">
-                        <div className="loaderText">
-                            loading<span>...</span>
-                        </div>
-                    </div>
-                }
-            >
+            <Suspense fallback={<LoadingFallback />}>
                 <Outlet />
             </Suspense>
         </div>

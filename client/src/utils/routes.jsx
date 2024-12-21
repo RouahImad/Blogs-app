@@ -10,6 +10,7 @@ import Root, { RootLoader } from "../pages/Root";
 import Home from "../pages/Home";
 import Admin from "../pages/Admin";
 import { StatsLoader } from "../components/AdminStats";
+import LoadingFallback from "../components/LoadingFallback";
 
 const BlogPage = lazy(() => import("../pages/BlogPage"));
 const BlogForm = lazy(() => import("../components/BlogForm"));
@@ -31,15 +32,7 @@ const routes = (links, setLinks, handleCreate, theme, setTheme) => {
                 {
                     path: "blogs",
                     element: (
-                        <Suspense
-                            fallback={
-                                <div className="loaderContainer">
-                                    <div className="loaderText">
-                                        loading<span>...</span>
-                                    </div>
-                                </div>
-                            }
-                        >
+                        <Suspense fallback={<LoadingFallback />}>
                             <BlogsList />
                         </Suspense>
                     ),
@@ -48,15 +41,7 @@ const routes = (links, setLinks, handleCreate, theme, setTheme) => {
                 {
                     path: "blogs/:id",
                     element: (
-                        <Suspense
-                            fallback={
-                                <div className="loaderContainer">
-                                    <div className="loaderText">
-                                        loading<span>...</span>
-                                    </div>
-                                </div>
-                            }
-                        >
+                        <Suspense fallback={<LoadingFallback />}>
                             <BlogPage />
                         </Suspense>
                     ),
@@ -65,15 +50,7 @@ const routes = (links, setLinks, handleCreate, theme, setTheme) => {
                 {
                     path: "search",
                     element: (
-                        <Suspense
-                            fallback={
-                                <div className="loaderContainer">
-                                    <div className="loaderText">
-                                        loading<span>...</span>
-                                    </div>
-                                </div>
-                            }
-                        >
+                        <Suspense fallback={<LoadingFallback />}>
                             <SearchPage />
                         </Suspense>
                     ),
@@ -82,15 +59,7 @@ const routes = (links, setLinks, handleCreate, theme, setTheme) => {
                 {
                     path: "favorites",
                     element: (
-                        <Suspense
-                            fallback={
-                                <div className="loaderContainer">
-                                    <div className="loaderText">
-                                        loading<span>...</span>
-                                    </div>
-                                </div>
-                            }
-                        >
+                        <Suspense fallback={<LoadingFallback />}>
                             <FavPage />
                         </Suspense>
                     ),

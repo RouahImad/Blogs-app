@@ -5,6 +5,7 @@ import { AuthProvider } from "./utils/auth";
 import routes from "./utils/routes";
 import { create } from "./utils/api";
 import { ToolsProvider } from "./utils/toolsStore";
+import LoadingFallback from "./components/LoadingFallback";
 
 const App = () => {
     const [theme, setTheme] = useState("light");
@@ -37,21 +38,16 @@ const App = () => {
     const router = routes(links, setLinks, handleCreate, theme, setTheme);
 
     return (
-        <ToolsProvider>
-            <AuthProvider>
-                <Suspense
-                    fallback={
-                        <div className="loaderContainer">
-                            <div className="loaderText">
-                                loading<span>...</span>
-                            </div>
-                        </div>
-                    }
-                >
-                    <RouterProvider router={router} />
-                </Suspense>
-            </AuthProvider>
-        </ToolsProvider>
+        <Suspense fallback={<LoadingFallback />}>
+            <ToolsProvider>
+                <AuthProvider>
+                    <RouterProvider
+                        router={router}
+                        fallbackElement={<LoadingFallback />}
+                    />
+                </AuthProvider>
+            </ToolsProvider>
+        </Suspense>
     );
 };
 

@@ -109,7 +109,7 @@ const AdminBlogs = () => {
         <div className="adminBlogs">
             <h2>Admin Blogs</h2>
             {loading ? (
-                <SkeletonList />
+                <SkeletonList count={3} />
             ) : (
                 <div className="blogsContainer">
                     {blogs?.length ? (

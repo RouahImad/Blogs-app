@@ -3,6 +3,7 @@ import Blog from "../components/Blog";
 import { useTools } from "../utils/toolsStore";
 import { lazy, useEffect, useState } from "react";
 import { IoArrowBack } from "react-icons/io5";
+import LoadingFallback from "../components/LoadingFallback";
 const NotFound = lazy(() => import("../components/NotFound"));
 
 const BlogPage = () => {
@@ -58,13 +59,7 @@ const BlogPage = () => {
     }, [setProgress, setIsLoading]);
 
     if (isLoadingBlog) {
-        return (
-            <div className="loaderContainer">
-                <div className="loaderText">
-                    loading<span>...</span>
-                </div>
-            </div>
-        );
+        return <LoadingFallback />;
     }
 
     if (notFound) {
