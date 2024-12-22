@@ -5,6 +5,7 @@ import soon from "../assets/work-in-progress.png";
 import "../styles/search.css";
 import Blog from "../components/Blog";
 import { useTools } from "../utils/toolsStore";
+import { useNavigate } from "react-router-dom";
 
 const SearchPage = () => {
     const handleSearch = () => {
@@ -22,8 +23,15 @@ const SearchPage = () => {
     const [search, setSearch] = useState("");
     const [results, setResults] = useState(undefined);
 
-    const { setIsLoading, setProgress, likedBlogsId, handleLike, handleShare } =
-        useTools();
+    const {
+        isLoading,
+        setIsLoading,
+        handleNavClick,
+        setProgress,
+        likedBlogsId,
+        handleLike,
+        handleShare,
+    } = useTools();
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -37,6 +45,8 @@ const SearchPage = () => {
             setIsLoading(false);
         };
     }, [setProgress, setIsLoading]);
+
+    const navigate = useNavigate();
 
     return (
         <div className="search ">
@@ -72,6 +82,14 @@ const SearchPage = () => {
                                         result.title,
                                         result.content
                                     )
+                                }
+                                handleClick={() => {
+                                    if (isLoading) return;
+                                    navigate(`/blogs/${result.id}`);
+                                    handleNavClick();
+                                }}
+                                links={
+                                    result.links ? JSON.parse(result.links) : []
                                 }
                             />
                         ))

@@ -94,6 +94,7 @@ const FavPage = () => {
                                 navigate(`/blogs/${blog.id}`);
                                 handleNavClick();
                             }}
+                            links={blog.links ? JSON.parse(blog.links) : []}
                         />
                     ))}
                 </div>

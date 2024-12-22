@@ -44,6 +44,9 @@
     background-color: var(--bg-color-light);
     z-index: 1000;
 }
+.dark .loaderContainer {
+    background-color: var(--bg-color-dark);
+}
 .loaderText {
     font-family: "Merriweather", serif;
     display: flex;

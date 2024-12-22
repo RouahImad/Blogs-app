@@ -15,8 +15,6 @@ import { useEffect, useRef, useState } from "react";
 const NavBar = ({ theme, setTheme }) => {
     const toggleTheme = () => {
         const newTheme = theme === "light" ? "dark" : "light";
-        document.body.className = newTheme;
-        localStorage.setItem("theme", newTheme);
         setTheme(newTheme);
     };
 

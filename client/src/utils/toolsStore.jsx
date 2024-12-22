@@ -12,6 +12,31 @@ export const ToolsProvider = ({ children }) => {
     const [blogs, setBlogs] = useState([]);
 
     const [blogsLoaded, setBlogsLoaded] = useState(false);
+    const [theme, setTheme] = useState("light");
+
+    useEffect(() => {
+        localStorage.setItem("theme", theme);
+        document.body.className = theme;
+    }, [theme]);
+    useEffect(() => {
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", (e) =>
+                setTheme(e.matches ? "dark" : "light")
+            );
+
+        setTheme(
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light"
+        );
+
+        return () => {
+            window
+                .matchMedia("(prefers-color-scheme: dark)")
+                .removeEventListener("change", () => {});
+        };
+    }, []);
 
     const loadBlogs = async () => {
         setLoadingBlogs(true);
@@ -105,6 +130,8 @@ export const ToolsProvider = ({ children }) => {
     return (
         <ToolsStore.Provider
             value={{
+                theme,
+                setTheme,
                 loadingBlogs,
                 setLoadingBlogs,
                 loadBlog,

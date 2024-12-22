@@ -21,11 +21,11 @@ const BlogsList = lazy(() => import("../pages/BlogsList"));
 const FavPage = lazy(() => import("../pages/FavPage"));
 const SearchPage = lazy(() => import("../pages/SearchPage"));
 
-const routes = (links, setLinks, handleCreate, theme, setTheme) => {
+const routes = (links, setLinks, handleCreate) => {
     return createBrowserRouter([
         {
             path: "/",
-            element: <Root theme={theme ?? "light"} setTheme={setTheme} />,
+            element: <Root />,
             loader: RootLoader,
             children: [
                 { index: true, element: <Home /> },

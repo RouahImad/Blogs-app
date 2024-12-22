@@ -8,8 +8,6 @@ import { ToolsProvider } from "./utils/toolsStore";
 import LoadingFallback from "./components/LoadingFallback";
 
 const App = () => {
-    const [theme, setTheme] = useState("light");
-
     const [links, setLinks] = useState([]);
 
     const handleCreate = async (event) => {
@@ -35,7 +33,7 @@ const App = () => {
         }
     };
 
-    const router = routes(links, setLinks, handleCreate, theme, setTheme);
+    const router = routes(links, setLinks, handleCreate);
 
     return (
         <Suspense fallback={<LoadingFallback />}>
