@@ -21,6 +21,10 @@
 ::-webkit-scrollbar-track {
     background-color: #f0f0f0;
 }
+::selection {
+    background-color: #ee5466;
+    color: white;
+}
 @keyframes loader {
     0% {
         width: 0;
