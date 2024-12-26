@@ -92,7 +92,7 @@ body {
     background-color: var(--bg-color-dark);
 }
 .blogs:has(.emptyBlogs) {
-    min-height: 67vh;
+    min-height: 57vh;
 }
 .blogs,
 .blogPage {
