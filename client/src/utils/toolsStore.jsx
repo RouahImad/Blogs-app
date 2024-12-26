@@ -27,7 +27,9 @@ export const ToolsProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
+        if (theme === null) return;
         document.body.className = theme;
+        localStorage.setItem("theme", theme);
     }, [theme]);
 
     useEffect(() => {
