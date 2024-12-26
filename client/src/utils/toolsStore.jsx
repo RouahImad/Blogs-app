@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+    createContext,
+    useCallback,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import PropTypes from "prop-types";
 import { getAll, getOne } from "./api";
 
@@ -10,33 +16,29 @@ export const ToolsProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [loadingBlogs, setLoadingBlogs] = useState(false);
     const [blogs, setBlogs] = useState([]);
-
     const [blogsLoaded, setBlogsLoaded] = useState(false);
-    const [theme, setTheme] = useState("light");
+
+    const [theme, setTheme] = useState(null);
+
+    const setDark = useCallback(() => {
+        setTheme("dark");
+        document.body.className = "dark";
+        localStorage.setItem("theme", "dark");
+    }, []);
 
     useEffect(() => {
-        localStorage.setItem("theme", theme);
         document.body.className = theme;
     }, [theme]);
+
     useEffect(() => {
-        window
-            .matchMedia("(prefers-color-scheme: dark)")
-            .addEventListener("change", (e) =>
-                setTheme(e.matches ? "dark" : "light")
-            );
-
-        setTheme(
-            window.matchMedia("(prefers-color-scheme: dark)").matches
-                ? "dark"
-                : "light"
-        );
-
-        return () => {
-            window
-                .matchMedia("(prefers-color-scheme: dark)")
-                .removeEventListener("change", () => {});
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const handleChange = (e) => {
+            if (e.matches && theme === "light") setDark();
         };
-    }, []);
+
+        mediaQuery.addEventListener("change", handleChange);
+        return () => mediaQuery.removeEventListener("change", handleChange);
+    }, [theme, setDark]);
 
     const loadBlogs = async () => {
         setLoadingBlogs(true);

@@ -61,12 +61,14 @@
 .dark .search .searchBar button {
     color: black;
 }
-.search .searchBar input:focus + button,
-.search .searchBar input:hover + button,
-.search .searchBar button:hover {
-    color: #ee5467;
-    right: 33px;
-    transform: scale(1.1);
+@media (hover: hover) {
+    .search .searchBar input:focus + button,
+    .search .searchBar input:hover + button,
+    .search .searchBar button:hover {
+        color: #ee5467;
+        right: 33px;
+        transform: scale(1.1);
+    }
 }
 .search .searchResults .blog {
     width: 100vh;

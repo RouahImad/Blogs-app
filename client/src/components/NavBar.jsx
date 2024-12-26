@@ -7,18 +7,17 @@ import { IoSearchSharp } from "react-icons/io5";
 import { IoMenu } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { NavLink, useLocation } from "react-router-dom";
-import PropTypes from "prop-types";
 import "../styles/navbar.css";
 import { useTools } from "../utils/toolsStore";
 import { useEffect, useRef, useState } from "react";
 
-const NavBar = ({ theme, setTheme }) => {
+const NavBar = () => {
     const toggleTheme = () => {
         const newTheme = theme === "light" ? "dark" : "light";
         setTheme(newTheme);
     };
 
-    const { isLoading, setProgress } = useTools();
+    const { theme, setTheme, isLoading, setProgress } = useTools();
     const location = useLocation();
 
     const handleNavClick = (path) => {
@@ -130,11 +129,6 @@ const NavBar = ({ theme, setTheme }) => {
             </ul>
         </div>
     );
-};
-
-NavBar.propTypes = {
-    theme: PropTypes.string.isRequired,
-    setTheme: PropTypes.func.isRequired,
 };
 
 export default NavBar;

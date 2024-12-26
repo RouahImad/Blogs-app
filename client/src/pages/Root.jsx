@@ -1,20 +1,33 @@
 import { Outlet, useLoaderData } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import { useEffect, Suspense } from "react";
+import { Suspense } from "react";
 import { useTools } from "../utils/toolsStore";
 import LoadingBar from "react-top-loading-bar";
 import LoadingFallback from "../components/LoadingFallback";
 
+import { useEffect } from "react";
+
+export async function RootLoader() {
+    const theme = localStorage.getItem("theme") || "light";
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    return isDark ? "dark" : theme;
+}
+
 const Root = () => {
-    const data = useLoaderData();
     const { theme, setTheme, progress } = useTools();
+    const loadedTheme = useLoaderData();
 
     useEffect(() => {
-        setTheme(data);
-    }, [data, setTheme]);
+        document.body.className = loadedTheme;
+        localStorage.setItem("theme", loadedTheme);
+        setTheme(loadedTheme);
+    }, [loadedTheme, setTheme]);
+
+    if (theme == null) return <LoadingFallback />;
 
     return (
-        <div>
+        <>
             <LoadingBar
                 color="#8fe2d3"
                 progress={progress}
@@ -22,22 +35,12 @@ const Root = () => {
                 height={3}
                 waitingTime={400}
             />
-            <NavBar theme={theme} setTheme={setTheme} />
+            <NavBar />
             <Suspense fallback={<LoadingFallback />}>
                 <Outlet />
             </Suspense>
-        </div>
+        </>
     );
 };
 
 export default Root;
-
-export const RootLoader = () => {
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "dark") {
-        document.body.className = storedTheme;
-        return storedTheme;
-    }
-    document.body.className = storedTheme;
-    return storedTheme;
-};
