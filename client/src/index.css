@@ -10,6 +10,8 @@
 
     --nav-bg-light: #ffffff;
     --nav-bg-dark: #2c2c2c;
+
+    scroll-behavior: smooth;
 }
 ::-webkit-scrollbar {
     width: 10px;
@@ -34,6 +36,46 @@
     }
     100% {
         width: 0;
+    }
+}
+.scroll-top {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    width: 40px;
+    height: 40px;
+    background-color: #ee5466;
+    color: white;
+    box-shadow: 0px 0px 5px #ee5466;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease, opacity 1s ease;
+    transform: scale(1);
+    z-index: 1000;
+    opacity: 1;
+    @starting-style {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+.scroll-top button {
+    all: unset;
+    font-size: 20px;
+    display: flex;
+}
+@media (hover: hover) {
+    .scroll-top:hover {
+        background-color: #f0f0f0;
+        color: #ee5466;
+    }
+    .scroll-top button {
+        transition: transform 0.4s;
+    }
+    .scroll-top:hover button {
+        transform: scale(1.4);
     }
 }
 .loaderContainer {

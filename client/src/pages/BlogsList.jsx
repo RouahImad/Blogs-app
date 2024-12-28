@@ -7,6 +7,7 @@ import CategoriesNav from "../components/CategoriesNav";
 
 import soon from "../assets/work-in-progress.png";
 import { useTools } from "../utils/toolsStore";
+import ScrollTop from "../components/ScrollTop";
 
 const BlogsList = () => {
     const {
@@ -113,6 +114,7 @@ const BlogsList = () => {
                     )}
                 </div>
             )}
+            <ScrollTop />
         </>
     );
 };

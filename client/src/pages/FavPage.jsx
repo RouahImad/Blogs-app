@@ -4,6 +4,7 @@ import love from "../assets/love-letter.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTools } from "../utils/toolsStore";
+import ScrollTop from "../components/ScrollTop";
 
 const FavPage = () => {
     const {
@@ -99,6 +100,7 @@ const FavPage = () => {
                     ))}
                 </div>
             </div>
+            <ScrollTop />
         </div>
     );
 };
