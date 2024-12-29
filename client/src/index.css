@@ -39,6 +39,8 @@
     }
 }
 .scroll-top {
+    all: unset;
+    font-size: 20px;
     position: fixed;
     right: 15px;
     bottom: 15px;
@@ -58,24 +60,17 @@
     opacity: 1;
     @starting-style {
         opacity: 0;
-        transform: scale(0.8);
+        transform: scale(0.7);
     }
 }
-.scroll-top button {
-    all: unset;
-    font-size: 20px;
-    display: flex;
-}
 @media (hover: hover) {
+    .scroll-top {
+        transition: transform 0.4s ease;
+    }
     .scroll-top:hover {
         background-color: #f0f0f0;
         color: #ee5466;
-    }
-    .scroll-top button {
-        transition: transform 0.4s;
-    }
-    .scroll-top:hover button {
-        transform: scale(1.4);
+        transform: scale(1.2);
     }
 }
 .loaderContainer {

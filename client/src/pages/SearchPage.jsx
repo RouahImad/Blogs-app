@@ -6,6 +6,7 @@ import "../styles/search.css";
 import Blog from "../components/Blog";
 import { useTools } from "../utils/toolsStore";
 import { useNavigate } from "react-router-dom";
+import ScrollTop from "../components/ScrollTop";
 
 const SearchPage = () => {
     const handleSearch = () => {
@@ -109,6 +110,7 @@ const SearchPage = () => {
                     <div>search something</div>
                 )}
             </div>
+            {Array.isArray(results) && results.length > 0 && <ScrollTop />}
         </div>
     );
 };
