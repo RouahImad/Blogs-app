@@ -25,6 +25,4 @@ dist-ssr
 
 # Environment variables and sensitive data
 .env
-test
-local
 tasks.txt
