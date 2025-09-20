@@ -62,7 +62,7 @@ const NavBar = () => {
                         aria-label="Home page"
                         onClick={() => handleNavClick("/")}
                     >
-                        <IoHome />
+                        <IoHome size={25} />
                     </NavLink>
                 </li>
                 <li>
@@ -71,7 +71,7 @@ const NavBar = () => {
                         aria-label="blogs page"
                         onClick={() => handleNavClick("/blogs")}
                     >
-                        <GoLog />
+                        <GoLog size={23} />
                     </NavLink>
                 </li>
 
@@ -81,7 +81,7 @@ const NavBar = () => {
                         aria-label="Search blogs"
                         onClick={() => handleNavClick("/search")}
                     >
-                        <IoSearchSharp />
+                        <IoSearchSharp size={28} />
                     </NavLink>
                 </li>
 
@@ -95,7 +95,7 @@ const NavBar = () => {
                         aria-expanded={submenu}
                         aria-controls="submenu"
                     >
-                        {submenu ? <IoClose /> : <IoMenu />}
+                        {submenu ? <IoClose size={30} /> : <IoMenu size={30} />}
                     </button>
                     <ul
                         className={`submenu ${submenu ? "open" : ""}`}
@@ -106,7 +106,7 @@ const NavBar = () => {
                                 to="/favorites"
                                 aria-label="Liked blogs page"
                             >
-                                <FaHeart />
+                                <FaHeart size={23} />
                             </NavLink>
                         </li>
                         <li>
@@ -118,9 +118,9 @@ const NavBar = () => {
                                 aria-label="Toggle theme"
                             >
                                 {theme == "dark" ? (
-                                    <LuSunMoon />
+                                    <LuSunMoon size={23} />
                                 ) : (
-                                    <FaRegMoon />
+                                    <FaRegMoon size={23} />
                                 )}
                             </button>
                         </li>

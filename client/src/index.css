@@ -2,14 +2,16 @@
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 
-    --bg-color-light: #f8f8f8;
-    --bg-color-dark: #1c1d1f;
+    /* --bg-color-light: hsl(0, 0%, 97%); */
+    /* --bg-color-dark: hsl(220, 5%, 12%); */
+    --bg-color-light: hsl(0, 0%, 89%);
+    --bg-color-dark: hsl(0, 0%, 11%);
 
     --blog-bg-light: #ffffff;
     --blog-bg-dark: #1c1d1f;
 
     --nav-bg-light: #ffffff;
-    --nav-bg-dark: #2c2c2c;
+    --nav-bg-dark: #292929;
 
     scroll-behavior: smooth;
 }
@@ -376,7 +378,7 @@ body {
 .blogPage .link {
     font-family: "Merriweather", serif;
     background-color: #caf1eb87;
-    color: #8fe2d3;
+    color: #65d7c3;
     font-size: 1rem;
     text-decoration: none;
     padding: 5px 10px;
@@ -385,6 +387,10 @@ body {
     white-space: nowrap;
     overflow: hidden;
     cursor: pointer;
+}
+.dark .blog .link,
+.dark .blogPage .link {
+    color: #8fe2d3;
 }
 .blogs .links .link:nth-child(n + 4),
 .blogPage .links .link:nth-child(n + 4) {

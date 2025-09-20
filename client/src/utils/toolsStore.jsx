@@ -18,29 +18,13 @@ export const ToolsProvider = ({ children }) => {
     const [blogs, setBlogs] = useState([]);
     const [blogsLoaded, setBlogsLoaded] = useState(false);
 
-    const [theme, setTheme] = useState(null);
-
-    const setDark = useCallback(() => {
-        setTheme("dark");
-        document.body.className = "dark";
-        localStorage.setItem("theme", "dark");
-    }, []);
+    const [theme, setTheme] = useState("light");
 
     useEffect(() => {
         if (theme === null) return;
         document.body.className = theme;
         localStorage.setItem("theme", theme);
     }, [theme]);
-
-    useEffect(() => {
-        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-        const handleChange = (e) => {
-            if (e.matches && theme === "light") setDark();
-        };
-
-        mediaQuery.addEventListener("change", handleChange);
-        return () => mediaQuery.removeEventListener("change", handleChange);
-    }, [theme, setDark]);
 
     const loadBlogs = async () => {
         setLoadingBlogs(true);

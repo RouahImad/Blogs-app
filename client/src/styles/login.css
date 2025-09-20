@@ -2,11 +2,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    gap: 30px;
-    width: 80vw;
+    width: 90vw;
     height: calc(93vh - 70px);
     margin: 0 auto;
+}
+.holder {
+    display: flex;
+    place-items: center;
+    flex-direction: column;
+    gap: 30px;
+    background-color: white;
+    padding: 28px;
+    border-radius: 12px;
+    width: 80vw;
+    max-width: 520px;
 }
 .loginContainer h2 {
     font-family: "Montserrat", sans-serif;

@@ -78,7 +78,7 @@ body:has(.admin) {
     justify-content: center;
     flex: 1;
     min-height: calc(93vh - 70px);
-    margin-block: 18px;
+    margin-block: 32px;
     padding-inline: 20px;
 }
 .adminContent h2 {
@@ -180,12 +180,16 @@ body:has(.admin) {
 /* create blog */
 
 .adminForm {
+    background-color: var(--nav-bg-light);
     width: 80%;
     max-width: 800px;
     padding-inline: 20px;
     padding-block: 18px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+.dark .adminForm {
+    background-color: var(--nav-bg-dark);
 }
 @media (max-width: 512px) {
     .adminForm {
@@ -283,7 +287,7 @@ textarea {
     font-size: 2rem;
     color: #333;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 36px;
 }
 .dark .adminBlogs h1 {
     color: white;
@@ -291,7 +295,7 @@ textarea {
 .adminBlogs .blogsContainer {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     height: calc(80vh - 70px);
     overflow: hidden auto;
     padding-right: 10px;
@@ -304,6 +308,7 @@ textarea {
     background-color: white;
     padding: 10px;
     border-bottom: 1px solid #ccc;
+    border-radius: 8px;
     min-height: fit-content;
 }
 .dark .adminBlogs .blogRow {

@@ -30,7 +30,8 @@ const Home = () => {
                 <h1>Welcome to iMadLog 👋</h1>
                 <p>
                     This is a simple blog app where you can read and like my
-                    blogs. You can also share the blogs with your friends.{" "}
+                    blogs. You can also share the blogs with your friends.
+                    <br />
                     <span
                         className="start-btn"
                         onClick={() => navigate("/blogs")}

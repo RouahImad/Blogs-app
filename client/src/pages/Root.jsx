@@ -9,9 +9,8 @@ import { useEffect } from "react";
 
 export async function RootLoader() {
     const theme = localStorage.getItem("theme") || "light";
-    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    return isDark ? "dark" : theme;
+    return theme;
 }
 
 const Root = () => {

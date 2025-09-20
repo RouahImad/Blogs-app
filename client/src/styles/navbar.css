@@ -5,11 +5,12 @@
     font-weight: bold;
     background-color: var(--nav-bg-light);
     padding-inline: 25px;
-    border-bottom: 1px solid #ccc;
+    border-color: hsla(0, 0%, 0%, 0.3);
 }
 .dark .nav {
     background-color: var(--nav-bg-dark);
     color: white;
+    border-bottom: 1px solid #ffffff33;
 }
 .nav h2 {
     font-family: "montserrat", sans-serif;
@@ -25,7 +26,6 @@ li a {
     color: #333;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Arial",
         sans-serif;
-    font-size: 23px;
     cursor: pointer;
 }
 a.active {
@@ -39,7 +39,7 @@ a.active {
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 8px;
     margin-block: 14px;
 }
 @media (max-width: 498px) {
@@ -73,11 +73,7 @@ a.active {
 .dark .actions button:hover {
     background-color: #f6f7f90d;
 }
-.searchIcon a {
-    font-size: 28px;
-}
 .menu {
-    font-size: 30px;
     transition: 0.3s;
 }
 .nav:has(.submenu.open) .menu {

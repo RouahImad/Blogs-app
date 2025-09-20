@@ -19,48 +19,53 @@ const Login = () => {
 
     return (
         <div className="loginContainer">
-            <h2>Authentification</h2>
-            <form
-                onSubmit={async (e) => {
-                    const res = await handleLogin(e);
-                    setMessage(res);
-                    if (res.status === 200) {
-                        navigate("/admin", { replace: true });
-                    }
-                }}
-            >
-                <div className="inputBox">
-                    <label htmlFor="username">Username: </label>
-                    <input
-                        type="username"
-                        name="username"
-                        id="username"
-                        placeholder="Enter your username"
-                        required
-                    />
-                </div>
-                <div className="inputBox">
-                    <label htmlFor="password">Password: </label>
-                    <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="Enter your password"
-                        required
-                    />
-                </div>
-                <button
-                    className="login"
-                    type="submit"
-                    name="login"
-                    aria-label="Login"
+            <div className="holder">
+                <h2>Authentification</h2>
+                <form
+                    onSubmit={async (e) => {
+                        const res = await handleLogin(e);
+                        setMessage(res);
+                        if (res.status === 200) {
+                            navigate("/admin", { replace: true });
+                        }
+                    }}
                 >
-                    Login
-                </button>
-            </form>
-            {message?.status && (
-                <Message status={message.status} message={message.message} />
-            )}
+                    <div className="inputBox">
+                        <label htmlFor="username">Username: </label>
+                        <input
+                            type="username"
+                            name="username"
+                            id="username"
+                            placeholder="Enter your username"
+                            required
+                        />
+                    </div>
+                    <div className="inputBox">
+                        <label htmlFor="password">Password: </label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                        />
+                    </div>
+                    <button
+                        className="login"
+                        type="submit"
+                        name="login"
+                        aria-label="Login"
+                    >
+                        Login
+                    </button>
+                </form>
+                {message?.status && (
+                    <Message
+                        status={message.status}
+                        message={message.message}
+                    />
+                )}
+            </div>
         </div>
     );
 };

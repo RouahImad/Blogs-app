@@ -10,11 +10,11 @@
 .search .searchBar {
     position: relative;
     margin-inline: auto;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     transition: 0.3s;
 }
 .search .searchBar input {
-    background-color: #1a1a1a;
+    background-color: #292929;
     color: white;
     width: 100vh;
     max-width: 480px;
@@ -42,6 +42,11 @@
 @media (max-width: 568px) {
     .search .searchBar input {
         max-width: 350px;
+    }
+}
+@media (max-width: 838px) {
+    .search .searchResults .blog {
+        width: 100% !important;
     }
 }
 .search .searchBar input[type="search"]::-webkit-search-cancel-button {
