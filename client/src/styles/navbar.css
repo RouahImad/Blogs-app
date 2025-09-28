@@ -15,7 +15,7 @@
 .nav h2 {
     font-family: "montserrat", sans-serif;
     font-size: 27px;
-    color: #333;
+    color: #1a1a1a;
 }
 .dark .nav h2 {
     color: white;
@@ -23,7 +23,7 @@
 li button,
 li a {
     all: unset;
-    color: #333;
+    color: #1a1a1a;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Arial",
         sans-serif;
     cursor: pointer;

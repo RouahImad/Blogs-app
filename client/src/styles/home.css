@@ -1,11 +1,30 @@
 .home {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    max-width: 1000px;
     height: calc(87vh - 76px);
-    gap: 30px;
+    gap: 44px;
     margin: 36px;
 }
+@media (min-width: 1037px) {
+    .home {
+        margin-inline: auto;
+        max-width: 90vw;
+        justify-content: space-around;
+        margin-inline: 28px;
+    }
+    .home h1 {
+        font-size: 54px !important;
+    }
+    .social a {
+        font-size: 54px !important;
+    }
+    .home img {
+        width: 320px !important;
+    }
+}
+
 @media (max-width: 818px) {
     .home {
         flex-direction: column-reverse;
@@ -23,7 +42,7 @@
     .home h1 {
         margin-top: 26px !important;
         margin-bottom: 18px !important;
-        font-size: 2rem !important;
+        font-size: 32px !important;
         text-align: left;
     }
     .home p {
@@ -41,9 +60,9 @@
 .home h1 {
     font-family: "montserrat", sans-serif;
     white-space: nowrap;
-    font-size: 2.5rem;
+    font-size: 40px;
     font-weight: 700;
-    color: #333;
+    color: #1a1a1a;
     margin: 0;
     margin-top: 36px;
     margin-bottom: 20px;
@@ -54,7 +73,7 @@
 .home p {
     text-wrap: pretty;
     width: 390px;
-    font-size: 1.2rem;
+    font-size: 20px;
     line-height: 1.5;
     color: #666;
     margin: 0;
@@ -87,10 +106,10 @@
     position: relative;
     display: inline-flex;
     cursor: pointer;
-    color: #333;
+    color: #1a1a1a;
     text-decoration: underline;
     text-decoration-color: #ee5467;
-    font-size: 1.2rem;
+    font-size: 20px;
     width: 0ch;
     padding-right: 3px;
     white-space: nowrap;
@@ -140,11 +159,11 @@
     display: flex;
     align-items: center;
     justify-content: end;
-    gap: 20px;
+    gap: 28px;
 }
 .social a {
     all: unset;
-    color: #333;
+    color: #1a1a1a;
     display: flex;
     font-size: 44px;
     cursor: pointer;

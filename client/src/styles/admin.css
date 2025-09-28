@@ -25,7 +25,7 @@ body:has(.admin) {
     transition: 0.3s ease;
 }
 .dark .contentMenu {
-    background-color: #333;
+    background-color: #1a1a1a;
 }
 .open .contentMenu {
     width: 100%;
@@ -34,7 +34,7 @@ body:has(.admin) {
 .menuIcon {
     display: flex;
     background-color: #8fe2d3;
-    color: #333;
+    color: #1a1a1a;
     padding: 13px;
     border-radius: 50%;
     width: fit-content;
@@ -53,7 +53,7 @@ body:has(.admin) {
     gap: 15px;
     padding: 10px 15px;
     padding-left: 20px;
-    color: #333;
+    color: #1a1a1a;
     text-decoration: none;
     border-bottom: 1px solid #ccc;
     white-space: nowrap;
@@ -86,7 +86,7 @@ body:has(.admin) {
     margin-top: 0;
     font-size: 2rem;
     font-weight: bold;
-    color: #333;
+    color: #1a1a1a;
     text-align: center;
 }
 .dark .adminContent h2 {
@@ -105,16 +105,16 @@ body:has(.admin) {
     padding: 20px;
     border-radius: 5px;
     background-color: #fff;
-    color: #333;
+    color: #1a1a1a;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 .dark .statsContainer {
-    background-color: #333;
+    background-color: #1a1a1a;
     color: white;
 }
 .statsContainer h2 {
     font-size: 1.5rem;
-    color: #333;
+    color: #1a1a1a;
     margin: 0;
 }
 .dark .statsContainer h2 {
@@ -147,7 +147,7 @@ body:has(.admin) {
 }
 .statsContainer .graph .withLinks {
     background-color: #8fe2d3;
-    border-right: 1px solid #333;
+    border-right: 1px solid #1a1a1a;
 }
 .statsContainer .graph .withoutLinks {
     background-color: #ee5467;
@@ -256,7 +256,7 @@ textarea {
 }
 .dark .linkForm {
     color: white;
-    background-color: #333;
+    background-color: #1a1a1a;
 }
 
 @media (max-width: 512px) {
@@ -285,7 +285,7 @@ textarea {
 .adminBlogs > h2 {
     font-family: "Montserrat", sans-serif;
     font-size: 2rem;
-    color: #333;
+    color: #1a1a1a;
     text-align: center;
     margin-bottom: 36px;
 }
@@ -312,7 +312,7 @@ textarea {
     min-height: fit-content;
 }
 .dark .adminBlogs .blogRow {
-    background-color: #333;
+    background-color: #1a1a1a;
 }
 .adminBlogs .blogRow > div {
     display: flex;
@@ -325,7 +325,7 @@ textarea {
 .adminBlogs .blogRow h2 {
     font-size: 1.3rem;
     margin: 0;
-    color: #333;
+    color: #1a1a1a;
     text-transform: capitalize;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -342,7 +342,7 @@ textarea {
     color: white;
 }
 .adminBlogs .blogRow span {
-    color: #333;
+    color: #1a1a1a;
     background-color: #ee546657;
     padding: 5px 10px;
     border-radius: 5px;

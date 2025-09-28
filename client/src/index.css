@@ -95,7 +95,7 @@
     display: flex;
     align-items: center;
     font-size: 1.5rem;
-    color: #333;
+    color: #1a1a1a;
     width: fit-content;
     margin-inline: auto;
     position: relative;
@@ -162,7 +162,7 @@ body {
     align-items: center;
     gap: 10px;
     font-size: 23px;
-    color: #333;
+    color: #1a1a1a;
     width: fit-content;
     cursor: pointer;
     transition: 0.3s;
@@ -177,7 +177,7 @@ body {
     bottom: 0;
     height: 2px;
     width: 0px;
-    background-color: #333;
+    background-color: #1a1a1a;
     transition: 0.3s;
 }
 .dark .blogPage .backBtn::before {
@@ -212,7 +212,7 @@ body {
 .blogPage > h2 {
     font-family: "Montserrat", sans-serif;
     font-size: 2rem;
-    color: #333;
+    color: #1a1a1a;
     text-align: center;
     margin-bottom: 0;
 }
@@ -299,7 +299,7 @@ body {
 }
 .blog .info span:first-of-type {
     font-family: "Montserrat", sans-serif;
-    color: #333;
+    color: #1a1a1a;
     font-size: 1.5rem;
     font-size: 1.4rem;
     font-weight: bold;
@@ -410,7 +410,7 @@ body {
 .likePage h2 {
     font-family: "Montserrat", sans-serif;
     font-size: 2rem;
-    color: #333;
+    color: #1a1a1a;
     text-wrap: pretty;
     text-align: center;
 }
@@ -446,7 +446,7 @@ body {
     justify-content: center;
     align-items: center;
     font-weight: bold;
-    color: #333;
+    color: #1a1a1a;
 }
 .dark .emptyLiked,
 .dark .emptyBlogs {

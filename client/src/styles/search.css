@@ -34,7 +34,7 @@
     color: white;
 }
 .dark .search .searchBar input::placeholder {
-    color: #333;
+    color: #1a1a1a;
 }
 .search .searchBar input:focus {
     outline: none;
@@ -79,7 +79,7 @@
     width: 100vh;
 }
 .search .searchResults div {
-    color: #333;
+    color: #1a1a1a;
 }
 .dark .search .searchResults div {
     color: white;

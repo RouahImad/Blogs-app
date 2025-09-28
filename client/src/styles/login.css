@@ -21,7 +21,7 @@
     font-family: "Montserrat", sans-serif;
     font-size: 2rem;
     margin-bottom: 20px;
-    color: #333;
+    color: #1a1a1a;
 }
 .dark .loginContainer h2 {
     color: white;
@@ -50,7 +50,7 @@
 .loginContainer form label {
     font-family: "Montserrat", sans-serif;
     font-size: 1rem;
-    color: #333;
+    color: #1a1a1a;
 }
 .dark .loginContainer form label {
     color: white;
