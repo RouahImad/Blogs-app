@@ -10,19 +10,48 @@ const { pool } = require("./configure/db");
 const isProduction = process.env.NODE_ENV === "production";
 
 const allowedOrigins = isProduction
-    ? "https://imadlog.vercel.app"
+    ? ["https://imadlog.vercel.app"]
     : ["http://127.0.0.1:5173", "http://localhost:5173"];
 
-// if (isProduction) {
-//     app.set("trust proxy", 1);
-// }
+if (isProduction) {
+    app.set("trust proxy", 1);
+}
 
-app.use(express.json());
 app.use(cookieParser());
+
+app.options("*", (req, res) => {
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin) || !isProduction) {
+        res.setHeader("Access-Control-Allow-Origin", origin || "*");
+        res.setHeader(
+            "Access-Control-Allow-Methods",
+            "GET, POST, PUT, DELETE, OPTIONS"
+        );
+        res.setHeader(
+            "Access-Control-Allow-Headers",
+            "Content-Type, Authorization"
+        );
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+        res.sendStatus(204);
+    } else {
+        res.sendStatus(403);
+    }
+});
 
 app.use(
     cors({
-        origin: allowedOrigins,
+        origin: function (origin, callback) {
+            // Allow requests with no origin (like mobile apps, curl requests)
+            if (!origin) return callback(null, true);
+
+            // Check if origin is allowed
+            if (allowedOrigins.indexOf(origin) !== -1) {
+                return callback(null, true);
+            }
+
+            // Otherwise, reject
+            return callback(new Error("Not allowed by CORS"));
+        },
         credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
         allowedHeaders: ["Content-Type", "Authorization"],
