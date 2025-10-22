@@ -40,6 +40,16 @@ app.use(
     })
 );
 
+app.use((req, _res, next) => {
+    console.log(
+        `${new Date().toISOString()} - ${req.method} ${
+            req.originalUrl
+        } - from ${req.ip}
+        `
+    );
+    next();
+});
+
 app.use(express.json());
 app.use(routers);
 
