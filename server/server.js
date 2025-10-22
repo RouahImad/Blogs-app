@@ -4,6 +4,7 @@ const cookieSession = require("cookie-session");
 require("dotenv").config();
 const app = express();
 const routers = require("./routes/routes");
+const { pool } = require("./configure/db");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -39,5 +40,13 @@ app.use(routers);
 
 app.listen(process.env.SERVER_PORT, (err) => {
     if (err) return console.error(err);
+    pool.getConnection((err, connection) => {
+        if (err) {
+            console.error("Error connecting to the database:", err);
+            return;
+        }
+        console.log("Connected to the database.");
+        connection.release();
+    });
     console.log("server started at " + process.env.SERVER_PORT);
 });
