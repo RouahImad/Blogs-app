@@ -4,23 +4,28 @@ const cookieSession = require("cookie-session");
 require("dotenv").config();
 const app = express();
 const routers = require("./routes/routes");
+const cookieParser = require("cookie-parser");
 const { pool } = require("./configure/db");
 
 const isProduction = process.env.NODE_ENV === "production";
 
 const allowedOrigins = isProduction
-    ? ["https://imadlog-bay.vercel.app"]
+    ? "https://imadlog.vercel.app"
     : ["http://127.0.0.1:5173", "http://localhost:5173"];
 
-if (isProduction) {
-    app.set("trust proxy", 1);
-}
+// if (isProduction) {
+//     app.set("trust proxy", 1);
+// }
+
+app.use(express.json());
+app.use(cookieParser());
 
 app.use(
     cors({
         origin: allowedOrigins,
-        optionsSuccessStatus: 200,
         credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
 
